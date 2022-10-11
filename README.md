@@ -13,9 +13,7 @@ The aim of this website is to make the Erasmus application process easier and mo
     * **Registration Lists:**
 
         Incoming students can make a list of the courses that they would like to take in that semester.
-
     * **Registration Appointment:**
-
         Incoming students can make an appointment with coordinators to discuss their registration lists.
 
 * **Outgoing Students**
