@@ -18,14 +18,14 @@ The aim of this website is to** **make the Erasmus application process easier an
         Incoming students can make an appointment with coordinators to discuss their registration lists.
 
 * **Outgoing Students**
-    * **Quiz: **Outgoing students can partake in a quiz and answer a few questions about their cGPA, ENG101-102 scores and prefered school locations. This quiz will then provide suggestions for which universities to apply to.
-    * **Profile: **Profile page will include contact information for the student. If the student views his page, he can see the application status of his ongoing exchange or erasmus applications.
-    * **Application: **Outgoing students can submit an application for either exchange or erasmus program.The students can upload the required files into their application, such as their cv, application forms and statement of purpose. The application process will be presented to the student as a timeline with checkpoints and the students can see the status of their application (academic coordinator inspection, approved etc). Students will also provide the semester/s that they intend to study abroad. Students will be able to cancel their application.
-    * **Syllabus Database: **A course which will be taken in Erasmus must be approved by Bilkent instructors. To make this job easier, students can find and upload the syllabus of a relevant course to the database and book an appointment with the appropriate course instructor. If the instructor approves the course, it is added to the database. The students can browse the database for previously approved courses. 
+    * **Quiz:** Outgoing students can partake in a quiz and answer a few questions about their cGPA, ENG101-102 scores and prefered school locations. This quiz will then provide suggestions for which universities to apply to.
+    * **Profile:** Profile page will include contact information for the student. If the student views his page, he can see the application status of his ongoing exchange or erasmus applications.
+    * **Application:** Outgoing students can submit an application for either exchange or erasmus program.The students can upload the required files into their application, such as their cv, application forms and statement of purpose. The application process will be presented to the student as a timeline with checkpoints and the students can see the status of their application (academic coordinator inspection, approved etc). Students will also provide the semester/s that they intend to study abroad. Students will be able to cancel their application.
+    * **Syllabus Database:** A course which will be taken in Erasmus must be approved by Bilkent instructors. To make this job easier, students can find and upload the syllabus of a relevant course to the database and book an appointment with the appropriate course instructor. If the instructor approves the course, it is added to the database. The students can browse the database for previously approved courses. 
     * **Calendar:** Outgoing students can view upcoming due dates for Erasmus applications and their appointments on a calendar.
-    * **Appointments: **Outgoing students can book appointments with coordinators to evaluate their application process or get their curriculum approved.
-    * **Course Counting: **Rather than e-mail or submitting a form, outgoing students can match the courses in bilkent curriculum and the courses in their 
-* **Internal Coordinator **
+    * **Appointments:** Outgoing students can book appointments with coordinators to evaluate their application process or get their curriculum approved.
+    * **Course Counting:** Rather than e-mail or submitting a form, outgoing students can match the courses in bilkent curriculum and the courses in their 
+* **Internal Coordinator**
     * **Applications**
         * See the list of students who applied to erasmus.
         * Ability to sort students based on points.
