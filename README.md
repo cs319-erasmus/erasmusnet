@@ -2,7 +2,7 @@
 
 **Description**
 
-The aim of this website is to** **make the Erasmus application process easier and more efficient. It can be used by incoming students, outgoing students, internal coordinators and external coordinators. It allows the outgoing students to make an Erasmus application and upload their required files, book appointments with coordinators and upload the syllabus of the courses that they would like to take in their exchange semester. Incoming students can make registration lists and schedule appointments with coordinators. Internal coordinators can see and sort the students who applied to the Erasmus program, view and download their documents, approve/disapprove their applications and send/arrange interviews with the applicants. Finally the external coordinators can use this website to see the status and the information of the students.
+The aim of this website is to make the Erasmus application process easier and more efficient. It can be used by incoming students, outgoing students, internal coordinators and external coordinators. It allows the outgoing students to make an Erasmus application and upload their required files, book appointments with coordinators and upload the syllabus of the courses that they would like to take in their exchange semester. Incoming students can make registration lists and schedule appointments with coordinators. Internal coordinators can see and sort the students who applied to the Erasmus program, view and download their documents, approve/disapprove their applications and send/arrange interviews with the applicants. Finally the external coordinators can use this website to see the status and the information of the students.
 
 **Features**
 
@@ -45,7 +45,7 @@ The aim of this website is to** **make the Erasmus application process easier an
         * List of students who are currently studying abroad.
     * **E-mail tool:**
         * Create email templates for the target school’s coordinator for students that were selected.
-* **External Coordinator  **
+* **External Coordinator**
     * **Student Information:**
         * Upload student information to the website.
         * See important information for coordinators.
