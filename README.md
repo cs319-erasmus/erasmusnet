@@ -1,9 +1,15 @@
 # erasmusnet
 # Group Members
-Zeynep Selcen Öztunç - 21902941
-Beyza Çağlar - 22003394
-Gülin Çetinus - 21902115
 Arda Baktır - 21802354
+
+Beyza Çağlar - 22003394
+
+Gülin Çetinus - 21902115
+
+Mehmet Kagan Ilbak - 22002379
+
+Zeynep Selcen Öztunç - 21902941
+
 
 ## Description
 
