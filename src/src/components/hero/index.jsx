@@ -4,9 +4,9 @@ import { motion } from 'framer-motion'
 const Hero = () => {
     const heroImg = require('../../assets/hero.png');
     return (
-        <div className='grid grid-cols-2 gap-2 h-full justify-center py-40'>
-            <div className='px-2 py-1 flex-1 flex flex-col items-start justify-center gap-6'>
-                <p className='font-extrabold text-6xl tracking-wide text-indigo-1400 leading-relaxed'>
+        <div className='grid select-none grid-cols-2 gap-2 py-24 m-auto'>
+            <div className=' py-1 my-auto mx-auto flex-1 flex flex-col items-start gap-6'>
+                <p className='font-extrabold xl:text-[2.5rem] 2xl:text-[2.5rem] tracking-wide text-indigo-1400 w-5/6'>
                     Apply to Erasmus
                     <br />
                     Quickly, Efficiently
@@ -30,10 +30,11 @@ const Hero = () => {
 
                 </div>
             </div>
-            <img
-                src={heroImg}
-                alt='Students'
-                className='flex flex-1 my-auto'/>
+            <div className='flex-1 items-center justify-center flex m-auto'>
+                <img
+                    src={heroImg}
+                    alt='Students'/>
+            </div>
         </div>
     )
 }
