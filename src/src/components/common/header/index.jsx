@@ -1,5 +1,5 @@
 import React from "react";
-import { Logo } from "..";
+import { Logo } from "../..";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
@@ -17,7 +17,7 @@ function Header() {
   };
 
   return (
-    <header className="static z-50 w-screen border-b-4 border-indigo-700 p-6 px-16">
+    <header className="sticky justify-between items-center top-0 z-50 w-screen border-b-4 bg-white border-indigo-700 p-6 px-16">
       <div className="flex items-center">
         <Link to={"/"}>
           <Logo />
