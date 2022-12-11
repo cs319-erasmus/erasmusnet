@@ -1,17 +1,17 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
-import { Header, Hero, CreateItem, SignUp, Login } from './components'
+import { Header, Landing, SignUp, Login } from './components'
 
 const App = () => {
   return (
     <AnimatePresence>
-      <div className='w-screen h-auto flex flex-col'>
+      <div className='w-screen min-h-screen m-auto flex flex-col'>
         <Header />
 
-        <main className='p-8 w-full flex'>
+        <main className='p-8 w-full flex justify-center'>
           <Routes>
-            <Route path='/*' element={<Hero />} />
+            <Route path='/*' element={<Landing />} />
             <Route path='/signup' element={<SignUp />} />
             <Route path='/login' element={<Login />} />
           </Routes>
