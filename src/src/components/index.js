@@ -1,0 +1,5 @@
+export {default as Header } from './header'
+export {default as Logo } from './logo'
+export {default as Hero } from './hero'
+export {default as SignUp } from './signup'
+export {default as Login } from './login'
