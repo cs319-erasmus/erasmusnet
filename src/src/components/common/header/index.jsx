@@ -14,10 +14,11 @@ function Header() {
   };
   const home = () => {
     navigate("/", { replace: true });
+    document.getElementById("hero").scrollIntoView();
   };
 
   return (
-    <header className="sticky justify-between items-center top-0 z-50 w-screen border-b-4 bg-white border-indigo-700 p-6 px-16">
+    <header className="sticky justify-between items-center top-0 z-50 w-screen border-b-4 bg-white border-grey-700 p-6 px-16">
       <div className="flex items-center">
         <Link to={"/"}>
           <Logo />
@@ -30,28 +31,42 @@ function Header() {
           >
             Home
           </li>
-          <li className="text-base text-pink-500 hover:text-purple-500 duration-100 transition-all ease-in-out cursor-pointer">
+          <li
+            onClick={() => {
+              if (window.location.pathname !== "/") {
+                navigate("/", { replace: true });
+              }
+              document.getElementById("about").scrollIntoView();
+            }}
+            className="text-base text-pink-500 hover:text-purple-500 duration-100 transition-all ease-in-out cursor-pointer"
+          >
             About
           </li>
-          <li className="text-base text-pink-500 hover:text-purple-500 duration-100 transition-all ease-in-out cursor-pointer">
+          <li
+            onClick={() => {
+              if (window.location.pathname !== "/") {
+                navigate("/", { replace: true });
+              }
+              document.getElementById("contact").scrollIntoView();
+            }}
+            className="text-base text-pink-500 hover:text-purple-500 duration-100 transition-all ease-in-out cursor-pointer"
+          >
             Contact
           </li>
         </ul>
 
         <div className="flex select-none items-center space-x-4 ml-auto">
           <motion.button
-            whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
             onClick={login}
-            className="bg-indigo-700 hover:bg-purple-500 duration-100 transition-all ease-in-out text-white px-4 py-2 rounded-xl"
+            className="bg-indigo-700 hover:bg-pink-500 duration-100 transition-all ease-in-out text-white px-4 py-2 rounded-xl"
           >
             Login
           </motion.button>
           <motion.button
-            whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.8 }}
             onClick={signup}
-            className="bg-indigo-900 hover:bg-purple-500 duration-100 transition-all ease-in-out text-white px-4 py-2 rounded-xl"
+            className="bg-indigo-900 hover:bg-pink-500 duration-100 transition-all ease-in-out text-white px-4 py-2 rounded-xl"
           >
             Sign Up
           </motion.button>

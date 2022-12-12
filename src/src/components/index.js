@@ -1,6 +1,6 @@
 export {default as Header } from './common/header'
 export {default as Logo } from './common/logo'
-export {default as Hero } from './pages/landing/hero'
 export {default as SignUp } from './pages/signup'
 export {default as Login } from './pages/login'
 export {default as Landing } from './pages/landing'
+export { default as Footer } from './common/footer'
