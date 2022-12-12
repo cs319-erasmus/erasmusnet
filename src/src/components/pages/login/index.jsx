@@ -1,66 +1,43 @@
-import React from 'react'
+import React from "react";
+import { Logo } from "../..";
+import { motion } from "framer-motion";
 
 export default function login() {
   return (
-    <div>
-      <div className="flex flex-col items-center justify-center min-h-screen py-2 -mt-20 sm:py-6">
-        <div className="px-4 text-center sm:px-0">
-          <p className="text-sm font-semibold text-indigo-600 uppercase">
-            Sign in to your account
-          </p>
-          <h2 className="mt-1 text-4xl font-extrabold text-gray-900 sm:mt-5 sm:text-6xl sm:tracking-tight lg:text-6xl">
-            Welcome back
-          </h2>
-          <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-            Don't have an account?{' '}
-            <a
-              href="#"
-              className="font-medium text-indigo-600 hover:text-indigo-500"
-            >
-              Sign up
-            </a>
-          </p>
-        </div>
-
-        <div className="w-full max-w-md mt-8 space-y-8">
-          //email address field
-          <div>
-            <label htmlFor="email-address" className="sr-only">
-              Email address
-            </label>
+    <div className="flex flex-col w-screen items-center m-auto">
+      <Logo className="text-3xl" />
+      <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+        Don't have an account?{" "}
+        <a
+          href="/signup"
+          className="font-medium text-indigo-600 hover:text-indigo-500"
+        >
+          Sign up
+        </a>
+      </p>
+      <div className="grid grid-cols-1 mt-6 border-indigo-900 border-2 gap-18 m-auto justify-center items-center rounded-xl">
+        <div className="grid grid-rows-3 pt-6 px-6 items-center m-auto">
+          <div id="emailcontainer" className="p-6">
+            <div>Email Address</div>
             <input
-              id="email-address"
-              name="email-address"
               type="email"
-              autoComplete="email"
-              required
-              className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Email address"
+              placeholder="johndoe@example.com"
+              className="mt-2 p-2 w-full px-4 rounded-xl border-indigo-900 border-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             />
           </div>
-          //password field
-          <div className="space-y-1">
-            <label htmlFor="password" className="sr-only">
-              Password
-            </label>
+          <div id="passwordContainer" className="px-6 flex flex-col">
+            <div>Password</div>
             <input
-              id="password"
-              name="password"
               type="password"
-              autoComplete="current-password"
-              required
-              className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-              placeholder="Password"
+              placeholder="************"
+              className="mt-2 py-2 pr-20 px-4 w-full justify-start m-auto m rounded-xl border-indigo-900 border-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             />
-          </div>
-          // remember me checkbox
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
+            <div className="flex items-end pl-36 pt-2 justify-end m-auto">
               <input
                 id="remember-me"
                 name="remember-me"
                 type="checkbox"
-                className="w-4 h-4 text indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                className="w-4 h-4 text indigo-600 justify-end m-auto focus:ring-indigo-500 border-gray-300 rounded"
               />
               <label
                 htmlFor="remember-me"
@@ -69,6 +46,17 @@ export default function login() {
                 Remember me
               </label>
             </div>
+          </div>
+          <div
+            id="submit"
+            className="p-6 flex w-full h-full justify-center m-auto align-top"
+          >
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              className="bg-indigo-700 justify-center flex w-full h-3/5 items-center m-auto hover:bg-indigo-900 duration-100 transition-all ease-in-out text-white rounded-xl"
+            >
+              Login
+            </motion.button>
           </div>
         </div>
       </div>
