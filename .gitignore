@@ -1,2 +1,3 @@
 *.vpp.bak_000f
 /.idea
+.DS_STORE
