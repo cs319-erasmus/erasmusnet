@@ -26,8 +26,8 @@ function Header() {
   };
 
   return (
-    <header aria-label="Site Header" class="sticky top-0 bg-white border-b-2">
-      <div class="mx-auto flex h-16 max-w-screen items-center gap-8 px-4 sm:px-6 lg:px-8">
+    <header aria-label="Site Header" class="sticky top-0 z-0 bg-white border-b-2">
+      <div class="mx-auto flex h-16 max-w-screen-2xl items-center gap-8 px-4 sm:px-6 lg:px-8">
         <Link to={"/"}>
           <Logo />
         </Link>
