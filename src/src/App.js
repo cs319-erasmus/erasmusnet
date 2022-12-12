@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
-import { Header, Landing, SignUp, Login } from './components'
+import { Header, Footer,  Landing, SignUp, Login } from './components'
 
 const App = () => {
   return (
@@ -9,7 +9,7 @@ const App = () => {
       <div className='w-screen min-h-screen m-auto flex flex-col'>
         <Header />
 
-        <main className='p-8 max-w-screen-2xl mx-auto flex justify-center'>
+        <main className='p-8 max-w-screen-2xl mx-auto flex'>
           <Routes>
             <Route path='/*' element={<Landing />} />
             <Route path='/signup' element={<SignUp />} />
@@ -17,6 +17,8 @@ const App = () => {
           </Routes>
         </main>
       </div>
+
+      <Footer />
     </AnimatePresence>
   )
 }
