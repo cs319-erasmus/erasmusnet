@@ -18,7 +18,6 @@ const App = () => {
           </Routes>
         </main>
       </div>
-
       <Footer />
     </AnimatePresence>
   )
