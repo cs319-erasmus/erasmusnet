@@ -9,7 +9,7 @@ const App = () => {
       <div className='w-screen min-h-screen m-auto flex flex-col'>
         <Header />
 
-        <main className='p-8 w-full flex justify-center'>
+        <main className='p-8 max-w-screen-2xl mx-auto flex justify-center'>
           <Routes>
             <Route path='/*' element={<Landing />} />
             <Route path='/signup' element={<SignUp />} />

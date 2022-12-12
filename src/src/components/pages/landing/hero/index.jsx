@@ -2,7 +2,7 @@ import React from 'react'
 import { motion } from 'framer-motion'
 
 const Hero = () => {
-    const heroImg = require('../../assets/hero.png');
+    const heroImg = require('../../../../assets/hero.png');
     return (
         <div className='grid select-none grid-cols-2 gap-2 py-24 m-auto'>
             <div className=' py-1 my-auto mx-auto flex-1 flex flex-col items-start gap-6'>
