@@ -16,60 +16,88 @@ function Header() {
     navigate("/", { replace: true });
     document.getElementById("hero").scrollIntoView();
   };
+  const about = () => {
+    navigate("/", { replace: true });
+    document.getElementById("about").scrollIntoView();
+  };
+  const contact = () => {
+    navigate("/", { replace: true });
+    document.getElementById("contact").scrollIntoView();
+  };
 
   return (
-    <header className="sticky justify-between items-center top-0 z-50 w-screen border-b-4 bg-white border-grey-700 p-6 px-16">
-      <div className="flex items-center">
+    <header aria-label="Site Header" class="sticky top-0 bg-white border-b-2">
+      <div class="mx-auto flex h-16 max-w-screen items-center gap-8 px-4 sm:px-6 lg:px-8">
         <Link to={"/"}>
           <Logo />
         </Link>
 
-        <ul className="flex select-none items-center gap-8 ml-10">
-          <li
-            onClick={home}
-            className="text-base text-pink-500 hover:text-purple-500 duration-100 transition-all ease-in-out cursor-pointer"
-          >
-            Home
-          </li>
-          <li
-            onClick={() => {
-              if (window.location.pathname !== "/") {
-                navigate("/", { replace: true });
-              }
-              document.getElementById("about").scrollIntoView();
-            }}
-            className="text-base text-pink-500 hover:text-purple-500 duration-100 transition-all ease-in-out cursor-pointer"
-          >
-            About
-          </li>
-          <li
-            onClick={() => {
-              if (window.location.pathname !== "/") {
-                navigate("/", { replace: true });
-              }
-              document.getElementById("contact").scrollIntoView();
-            }}
-            className="text-base text-pink-500 hover:text-purple-500 duration-100 transition-all ease-in-out cursor-pointer"
-          >
-            Contact
-          </li>
-        </ul>
+        <div class="flex flex-1 items-center justify-end md:justify-between">
+          <nav aria-label="Site Nav" class="hidden md:block">
+            <ul class="flex items-center gap-6 text-sm">
+              <li>
+                <div
+                  onClick={home}
+                  class="text-gray-500 transition hover:text-gray-500/75"
+                >
+                  Home
+                </div>
+              </li>
 
-        <div className="flex select-none items-center space-x-4 ml-auto">
-          <motion.button
-            whileTap={{ scale: 0.9 }}
-            onClick={login}
-            className="bg-indigo-700 hover:bg-pink-500 duration-100 transition-all ease-in-out text-white px-4 py-2 rounded-xl"
-          >
-            Login
-          </motion.button>
-          <motion.button
-            whileTap={{ scale: 0.8 }}
-            onClick={signup}
-            className="bg-indigo-900 hover:bg-pink-500 duration-100 transition-all ease-in-out text-white px-4 py-2 rounded-xl"
-          >
-            Sign Up
-          </motion.button>
+              <li>
+                <div
+                  onClick={about}
+                  class="text-gray-500 transition hover:text-gray-500/75"
+                >
+                  About
+                </div>
+              </li>
+
+              <li>
+                <div
+                  onClick={contact}
+                  class="text-gray-500 transition hover:text-gray-500/75"
+                >
+                  Contact
+                </div>
+              </li>
+            </ul>
+          </nav>
+
+          <div className="flex select-none items-center space-x-4 ml-auto">
+            <motion.button
+              whileTap={{ scale: 0.9 }}
+              onClick={login}
+              className="hidden sm:block bg-indigo-700 hover:bg-pink-500 duration-100 transition-all ease-in-out text-white px-4 py-2 rounded-xl"
+            >
+              Login
+            </motion.button>
+            <motion.button
+              whileTap={{ scale: 0.8 }}
+              onClick={signup}
+              className="hidden sm:block bg-indigo-900 hover:bg-pink-500 duration-100 transition-all ease-in-out text-white px-4 py-2 rounded-xl"
+            >
+              Sign Up
+            </motion.button>
+
+            <button class="block rounded bg-gray-100 p-2.5 text-gray-600 transition hover:text-gray-600/75 md:hidden">
+              <span class="sr-only">Toggle menu</span>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </header>
