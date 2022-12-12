@@ -32,7 +32,7 @@ function index() {
           </p>
           <motion.button
               whileTap={{ scale: 0.9 }}
-              onClick={window.location = "mailto:calkan@cs.bilkent.edu.tr"}
+              onClick={() => window.location.href = "mailto:calkan@cs.bilkent.edu.tr"}
               className="bg-indigo-700 select-none hover:bg-indigo-900 flex ml-auto duration-100 m-4 transition-all ease-in-out text-white px-4 py-2 rounded-xl"
             >Contact Us</motion.button>
         </div>
