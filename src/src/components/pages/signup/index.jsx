@@ -1,74 +1,151 @@
-import React from 'react'
+import React from "react";
+import { Logo } from "../..";
+import { motion } from "framer-motion";
 
 export default function signUp() {
-    return (
-        <div>
-            <div className="flex flex-col items-center justify-center min-h-screen py-2 -mt-20 sm:py-6">
-                <div className="px-4 text-center sm:px-0">
-                    <p className="text-sm font-semibold text-indigo-600 uppercase">
-                        Sign up to your account
+  const heroImg = require("../../../assets/hero.png");
+  return (
+    <section class="bg-white">
+      <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
+        <aside class="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
+          <img
+            alt="Students"
+            src={heroImg}
+            class="absolute inset-0 h-full w-full object-cover"
+          />
+        </aside>
+
+        <main
+          aria-label="Main"
+          class="flex items-center flex-col justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:py-12 lg:px-16 xl:col-span-6"
+        >
+          <Logo className="text-3xl pb-4" />
+          <div class="max-w-xl lg:max-w-3xl border-2 p-4 rounded-xl">
+            <form action="#" class="mt-8 grid grid-cols-6 gap-6">
+              <div class="col-span-6 sm:col-span-3">
+                <label
+                  for="FirstName"
+                  class="block text-sm font-medium text-gray-700"
+                >
+                  First Name
+                </label>
+
+                <input
+                  type="text"
+                  id="FirstName"
+                  name="first_name"
+                  class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 border-2 p-2 shadow-sm"
+                />
+              </div>
+
+              <div class="col-span-6 sm:col-span-3">
+                <label
+                  for="LastName"
+                  class="block text-sm font-medium text-gray-700"
+                >
+                  Last Name
+                </label>
+
+                <input
+                  type="text"
+                  id="LastName"
+                  name="last_name"
+                  class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 border-2 p-2 shadow-sm"
+                />
+              </div>
+
+              <div class="col-span-6">
+                <label
+                  for="Email"
+                  class="block text-sm font-medium text-gray-700"
+                >
+                  Email
+                </label>
+
+                <input
+                  type="email"
+                  id="Email"
+                  name="email"
+                  class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 border-2 p-2 shadow-sm"
+                />
+              </div>
+
+              <div class="col-span-6 sm:col-span-3">
+                <label
+                  for="Password"
+                  class="block text-sm font-medium text-gray-700"
+                >
+                  Password
+                </label>
+
+                <input
+                  type="password"
+                  id="Password"
+                  name="password"
+                  class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 border-2 p-2 shadow-sm"
+                />
+              </div>
+
+              <div class="col-span-6 sm:col-span-3">
+                <label
+                  for="PasswordConfirmation"
+                  class="block text-sm font-medium text-gray-700"
+                >
+                  Password Confirmation
+                </label>
+
+                <input
+                  type="password"
+                  id="PasswordConfirmation"
+                  name="password_confirmation"
+                  class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 border-2 p-2 shadow-sm"
+                />
+              </div>
+
+              <div class="col-span-6">
+                <label for="TermsAccept" class="flex gap-4">
+                  <input
+                    type="checkbox"
+                    id="TermsAccept"
+                    name="terms_accept"
+                    class="h-5 w-5 rounded-md border-gray-200 bg-white shadow-sm"
+                  />
+                  <div class="col-span-6">
+                    <p class="text-sm text-gray-500">
+                      I agree to the{" "}
+                      <a href="#" class="text-gray-700 underline">
+                        terms and conditions
+                      </a>{" "}
+                      and{" "}
+                      <a href="#" class="text-gray-700 underline">
+                        privacy policy
+                      </a>
+                      .
                     </p>
-                    <h2 className="mt-1 text-4xl font-extrabold text-gray-900 sm:mt-5 sm:text-6xl sm:tracking-tight lg:text-6xl">
-                        Welcome
-                    </h2>
-                    <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                        Already have an account?{' '}
-                        <a
-                            href="#"
-                            className="font-medium text-indigo-600 hover:text-indigo-500"
-                        >
-                            Sign in
-                        </a>
-                    </p>
-                </div>
+                  </div>
+                </label>
+              </div>
 
-                <div className="w-full max-w-md mt-8 space-y-8">
-                    <div>
-                        <label htmlFor="email-address" className="sr-only">
-                            Email address
-                        </label>
-                        <input
-                            id="email-address"
-                            name="email-address"
-                            type="email"
-                            autoComplete="email"
-                            required
-                            className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                            placeholder="Email address"
-                        />
-                    </div>
+              <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
+                <motion.button
+                  whileTap={{ scale: 0.9 }}
+                  class="bg-transparent border-2 font-semibold border-indigo-900 text-indigo-900 p-2 px-12 rounded-lg hover:bg-indigo-900 hover:text-white"
+                >
+                  Submit
+                </motion.button>
 
-                    <div className="space-y-1">
-                        <label htmlFor="password" className="sr-only">
-                            Password
-                        </label>
-                        <input
-                            id="password"
-                            name="password"
-                            type="password"
-                            autoComplete="current-password"
-                            required
-                            className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                            placeholder="Password"
-                        />
-                    </div>
-
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center">
-                            <input
-                                id="remember-me"
-                                name="remember-me"
-                                type="checkbox"
-                                className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                            />
-                            <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900">
-                                Remember me
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    )
+                <p class="mt-4 text-sm text-gray-500 sm:mt-0">
+                  Already have an account?{" "}
+                  <a href="#" class="text-gray-700 underline">
+                    Log in
+                  </a>
+                  .
+                </p>
+              </div>
+            </form>
+          </div>
+        </main>
+      </div>
+    </section>
+  );
 }
-
