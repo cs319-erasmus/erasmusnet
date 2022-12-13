@@ -10,7 +10,7 @@ export default function SignUp() {
     navigate("/login", { replace: true });
   };
   return (
-    <section class="bg-white">
+    <section class="bg-white max-w-screen-2xl mx-auto">
       <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
         <aside class="relative block h-16 lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
           <img
