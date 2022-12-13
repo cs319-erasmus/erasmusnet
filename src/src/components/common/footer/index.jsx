@@ -1,12 +1,22 @@
 import React from "react";
 import { Logo } from "../..";
+import { useNavigate } from "react-router-dom";
 
 function backToTop() {
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;
   }
 
-function index() {
+function Footer() {
+  const navigate = useNavigate();
+    const about = () => {
+        navigate("/", { replace: true });
+        document.getElementById("about").scrollIntoView();
+    };
+    const contact = () => {
+        navigate("/", { replace: true });
+        document.getElementById("contact").scrollIntoView();
+    };
   return (
     <footer aria-label="Site Footer" class="bg-gray-100 w-full">
       <div class="relative mx-auto max-w-screen-2xl px-4 py-16 sm:px-6 lg:px-8 lg:pt-24">
@@ -49,7 +59,7 @@ function index() {
               <li>
                 <a
                   class="text-gray-700 transition hover:text-gray-700/75"
-                  href="/about"
+                  href="#" onClick={about}
                 >
                   About
                 </a>
@@ -58,7 +68,7 @@ function index() {
               <li>
                 <a
                   class="text-gray-700 transition hover:text-gray-700/75"
-                  href="/contact"
+                  href="#" onClick={contact}
                 >
                   Contact
                 </a>
@@ -75,4 +85,4 @@ function index() {
   );
 }
 
-export default index;
+export default Footer;
