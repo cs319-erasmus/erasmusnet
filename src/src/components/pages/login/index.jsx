@@ -9,7 +9,7 @@ export default function Login() {
     navigate("/signup", { replace: true });
   };
   return (
-    <div className="flex flex-col w-screen items-center m-auto">
+    <div className="flex flex-col w-screen items-center max-w-screen-xl m-auto">
       <Logo className="text-3xl" />
       <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
         Don't have an account?{" "}
