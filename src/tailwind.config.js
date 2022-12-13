@@ -5,7 +5,14 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontSize: {
+        'body-lg': 'text-lg',
+        'body': 'text-base',
+      }
     },
   },
-  plugins: [],
+  plugins: [require("daisyui")],
+  daisyui: {
+    themes: false,
+  },
 }
