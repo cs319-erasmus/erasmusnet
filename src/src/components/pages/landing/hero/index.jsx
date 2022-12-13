@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 const Hero = () => {
   const heroImg = require("../../../../assets/hero.png");
   return (
-    <div id="hero" className="grid select-none grid-cols-2 gap-2 py-18 m-auto">
+    <div id="hero" className="grid select-none lg:grid-cols-2 lg:grid-rows-1 grid-rows-2 gap-2 py-18 m-auto">
       <div className=" py-1 my-auto mx-auto flex-1 flex flex-col items-start gap-6">
         <p className="font-extrabold xl:text-[2.5rem] 2xl:text-[2.5rem] tracking-wide text-indigo-1400 w-5/6">
           Apply to Erasmus
