@@ -1,9 +1,14 @@
 import React from "react";
 import { Logo } from "../..";
 import { motion } from "framer-motion";
+import { useNavigate } from "react-router-dom";
 
-export default function signUp() {
+export default function SignUp() {
   const heroImg = require("../../../assets/hero.png");
+  const navigate = useNavigate();
+  const login = () => {
+    navigate("/login", { replace: true });
+  };
   return (
     <section class="bg-white">
       <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
@@ -136,7 +141,7 @@ export default function signUp() {
 
                 <p class="mt-4 text-sm text-gray-500 sm:mt-0">
                   Already have an account?{" "}
-                  <a href="#" class="text-gray-700 underline">
+                  <a onClick={login} class="text-gray-700 underline">
                     Log in
                   </a>
                   .

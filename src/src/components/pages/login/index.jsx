@@ -1,15 +1,20 @@
 import React from "react";
 import { Logo } from "../..";
 import { motion } from "framer-motion";
+import { useNavigate,Route } from "react-router-dom";
 
-export default function login() {
+export default function Login() {
+  const navigate = useNavigate();
+  const signup = () => {
+    navigate("/signup", { replace: true });
+  };
   return (
     <div className="flex flex-col w-screen items-center m-auto">
       <Logo className="text-3xl" />
       <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
         Don't have an account?{" "}
         <a
-          href="/signup"
+          onClick={signup}
           className="font-medium text-indigo-600 hover:text-indigo-500"
         >
           Sign up
