@@ -1,3 +1,4 @@
+//router eklentilerini sildim, course approval page comment outlu oldugu icin
 // import { Box, Typography, useTheme } from "@mui/material";
 // import { DataGrid } from "@mui/x-data-grid";
 // import { mockDataCourse} from "./src/mockData";
