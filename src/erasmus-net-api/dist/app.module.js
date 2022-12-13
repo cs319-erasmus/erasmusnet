@@ -11,13 +11,20 @@ const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const user_module_1 = require("./user/user.module");
+const auth_module_1 = require("./auth/auth.module");
+const host_university_module_1 = require("./host-university/host-university.module");
+const course_module_1 = require("./course/course.module");
+const firebase_service_1 = require("./firebase/firebase.service");
+const config_1 = require("@nestjs/config");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [user_module_1.UserModule],
+        imports: [auth_module_1.AuthModule, user_module_1.UserModule, host_university_module_1.HostUniversityModule,
+            course_module_1.CourseModule, config_1.ConfigModule.forRoot()
+        ],
         controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        providers: [app_service_1.AppService, firebase_service_1.FirebaseService],
     })
 ], AppModule);
 exports.AppModule = AppModule;
