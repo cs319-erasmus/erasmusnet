@@ -4,10 +4,11 @@ import { Accessibility } from "./accessibility";
 import {useNavigate} from "react-router-dom";
 import {MenuToggle} from "./menuToggle";
 
-const NavLinksContainer = styled.div`
+const NavLinksContainer = styled.nav`
   height: 100%;
   display: flex;
   align-items: center;
+  z-index: 100;
 `;
 
 const LinksWrapper = styled.ul`
