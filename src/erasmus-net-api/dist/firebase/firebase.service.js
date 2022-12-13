@@ -12,10 +12,28 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.FirebaseService = void 0;
 const common_1 = require("@nestjs/common");
 const config_1 = require("@nestjs/config");
+const app_1 = require("firebase/app");
+const auth_1 = require("firebase/auth");
+const firestore_1 = require("firebase/firestore");
 let FirebaseService = class FirebaseService {
     constructor(configService) {
         this.configService = configService;
+        this.app = (0, app_1.initializeApp)({
+            apiKey: configService.get('apiKey'),
+            appId: configService.get('appId'),
+            authDomain: configService.get('authDomain'),
+            measurementId: configService.get('measurementId'),
+            messagingSenderId: configService.get('messagingSenderId'),
+            projectId: configService.get('projectId'),
+            storageBucket: configService.get('storageBucket'),
+        });
+        this.auth = (0, auth_1.getAuth)(this.app);
+        this.firestore = (0, firestore_1.getFirestore)(this.app);
+        this._createCollections();
         console.log('FirebaseService instantiated');
+    }
+    _createCollections() {
+        this.usersCollection = (0, firestore_1.collection)(this.firestore, 'users');
     }
 };
 FirebaseService = __decorate([

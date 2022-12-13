@@ -16,7 +16,7 @@ let AuthModule = class AuthModule {
 };
 AuthModule = __decorate([
     (0, common_1.Module)({
-        imports: [config_1.ConfigModule.forRoot()],
+        imports: [config_1.ConfigModule],
         controllers: [auth_controller_1.AuthController],
         providers: [auth_service_1.AuthService, firebase_service_1.FirebaseService],
     })
