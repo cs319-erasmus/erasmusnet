@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
-import { Header, Footer,  Landing, SignUp, Login } from './components'
+import { Header, Footer,  Landing, SignUp, Login, FAQ } from './components'
 
 const App = () => {
   return (
@@ -14,10 +14,10 @@ const App = () => {
             <Route path='/*' element={<Landing />} />
             <Route path='/signup' element={<SignUp />} />
             <Route path='/login' element={<Login />} />
+            <Route path='/faq' element={<FAQ />} />
           </Routes>
         </main>
       </div>
-
       <Footer />
     </AnimatePresence>
   )
