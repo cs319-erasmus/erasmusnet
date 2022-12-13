@@ -10,6 +10,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
 const NavbarContainer = styled.div`
+  z-index: 100;
   width: 100%;
   height: 60px;
   box-shadow: 0 1px 3px rgba(15, 15, 15, 0.13);
@@ -22,6 +23,7 @@ const NavbarContainer = styled.div`
 
 const LeftSection = styled.div`
   display: flex;
+  z-index: 100;
 `;
 
 const MiddleSection = styled.div`
