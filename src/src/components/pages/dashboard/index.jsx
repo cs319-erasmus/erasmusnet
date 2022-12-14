@@ -26,7 +26,7 @@ function index() {
     { Task: "New Appointment Request", Date: "2021-05-01" },
     { Task: "New Appointment Request", Date: "2021-05-01" },
   ];
-  const stage = 0;
+  const stage = 3;
 
   const studentSteps = [
     "Application",
@@ -44,15 +44,16 @@ function index() {
     "Pre-Approval Forms",
     "Complete",
   ];
+  
   let stepItems;
   if (user === 0) {
     stepItems = studentSteps.map((step, idx) => {
-      let css = "step" + (idx <= stage ? " step-primary" : " ");
+      let css = "step" + (idx < stage ? " step-primary" : " ");
       return <li className={css}>{step}</li>;
     });
   } else {
     stepItems = coordinatorSteps.map((step, idx) => {
-      let css = "step" + (idx <= stage ? " step-primary" : " ");
+      let css = "step" + (idx < stage ? " step-primary" : " ");
       return <li className={css}>{step}</li>;
     });
   }
