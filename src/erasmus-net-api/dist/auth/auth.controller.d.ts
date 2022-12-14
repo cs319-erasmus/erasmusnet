@@ -1,7 +1,8 @@
 import { AuthService } from "./auth.service";
+import { User } from "src/models/user.model";
 export declare class AuthController {
-    private authService;
+    private readonly authService;
     constructor(authService: AuthService);
-    signup(): string;
-    login(): string;
+    login(body: Pick<User, 'email' | 'password'>): Promise<void>;
+    signup(name: string, password: string, email: string, role: string): Promise<any>;
 }

@@ -11,14 +11,13 @@ const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
 const auth_controller_1 = require("./auth.controller");
 const config_1 = require("@nestjs/config");
-const firebase_service_1 = require("../firebase/firebase.service");
 let AuthModule = class AuthModule {
 };
 AuthModule = __decorate([
     (0, common_1.Module)({
-        imports: [config_1.ConfigModule.forRoot()],
+        imports: [config_1.ConfigModule],
         controllers: [auth_controller_1.AuthController],
-        providers: [auth_service_1.AuthService, firebase_service_1.FirebaseService],
+        providers: [auth_service_1.AuthService],
     })
 ], AuthModule);
 exports.AuthModule = AuthModule;

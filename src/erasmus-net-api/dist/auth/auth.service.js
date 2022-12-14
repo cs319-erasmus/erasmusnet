@@ -11,21 +11,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
-const firebase_service_1 = require("../firebase/firebase.service");
+const admin = require("firebase-admin");
 let AuthService = class AuthService {
-    constructor(fireBaseService) {
-        this.fireBaseService = fireBaseService;
+    constructor() { }
+    async login(email, password) {
+        try {
+        }
+        catch (error) {
+        }
     }
-    login() {
-        return "login";
-    }
-    signup() {
-        return "signup";
+    async signup(displayName, password, email, role) {
+        try {
+            const { uid } = await admin.auth().createUser({
+                displayName,
+                password,
+                email
+            });
+            await admin.auth().setCustomUserClaims(uid, { role });
+            return { uid };
+        }
+        catch (error) {
+            throw new common_1.UnauthorizedException(error.message);
+        }
     }
 };
 AuthService = __decorate([
     (0, common_1.Injectable)({}),
-    __metadata("design:paramtypes", [firebase_service_1.FirebaseService])
+    __metadata("design:paramtypes", [])
 ], AuthService);
 exports.AuthService = AuthService;
 //# sourceMappingURL=auth.service.js.map
