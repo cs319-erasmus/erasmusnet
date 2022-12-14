@@ -16,7 +16,7 @@ const NavbarContainer = styled.div`
   display: flex;
   align-items: center;
   padding: 0 1.5em;
-  z-index: 0;
+  z-index: 100;
   sticky: top;
 `;
 

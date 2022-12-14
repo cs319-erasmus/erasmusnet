@@ -16,7 +16,7 @@ export default function SignUp() {
           <img
             alt="Students"
             src={heroImg}
-            class="absolute inset-0 h-full w-full object-cover"
+            class="absolute inset-0 h-full w-full object-cover z-0"
           />
         </aside>
 
