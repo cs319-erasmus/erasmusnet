@@ -59,13 +59,13 @@ export function NavLinks(props) {
     <NavLinksContainer aria-label="Site Nav" class="hidden md:block" >
         <LinksWrapper>
           <LinkItem>
-            <Link href="#" onClick={home}>Home</Link>
+            <Link onClick={home}>Home</Link>
           </LinkItem>
           <LinkItem>
-            <Link href="#" onClick={about}>About Us</Link>
+            <Link onClick={about}>About Us</Link>
           </LinkItem>
           <LinkItem>
-            <Link href="#"onClick={contact}>Contact</Link>
+            <Link onClick={contact}>Contact</Link>
           </LinkItem>
         </LinksWrapper>
     </NavLinksContainer>
