@@ -1,21 +1,23 @@
 import { Body, Controller, Post } from "@nestjs/common";
 import { AuthService } from "./auth.service";
-import { MockUser } from "src/models/mockUser.model";
+import { UserDTO } from "src/user/dto/user.dto";
+import { User } from "src/models/user.model";
 
 @Controller('auth')
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
-
-//   @Post('login')
-//   async login(@Body() loginDto: LoginDto) {
-//     // return this.authService.login(loginDto);
-//   }
+  
     @Post('login')
-    public login(@Body() body: Pick<MockUser, 'email' | 'password'>) {
+    public login(@Body() body: Pick<User, 'email' | 'password'>) {
         return this.authService.login(body.email, body.password);
     }
     @Post('signup')
-    public signup(@Body() body: Omit<MockUser, 'id'>) {
-        return this.authService.signup(body);
+    public signup(
+        @Body('name') name: string, 
+        @Body('password') password: string,
+        @Body('email') email: string,
+        @Body('role') role: string
+    ) {
+        return this.authService.signup(name, password, email, role);
     }
 }

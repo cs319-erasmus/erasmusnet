@@ -11,57 +11,33 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AuthService = void 0;
 const common_1 = require("@nestjs/common");
-const firebase_service_1 = require("../firebase/firebase.service");
-const auth_1 = require("firebase/auth");
-const firestore_1 = require("firebase/firestore");
+const admin = require("firebase-admin");
 let AuthService = class AuthService {
-    constructor(fireBaseService) {
-        this.fireBaseService = fireBaseService;
-    }
+    constructor() { }
     async login(email, password) {
         try {
-            const userCredential = await (0, auth_1.signInWithEmailAndPassword)(this.fireBaseService.auth, email, password);
-            if (userCredential) {
-                const id = userCredential.user.uid;
-                const docRef = (0, firestore_1.doc)(this.fireBaseService.usersCollection, id);
-                const snapshot = await (0, firestore_1.getDoc)(docRef);
-                const loggedUser = Object.assign(Object.assign({}, snapshot.data()), { id: snapshot.id });
-                delete loggedUser.password;
-                return loggedUser;
-            }
         }
         catch (error) {
-            const firebaseAuthError = error;
-            console.log(`[FIREBASE AUTH ERROR CODE]: ${firebaseAuthError.code}`);
-            if (firebaseAuthError.code === 'auth/wrong-password') {
-                throw new common_1.HttpException('Email or password incorrect.', common_1.HttpStatus.FORBIDDEN);
-            }
-            if (firebaseAuthError.code === 'auth/user-not-found') {
-                throw new common_1.HttpException('Email not found.', common_1.HttpStatus.NOT_FOUND);
-            }
         }
     }
-    async signup(body) {
+    async signup(displayName, password, email, role) {
         try {
-            const userCredential = await (0, auth_1.createUserWithEmailAndPassword)(this.fireBaseService.auth, body.email, body.password);
-            if (userCredential) {
-                const id = userCredential.user.uid;
-                const docRef = (0, firestore_1.doc)(this.fireBaseService.usersCollection, id);
-                await (0, firestore_1.setDoc)(docRef, body);
-            }
+            const { uid } = await admin.auth().createUser({
+                displayName,
+                password,
+                email
+            });
+            await admin.auth().setCustomUserClaims(uid, { role });
+            return { uid };
         }
         catch (error) {
-            const firebaseAuthError = error;
-            console.log(`[FIREBASE AUTH ERROR CODE]: ${firebaseAuthError.code}`);
-            if (firebaseAuthError.code === 'auth/email-already-in-use') {
-                throw new common_1.HttpException('Email already exists.', common_1.HttpStatus.CONFLICT);
-            }
+            throw new common_1.UnauthorizedException(error.message);
         }
     }
 };
 AuthService = __decorate([
     (0, common_1.Injectable)({}),
-    __metadata("design:paramtypes", [firebase_service_1.FirebaseService])
+    __metadata("design:paramtypes", [])
 ], AuthService);
 exports.AuthService = AuthService;
 //# sourceMappingURL=auth.service.js.map

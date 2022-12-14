@@ -1,8 +1,8 @@
 import { AuthService } from "./auth.service";
-import { MockUser } from "src/models/mockUser.model";
+import { User } from "src/models/user.model";
 export declare class AuthController {
     private readonly authService;
     constructor(authService: AuthService);
-    login(body: Pick<MockUser, 'email' | 'password'>): Promise<Omit<MockUser, "password">>;
-    signup(body: Omit<MockUser, 'id'>): Promise<void>;
+    login(body: Pick<User, 'email' | 'password'>): Promise<void>;
+    signup(name: string, password: string, email: string, role: string): Promise<any>;
 }

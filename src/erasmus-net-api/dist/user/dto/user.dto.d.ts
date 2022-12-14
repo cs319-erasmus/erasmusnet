@@ -1,5 +1,5 @@
-export declare class MockUser {
-    name: string;
+export declare class UserDTO {
+    displayName: string;
     email: string;
     password: string;
     role: string;
