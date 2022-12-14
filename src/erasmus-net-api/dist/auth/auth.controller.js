@@ -22,8 +22,8 @@ let AuthController = class AuthController {
     login(body) {
         return this.authService.login(body.email, body.password);
     }
-    signup(body) {
-        return this.authService.signup(body);
+    signup(name, password, email, role) {
+        return this.authService.signup(name, password, email, role);
     }
 };
 __decorate([
@@ -35,9 +35,12 @@ __decorate([
 ], AuthController.prototype, "login", null);
 __decorate([
     (0, common_1.Post)('signup'),
-    __param(0, (0, common_1.Body)()),
+    __param(0, (0, common_1.Body)('name')),
+    __param(1, (0, common_1.Body)('password')),
+    __param(2, (0, common_1.Body)('email')),
+    __param(3, (0, common_1.Body)('role')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [String, String, String, String]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "signup", null);
 AuthController = __decorate([
