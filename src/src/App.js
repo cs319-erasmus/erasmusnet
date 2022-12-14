@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
-import { Header, Footer,  Landing, SignUp, Login, FAQ, Appointments, Dashboard } from './components'
+import { Header, Footer,  Landing, SignUp, Login, FAQ, Appointments, Dashboard, Profile } from './components'
 
 const App = () => {
   return (
@@ -17,6 +17,7 @@ const App = () => {
             <Route path='/faq' element={<FAQ />} />
             <Route path='/appointments' element={<Appointments />} />
             <Route path='/dashboard' element={<Dashboard />} />
+            <Route path='/profile' element={<Profile />} />
           </Routes>
         </main>
       </div>
