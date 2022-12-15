@@ -74,18 +74,18 @@ function index() {
   return (
     <div
       id="Dashboard"
-      className="flex flex-col px-4 sm:px-6 lg:px-8 max-h-screen  mx-auto max-w-screen-2xl"
+      className="flex flex-col px-4 sm:px-6 lg:px-8  mx-auto max-w-screen-2xl"
     >
       <div id="Status">
         <div id="Status-Text" className={indicatorTextCss}>
           Status
         </div>
-        <ul className="steps steps-vertical sm:steps-horizontal w-full grow py-6 mt-1 sm:mt-2 lg:mt-4 border-2 rounded-2xl">
+        <ul className="steps steps-vertical sm:steps-horizontal w-full grow p-6 mt-1 sm:mt-2 lg:mt-4 border-2 rounded-2xl">
           {stepItems}
         </ul>
       </div>
-      <div id="Info" className="grid lg:grid-cols-2 grid-rows-2 overflow-auto my-4 sm:my-6 lg:my-8">
-        <div id="Info-Left" className="grid grid-rows-2 gap-12 justify-start">
+      <div id="Info" className="grid lg:grid-cols-2 lg:grid-rows-1 grid-rows-0 grid-cols-0 my-4 sm:my-6 lg:my-8">
+        <div id="Info-Left" className="grid grid-rows-2 justify-start">
           <div id="Next-Step" className="flex-col">
             <div id="Next-Step-Text" className={indicatorTextCss}>
               Next Steps
@@ -119,7 +119,7 @@ function index() {
             </div>
           </div>
         </div>
-        <div id="Info-Calendar">
+        <div id="Info-Calendar" className="mt-8 lg:mt-0">
           <div id="Calendar-Text" className={indicatorTextCss}>
             Calendar
           </div>
