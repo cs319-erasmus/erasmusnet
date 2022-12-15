@@ -1,90 +1,100 @@
 import { Table } from '@nextui-org/react';
-import { Button } from '@nextui-org/react';
+import { Button,Link } from '@nextui-org/react';
 import { Grid } from '@nextui-org/react';
 import { Text } from '@nextui-org/react';
 import { Input, Spacer } from "@nextui-org/react";
+import { Card } from "@nextui-org/react";
+const course1={
+  code:"CS 465",
+  name:"Computer Graphics",
+  instructor:"Uğur Güdükbay",
+  deparment:"CS",
+  type:"Technical Elective",
+  credits:"6.5",
 
+  Ecode:"1TD388",
+  Ename:"Computer Graphics",
+  Esyllabus:"syllabus.pdf",
+  Ecredits:"6.5",
+}
 export default function Approval() {
 
   return (
     <div width= '100%' layout='fill'>
-    <Spacer y={0.5} /><Text h1 color="indigo" >Approval Request</Text>
+     <Grid.Container gap={4}><Text h1 color="indigo" css={ {paddingLeft: "$10",}}>Approval Request</Text> </Grid.Container> 
     <hr color="indigo"></hr>
-
     <Grid.Container gap={4}>
       <Grid sm={12} md={12}>
       <div rows="6">
           <Text color="indigo">Bilkent Course Code</Text>
-          <Spacer y={0.5} />
-          <Input readOnly  initialValue="CS465" />
+          
+          <Input readOnly  initialValue={course1.code} />
         </div>
-        <Spacer y={2} />
+        <Spacer y={1} />
         <div>
           <Text color="indigo">Bilkent Course Name</Text>
-          <Spacer y={0.5} />
-          <Input readOnly  initialValue="Computer Graphics" />
+       
+          <Input readOnly  initialValue={course1.name} />
         </div>
-        <Spacer y={2} />
+        <Spacer y={1} />
         <div>
           <Text color="indigo">Bilkent Instructor</Text>
-          <Spacer y={0.5} />
-          <Input readOnly initialValue="Uğur Güdükbay" />
+          <Input readOnly initialValue={course1.instructor} />
         </div>
-          <Spacer y={2} />
+          <Spacer y={1} />
           <div>
             <Text color="indigo">Department</Text>
-            <Spacer y={0.5} />
-            <Input readOnly  initialValue="CS" />
+            <Input readOnly  initialValue={course1.deparment} />
           </div>
-          <Spacer y={2} />
+          <Spacer y={1} />
+         
+      </Grid>
 
-          <div>
+      <Grid sm={12} md={12}>
+      <div>
           <Text color="indigo">Type</Text>
-          <Spacer y={0.5} />
-          <Input readOnly  color="error" initialValue="Techinical Elective" />
+          <Input readOnly  color="error" initialValue={course1.type} />
           </div>
-          <Spacer y={2} />
+          <Spacer y={1} />
 
           <div>
           <Text color="indigo">ECTS Credits</Text>
-          <Spacer y={0.5} />
-          <Input readOnly  initialValue="6.5" />
-          </div>
+          <Input readOnly  initialValue={course1.credits} />
+       </div>
 
       </Grid>
-      <Spacer y={2} />
-
+     
       <Grid sm={12} md={12}>
       <div rows="6">
           <Text color="indigo">Erasmus Course Code</Text>
           <Spacer y={0.5} />
-          <Input readOnly  initialValue="1TD388" />
+          <Input readOnly  initialValue={course1.Ecode}/>
         </div>
-        <Spacer y={2} />
+        <Spacer y={1} />
         <div>
           <Text color="indigo">Erasmus Course Name</Text>
           <Spacer y={0.5} />
-          <Input readOnly  initialValue="Computer Graphics" />
+          <Input readOnly  initialValue={course1.Ename} />
         </div>
-        <Spacer y={2} />
+        <Spacer y={1} />
         
           <div>
-            <Text color="indigo">Syllabus</Text>
+            <Text px={"$3"} color="indigo">Syllabus</Text>
             <Spacer y={0.5} />
-            <Input readOnly  initialValue="Syllabus.pdf" />
+            <Input readOnly  initialValue={course1.Esyllabus} />
           </div>
-          <Spacer y={2} />
+          <Spacer y={1} />
 
           <div>
-          <Text color="indigo">ECTS Credits</Text>
+          <Text  px={"$3"} color="indigo">ECTS Credits</Text>
           <Spacer y={0.5} />
-          <Input readOnly  color="error" initialValue="6.5" />
+          <Input readOnly  color="error"  initialValue={course1.Ecredits} />
           </div>
-          <Spacer y={2} />
+          <Spacer y={1} />
 
       </Grid>
-      
-        
+      <Spacer y={2} />
+      <Button color="secondary" css={ {paddingLeft: "$10",}}><Link href="/instructor-approve">Back</Link> </Button>
       </Grid.Container>
        
     </div>
