@@ -85,7 +85,7 @@ export default function Home() {
         <Table.Row width="100%" key="1">
           <Table.Cell><Text b color="indigo" >Alperen Toprak</Text></Table.Cell>
 
-          <Table.Cell><Button color="indigo" ><Link href="/approvalinfo" color="secondary">View</Link> </Button> </Table.Cell>
+          <Table.Cell><Button color="indigo" ><Link href="/instructor-view-course" color="secondary">View</Link> </Button> </Table.Cell>
             {/* <a href="/approvalinfo"color="white" >View</a> */}
             <Table.Cell><Button color="success">Approve</Button></Table.Cell>
           <Table.Cell ><Button color="error" >Reject</Button></Table.Cell>
@@ -94,7 +94,7 @@ export default function Home() {
 
         <Table.Row key="2">
           <Table.Cell><Text b color="indigo">Eda Yılmaz</Text></Table.Cell>
-          <Table.Cell><Button color="indigo" ><Link href="/approvalinfo" color="secondary">View</Link> </Button> </Table.Cell>
+          <Table.Cell><Button color="indigo" ><Link href="/instructor-view-course" color="secondary">View</Link> </Button> </Table.Cell>
           <Table.Cell><Button color="success">Approve</Button></Table.Cell>
           <Table.Cell ><Button color="error" >Reject</Button></Table.Cell>
         </Table.Row>
@@ -102,7 +102,7 @@ export default function Home() {
 
         <Table.Row key="3">
           <Table.Cell><Text  b color="indigo">Melis Titiz</Text></Table.Cell>
-          <Table.Cell><Button color="indigo" ><Link href="/approvalinfo" color="secondary">View</Link> </Button> </Table.Cell>
+          <Table.Cell><Button color="indigo" ><Link href="/instructor-view-course" color="secondary">View</Link> </Button> </Table.Cell>
           <Table.Cell><Button color="success">Approve</Button></Table.Cell>
           <Table.Cell ><Button color="error" >Reject</Button></Table.Cell>
         </Table.Row>
