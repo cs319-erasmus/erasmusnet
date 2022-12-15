@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 
-function index() {
+function Dashboard() {
+  const user = JSON.parse(localStorage.getItem("user"));
+  
   const indicatorTextCss = "text-2xl tracking-wider text-gray-500";
-  const user = 0;
+  const userType = 0;
   const coordinatorInfo = {
     name: "Can Alkan",
     email: "calkan@cs.bilkent.edu.tr",
@@ -46,7 +48,7 @@ function index() {
   ];
   
   let stepItems;
-  if (user === 0) {
+  if (userType === 0) {
     stepItems = studentSteps.map((step, idx) => {
       let css = "step" + (idx < stage ? " step-primary" : " ");
       return <li className={css}>{step}</li>;
@@ -76,7 +78,10 @@ function index() {
       id="Dashboard"
       className="flex flex-col px-4 sm:px-6 lg:px-8  mx-auto max-w-screen-2xl"
     >
-      <div id="Status">
+      <text className="text-4xl font-bold tracking-wider text-gray-500 border-b-4 pb-4 w-full">
+        Welcome, {user.displayName}
+      </text>
+      <div id="Status" className="mt-6 md:mt-12">
         <div id="Status-Text" className={indicatorTextCss}>
           Status
         </div>
@@ -135,4 +140,4 @@ function index() {
   );
 }
 
-export default index;
+export default Dashboard;

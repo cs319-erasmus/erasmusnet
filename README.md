@@ -1,4 +1,4 @@
-# erasmusnet
+# erasmusnet.app
 ## Group Members
 * Arda Baktır - 21802354
 

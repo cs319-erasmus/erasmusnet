@@ -1,13 +1,33 @@
-import React from "react";
+import React, { useState } from "react";
 import { Logo } from "../..";
 import { motion } from "framer-motion";
 import { useNavigate,Route } from "react-router-dom";
+import { auth } from "../../../firebase.js";
+import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Login() {
+  localStorage.setItem("user", null);
+
   const navigate = useNavigate();
   const signup = () => {
     navigate("/signup", { replace: true });
   };
+
+  const login = async (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+    try {
+      const res = await signInWithEmailAndPassword(auth, email, password
+      );
+      localStorage.setItem("user", JSON.stringify(res.user));
+      navigate("/dashboard", { replace: true });
+    } catch (error) {
+      alert(error.message);
+      localStorage.setItem("user", null);
+    }
+  };
+
   return (
     <div className="flex flex-col items-center max-w-screen-xl m-auto">
       <Logo className="text-3xl" />
@@ -26,6 +46,7 @@ export default function Login() {
             <div>Email Address</div>
             <input
               type="email"
+              id="email"
               placeholder="johndoe@example.com"
               className="mt-2 p-2 w-full px-4 rounded-xl border-indigo-900 border-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             />
@@ -34,6 +55,7 @@ export default function Login() {
             <div>Password</div>
             <input
               type="password"
+              id="password"
               placeholder="************"
               className="mt-2 py-2 pr-20 px-4 w-full justify-start m-auto m rounded-xl border-indigo-900 border-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
             />
@@ -58,6 +80,7 @@ export default function Login() {
           >
             <motion.button
               whileTap={{ scale: 0.9 }}
+              onClick={login}
               className="bg-indigo-700 justify-center flex w-full h-3/5 items-center m-auto hover:bg-indigo-900 duration-100 transition-all ease-in-out text-white rounded-xl"
             >
               Login
