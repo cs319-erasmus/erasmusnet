@@ -10,8 +10,8 @@ export const useAuth = () => {
 const AuthProvider = ({ children }) => {
   const [user, setUser] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
-  const api = "http://18.185.6.57:3333";
-
+  // const api = "http://18.185.6.57:3333";
+    const api = "http://localhost:3333";
   const login = (email, password) => {
     return auth.signInWithEmailAndPassword(email, password);
   };
@@ -36,6 +36,9 @@ const AuthProvider = ({ children }) => {
     console.log(res);
     return res;
   };
+  const getToken = () => {
+    auth.currentUser.getIdToken().then((token) => {return token});
+  }
 
   // Observer pattern
   React.useEffect(() => {
@@ -50,7 +53,7 @@ const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
-  const value = { user, login, logout, signup };
+  const value = { user, login, logout, signup, getToken };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
