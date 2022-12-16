@@ -35,6 +35,28 @@ export class AuthService{
       throw new UnauthorizedException(error.message);
         }
     }
+  private getToken(authToken: string): string {
+    const match = authToken.match(/^Bearer (.*)$/);
+    if (!match || match.length < 2) {
+      throw new UnauthorizedException('Invalid Authorization token - Token does not match Bearer .*');
+    }
+    return match[1];
+  }
+  public async authenticate(authToken: string): Promise<any> {
+    const tokenString = this.getToken(authToken);
+    try {
+      const decodedToken: admin.auth.DecodedIdToken = await admin.auth().verifyIdToken(tokenString);
+      console.log(decodedToken);
+      const  {
+        email,
+        uid,
+        role
+      } = decodedToken;
+      return { email, uid, role};
+    } catch (err) {
+      throw new UnauthorizedException(err.message);
+    }
+  }
 }
 
 /*
