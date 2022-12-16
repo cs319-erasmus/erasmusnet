@@ -10,7 +10,7 @@ const courses = [
     status: "Rejected" }
 ]
 
-function studentCourseApproval()
+export default function studentCourseApproval()
 {
     const courseItems = courses.map((course) => {
         return(
@@ -77,4 +77,4 @@ function studentCourseApproval()
     );
 }
 
-export default studentCourseApproval;
+//export default studentCourseApproval;
