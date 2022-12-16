@@ -14,6 +14,7 @@ async function bootstrap() {
     databaseURL: process.env.FIREBASE_DATABASE_URL
   });
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
   await app.listen(3333);
 }
 export default admin;
