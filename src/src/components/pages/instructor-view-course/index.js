@@ -4,6 +4,8 @@ import { Grid } from '@nextui-org/react';
 import { Text } from '@nextui-org/react';
 import { Input, Spacer } from "@nextui-org/react";
 import { Card } from "@nextui-org/react";
+import {InstructorApprove } from './components/pages/instructor-approve';
+
 const course1={
   code:"CS 465",
   name:"Computer Graphics",
@@ -94,7 +96,7 @@ export default function InstructorView() {
 
       </Grid>
       <Spacer y={2} />
-      <Button color="secondary" css={ {paddingLeft: "$10",}}><Link href="/instructor-approve">Back</Link> </Button>
+      <Button color="secondary" css={ {paddingLeft: "$10"}}> <Route path='/instructor-approve' element={<InstructorApprove />} />Back</Button> 
       </Grid.Container>
        
     </div>
