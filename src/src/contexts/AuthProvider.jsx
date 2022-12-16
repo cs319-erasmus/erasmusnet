@@ -36,9 +36,14 @@ const AuthProvider = ({ children }) => {
     console.log(res);
     return res;
   };
-  const getToken = () => {
-    auth.currentUser.getIdToken().then((token) => {return token});
-  }
+  const getToken = async () => {
+    try {
+      return await auth.currentUser.getIdToken();
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
 
   // Observer pattern
   React.useEffect(() => {
