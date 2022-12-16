@@ -33,28 +33,28 @@ function studentCreateRequest()
                     <label for="coordinator" class="block mb-2 text-ml font-bold text-indigo-900">Course Coordinator</label>                    
                 </div>
                 <div class="grid gap-12 mb-6 grid-cols-3">
-                    <button type="button" class="bg-gray-50 border border-gray-300 text-gray-700 text-ml rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" disabled>
-                        { course.code }
-                    </button>
-                    <button type="button" class="bg-gray-50 border border-gray-300 text-gray-700 text-ml rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" disabled>
-                        { course.name }
-                    </button>
-                    <button type="button" class="bg-gray-50 border border-gray-300 text-gray-700 text-ml rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" disabled>
-                        { course.coordinator }
-                    </button>
+                    <input type="text" id="courseName"
+                        class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        placeholder= { course.code } required />
+                    <input type="text" id="courseName"
+                        class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        placeholder= { course.name } required />
+                    <input type="text" id="courseName"
+                        class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        placeholder= { course.coordinator } required />
                 </div>
 
                 <div class="grid gap-12 md:grid-cols-3">
-                    <label for="type" class="block mb-2 text-ml font-bold text-indigo-900">Syllabus</label>
+                    <label for="type" class="block mb-2 text-ml font-bold text-indigo-900">Course Type</label>
                     <label for="ects" class="block mb-2 text-ml font-bold text-indigo-900">ECTS Credits</label>                                     
                 </div>
                 <div class="grid gap-12 mb-6 grid-cols-3">
-                    <button type="button" class="bg-gray-50 border border-gray-300 text-gray-700 text-ml rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" disabled>
-                        { course.syllabus }
-                    </button>
-                    <button type="button" class="bg-gray-50 border border-gray-300 text-gray-700 text-ml rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" disabled>
-                        { course.credits }
-                    </button>
+                    <input type="text" id="courseName"
+                        class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        placeholder= { course.type } required />
+                    <input type="text" id="courseName"
+                        class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        placeholder= { course.credits } required />
                     <motion.button
                         whileTap={{ scale: 0.9 }}
                         class="bg-transparent border-2 font-semibold border-indigo-900 text-indigo-900 p-2 px-12 rounded-lg hover:bg-indigo-900 hover:text-white">
@@ -76,28 +76,28 @@ function studentCreateRequest()
                     <label for="coordinator" class="block mb-2 text-ml font-bold text-indigo-900">School</label>                    
                 </div>
                 <div class="grid gap-12 mb-6 grid-cols-3">
-                    <button type="button" class="bg-gray-50 border border-gray-300 text-gray-700 text-ml rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" disabled>
-                        { course.code }
-                    </button>
-                    <button type="button" class="bg-gray-50 border border-gray-300 text-gray-700 text-ml rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" disabled>
-                        { course.name }
-                    </button>
-                    <button type="button" class="bg-gray-50 border border-gray-300 text-gray-700 text-ml rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" disabled>
-                        { course.school }
-                    </button>
+                <input type="text" id="courseName"
+                        class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        placeholder= { course.code } required />
+                    <input type="text" id="courseName"
+                        class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        placeholder= { course.name } required />
+                    <input type="text" id="courseName"
+                        class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        placeholder= { course.school } required />
                 </div>
 
                 <div class="grid gap-12 md:grid-cols-3">
-                    <label for="type" class="block mb-2 text-ml font-bold text-indigo-900">Course Type</label>
+                    <label for="type" class="block mb-2 text-ml font-bold text-indigo-900">Course Syllabus</label>
                     <label for="ects" class="block mb-2 text-ml font-bold text-indigo-900">ECTS Credits</label>                                     
                 </div>
                 <div class="grid gap-12 mb-6 grid-cols-3">
-                    <button type="button" class="bg-gray-50 border border-gray-300 text-gray-700 text-ml rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" disabled>
-                        { course.syllabus }
-                    </button>
-                    <button type="button" class="bg-gray-50 border border-gray-300 text-gray-700 text-ml rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" disabled>
-                        { course.credits }
-                    </button>
+                    <input type="file" id="file_input"
+                        class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        placeholder= { course.syllabus } required />
+                    <input type="text" id="courseName"
+                        class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                        placeholder= { course.credits } required />
                     <motion.button
                         whileTap={{ scale: 0.9 }}
                         class="bg-transparent border-2 font-semibold border-indigo-900 text-indigo-900 p-2 px-12 rounded-lg hover:bg-indigo-900 hover:text-white">
