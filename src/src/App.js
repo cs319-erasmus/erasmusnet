@@ -2,7 +2,8 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 
-import { Header, Footer,  Landing, SignUp, Login, FAQ, Appointments, Dashboard, Profile, Placement, Error } from './components'
+import { Header, Footer,  Landing, SignUp, Login, FAQ, Appointments, Dashboard, Profile, 
+Placement, Error,InstructorApprove,InstructorView } from './components'
 
 
 const App = () => {
@@ -21,6 +22,8 @@ const App = () => {
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/placement' element={<Placement />} />
+            <Route path='/instructor-approve' element={<InstructorApprove />} />
+            <Route path='/instructor-view-course' element={<InstructorView />} />
             <Route path='*' element={<Error />} />
           </Routes>
         </main>

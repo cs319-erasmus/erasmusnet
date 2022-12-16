@@ -10,3 +10,6 @@ export {default as Dashboard } from './pages/dashboard'
 export {default as Profile } from './pages/profile'
 export {default as Placement} from './pages/placement'
 export {default as Error } from './pages/error'
+export {default as InstructorApprove } from './pages/instructor-approve'
+export {default as InstructorView } from './pages/instructor-view-course'
+
