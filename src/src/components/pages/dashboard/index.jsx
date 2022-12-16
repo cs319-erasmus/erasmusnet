@@ -3,8 +3,8 @@ import { useAuth } from "../../../contexts/AuthProvider"; // Should be UserConte
 
 function Dashboard() {
   const { user } = useAuth();
-  const token = user.getIdToken();
-
+  const { getToken} = useAuth();
+  const token = getToken();
   const indicatorTextCss = "text-2xl tracking-wider text-gray-500";
   const userType = 0;
   const coordinatorInfo = {
