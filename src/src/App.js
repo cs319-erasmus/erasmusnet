@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
-import { Header, Footer,  Landing, SignUp, Login, FAQ, Appointments, Dashboard, Profile, Placement, Error, StudentCourseApproval, StudentCourseRequest } from './components'
+import { Header, Footer,  Landing, SignUp, Login, FAQ, Appointments, Dashboard, Profile, Placement, Error, StudentCourseApproval, StudentCourseRequest, CoordinatorAppointment } from './components'
 import { AuthProvider } from './contexts/AuthProvider'
 
 const App = () => {
@@ -23,6 +23,7 @@ const App = () => {
             <Route path='/placement' element={<Placement />} />
             <Route path='/studentCourseApproval' element={<StudentCourseApproval />} />
             <Route path="/request" element={<StudentCourseRequest />} />
+            <Route path="/coordinator-appointment" element={<CoordinatorAppointment />} />
             <Route path='*' element={<Error />} />
           </Routes>
         </main>
