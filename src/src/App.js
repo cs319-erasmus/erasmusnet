@@ -3,12 +3,14 @@ import { Route, Routes } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 
 import { Header, Footer,  Landing, SignUp, Login, FAQ, Appointments, Dashboard, Profile, Placement, Error } from './components'
+import { AuthProvider } from './contexts/AuthProvider'
 
 
 const App = () => {
   return (
     <AnimatePresence>
       <div className='w-screen m-auto flex flex-col'>
+        <AuthProvider>
         <Header />
 
         <main className='py-8 px-1 lg:p-8 lg:px-0'>
@@ -24,8 +26,9 @@ const App = () => {
             <Route path='*' element={<Error />} />
           </Routes>
         </main>
+        <Footer />
+        </AuthProvider>
       </div>
-      <Footer />
     </AnimatePresence>
   )
 }
