@@ -1,20 +1,5 @@
 import { HttpException, HttpStatus,Injectable, UnauthorizedException } from "@nestjs/common";
-// import { FirebaseService } from "src/firebase/firebase.service";
-import { MockUser } from "src/models/mockUser.model";
-import {        
-        AuthError,
-        createUserWithEmailAndPassword,
-        signInWithEmailAndPassword,
-        UserCredential,
-} from 'firebase/auth';
-import { 
-    setDoc, 
-    DocumentReference,
-    doc,
-    getDoc,
-    DocumentSnapshot,
-    DocumentData,
-} from 'firebase/firestore';
+
 import * as admin from 'firebase-admin';
     
 
