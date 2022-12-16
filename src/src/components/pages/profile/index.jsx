@@ -18,7 +18,7 @@ const curUser = {
 export default function profile()
 {
     return (
-    <div>
+    <div className='max-w-screen-2xl mx-auto'>
         <div className='text-2xl m-12 font-bold text-indigo-900'>
             <h1>Profile</h1>
         </div>

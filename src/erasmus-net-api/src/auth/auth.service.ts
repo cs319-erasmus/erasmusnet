@@ -21,16 +21,6 @@ import * as admin from 'firebase-admin';
 @Injectable({})
 export class AuthService{
   constructor(){}
-  public async login(
-      email: string,
-      password: string,
-    ){
-      try {
-        
-      } catch (error: unknown) {
-  
-      }
-  }
 
   public async signup(displayName: string, password: string, email: string, role: string): Promise<any>{
     try{

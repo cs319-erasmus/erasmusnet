@@ -4,16 +4,16 @@ import { motion } from "framer-motion";
 const Hero = () => {
   const heroImg = require("../../../../assets/hero.png");
   return (
-    <div id="hero" className="grid select-none lg:grid-cols-2 lg:grid-rows-1 grid-rows-2 gap-2 py-18 m-auto">
+    <div id="hero" className="grid select-none md:grid-cols-2 md:grid-rows-1 grid-rows-1 gap-2 py-18 m-auto">
       <div className=" py-1 my-auto mx-auto flex-1 flex flex-col items-start gap-6">
-        <p className="font-extrabold xl:text-[2.5rem] 2xl:text-[2.5rem] tracking-wide text-indigo-1400 w-5/6">
+        <p className="font-extrabold text-2xl leading-loose  xl:text-4xl tracking-wide text-indigo-1400 w-5/6">
           Apply to Erasmus
           <br />
           Quickly, Efficiently
         </p>
 
         <div>
-          <p className="text-indigo-1000 tracking-wide text-xl leading-loose">
+          <p className="text-indigo-1000 tracking-wide text-md md:text-lg lg:text-xl leading-loose">
             Forget endless hours of writing e-mails to coordinators and
             instructors. <br />
             Forget the stress of trying to gather every single document. <br />
@@ -37,7 +37,7 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      <div className="flex-1 items-center justify-center flex m-auto">
+      <div className="flex-1 items-center justify-center hidden md:block m-auto">
         <img src={heroImg} alt="Students" />
       </div>
     </div>
