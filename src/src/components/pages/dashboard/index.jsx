@@ -1,10 +1,19 @@
-import React, { useState } from "react";
-import { useAuth } from "../../../contexts/AuthProvider"; // Should be UserContext fix later
+import React, {useEffect, useState} from "react";
+import { useAuth } from "../../../contexts/AuthProvider";
+import {auth} from "../../../firebase"; // Should be UserContext fix later
 
 function Dashboard() {
   const { user } = useAuth();
   const { getToken} = useAuth();
-  const token = getToken();
+  const [token, setToken] = useState("");
+  //set token using getToken function in useAuth
+  useEffect(() => {
+    async function fetchToken() {
+      const token = await getToken();
+      setToken(token);
+    }
+    fetchToken();
+  }, [getToken]);
   const indicatorTextCss = "text-2xl tracking-wider text-gray-500";
   const userType = 0;
   const coordinatorInfo = {
@@ -81,8 +90,10 @@ function Dashboard() {
       className="flex flex-col px-4 sm:px-6 lg:px-8  mx-auto max-w-screen-2xl"
     >
       <text className="text-4xl font-bold tracking-wider text-gray-500 border-b-4 pb-4 w-full">
+        Welcome, {user.displayName}
+      </text>
+      <text className="text-2xl font-bold tracking-wider text-gray-500 mt-4">
         token: {token}
-        {/*Welcome, {user.displayName}*/}
       </text>
       <div id="Status" className="mt-6 md:mt-12">
         <div id="Status-Text" className={indicatorTextCss}>
