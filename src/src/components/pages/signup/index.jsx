@@ -2,12 +2,45 @@ import React from "react";
 import { Logo } from "../..";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-
-export default function SignUp() {
+import {signInWithEmailAndPassword} from "firebase/auth";
+import {auth} from "../../../firebase";
+function SignUp(message) {
   const heroImg = require("../../../assets/hero.png");
   const navigate = useNavigate();
   const login = () => {
     navigate("/login", { replace: true });
+  };
+  const register = async (e) => {
+    e.preventDefault();
+    let email = document.getElementById("Email").value;
+    let password = document.getElementById("Password").value;
+    let firstName = document.getElementById("FirstName").value;
+    let lastName = document.getElementById("LastName").value;
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(
+          {
+            name: firstName + " " + lastName,
+            email: email,
+            password: password,
+            role: 'Student'
+          }
+      )
+    };
+    try {
+      await fetch(
+          'http://localhost:3333', requestOptions)
+          .then(response => {
+            response.json()
+                .then(data => {
+                  navigate("/login", { replace: true });
+                });
+          })
+        }
+        catch (error) {
+          console.error(error);
+        }
   };
   return (
     <section class="bg-white max-w-screen-xl mx-auto">
@@ -135,6 +168,7 @@ export default function SignUp() {
                 <motion.button
                   whileTap={{ scale: 0.9 }}
                   class="bg-transparent border-2 font-semibold border-indigo-900 text-indigo-900 p-2 px-12 rounded-lg hover:bg-indigo-900 hover:text-white"
+                  onClick={register}
                 >
                   Submit
                 </motion.button>
@@ -154,3 +188,4 @@ export default function SignUp() {
     </section>
   );
 }
+export default SignUp;

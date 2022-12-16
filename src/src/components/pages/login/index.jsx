@@ -7,6 +7,8 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 
 export default function Login() {
   localStorage.setItem("user", null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
   const signup = () => {
@@ -15,8 +17,6 @@ export default function Login() {
 
   const login = async (e) => {
     e.preventDefault();
-    const email = document.getElementById("email").value;
-    const password = document.getElementById("password").value;
     try {
       const res = await signInWithEmailAndPassword(auth, email, password
       );
@@ -49,6 +49,7 @@ export default function Login() {
               id="email"
               placeholder="johndoe@example.com"
               className="mt-2 p-2 w-full px-4 rounded-xl border-indigo-900 border-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <div id="passwordContainer" className="px-6 flex flex-col">
@@ -58,6 +59,7 @@ export default function Login() {
               id="password"
               placeholder="************"
               className="mt-2 py-2 pr-20 px-4 w-full justify-start m-auto m rounded-xl border-indigo-900 border-2 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+              onChange={(e) => setPassword(e.target.value)}
             />
             <div className="flex items-end pl-36 pt-2 justify-end m-auto">
               <input
