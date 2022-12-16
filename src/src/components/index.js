@@ -9,5 +9,6 @@ export {default as Appointments } from './pages/appointments'
 export {default as Dashboard } from './pages/dashboard'
 export {default as Profile } from './pages/profile'
 export {default as Placement} from './pages/placement'
-export {default as StudentCourseRequest } from './pages/request'
+export {default as StudentCourseApproval} from './pages/studentCourseApproval'
+export {default as StudentCourseRequest } from './pages/request
 export {default as Error } from './pages/error'
