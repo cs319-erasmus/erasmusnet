@@ -7,10 +7,6 @@ import { User } from "src/models/user.model";
 export class AuthController {
   constructor(private readonly authService: AuthService) {}
   
-    @Post('login')
-    public login(@Body() body: Pick<User, 'email' | 'password'>) {
-        return this.authService.login(body.email, body.password);
-    }
     @Post('signup')
     public signup(
         @Body('name') name: string, 

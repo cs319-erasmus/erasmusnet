@@ -1,14 +1,41 @@
-import React from "react";
+import React, { useState, useRef } from "react";
 import { Logo } from "../..";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../contexts/AuthProvider";
 
 export default function SignUp() {
   const heroImg = require("../../../assets/hero.png");
   const navigate = useNavigate();
+  const firstRef = useRef();
+  const lastRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
+  const passwordConfRef = useRef();
+  const { signup } = useAuth();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const { user } = useAuth();
+
   const login = () => {
     navigate("/login", { replace: true });
   };
+
+  const submit = async (e) => {
+    e.preventDefault();
+    try {
+      setError("");
+      setLoading(true);
+      const res = await signup(firstRef.current.value , lastRef.current.value, emailRef.current.value, passwordRef.current.value);
+      navigate("/dashboard", { replace: true });
+    } catch (err) {
+      console.log(err);
+      setError("Failed to signup");
+    }
+
+    setLoading(false);
+  };
+
   return (
     <section class="bg-white max-w-screen-xl mx-auto">
       <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
@@ -26,7 +53,7 @@ export default function SignUp() {
         >
           <Logo className="text-3xl pb-4" />
           <div class="max-w-xl lg:max-w-3xl border-2 p-4 rounded-xl">
-            <form action="#" class="mt-8 grid grid-cols-6 gap-6">
+            <div class="mt-8 grid grid-cols-6 gap-6">
               <div class="col-span-6 sm:col-span-3">
                 <label
                   for="FirstName"
@@ -38,7 +65,7 @@ export default function SignUp() {
                 <input
                   type="text"
                   id="FirstName"
-                  name="first_name"
+                  ref={firstRef}
                   class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 border-2 p-2 shadow-sm"
                 />
               </div>
@@ -54,7 +81,7 @@ export default function SignUp() {
                 <input
                   type="text"
                   id="LastName"
-                  name="last_name"
+                  ref={lastRef}
                   class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 border-2 p-2 shadow-sm"
                 />
               </div>
@@ -70,7 +97,7 @@ export default function SignUp() {
                 <input
                   type="email"
                   id="Email"
-                  name="email"
+                  ref={emailRef}
                   class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 border-2 p-2 shadow-sm"
                 />
               </div>
@@ -86,7 +113,7 @@ export default function SignUp() {
                 <input
                   type="password"
                   id="Password"
-                  name="password"
+                  ref={passwordRef}
                   class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 border-2 p-2 shadow-sm"
                 />
               </div>
@@ -102,7 +129,7 @@ export default function SignUp() {
                 <input
                   type="password"
                   id="PasswordConfirmation"
-                  name="password_confirmation"
+                  ref={passwordConfRef}
                   class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 border-2 p-2 shadow-sm"
                 />
               </div>
@@ -134,6 +161,8 @@ export default function SignUp() {
               <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
                 <motion.button
                   whileTap={{ scale: 0.9 }}
+                  type="submit"
+                  onClick={e => submit(e)}
                   class="bg-transparent border-2 font-semibold border-indigo-900 text-indigo-900 p-2 px-12 rounded-lg hover:bg-indigo-900 hover:text-white"
                 >
                   Submit
@@ -147,7 +176,7 @@ export default function SignUp() {
                   .
                 </p>
               </div>
-            </form>
+            </div>
           </div>
         </main>
       </div>

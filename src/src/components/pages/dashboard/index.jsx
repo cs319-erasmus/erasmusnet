@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import { useAuth } from "../../../contexts/AuthProvider"; // Should be UserContext fix later
 
 function Dashboard() {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const { user } = useAuth();
   
   const indicatorTextCss = "text-2xl tracking-wider text-gray-500";
   const userType = 0;
