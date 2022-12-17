@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../../contexts/AuthProvider";
 
 const AccessibilityContainer = styled.div`
   display: flex;
   margin-left: 10px;
 `;
 
-const RegisterButton = styled.button`
+const RightButton = styled.button`
   border: 0;
   outline: 0;
   padding: 8px 1em;
@@ -29,7 +30,7 @@ const RegisterButton = styled.button`
   }
 `;
 
-const LoginButton = styled.button`
+const LeftButton = styled.button`
   border: 0;
   outline: 0;
   padding: 8px 1em;
@@ -53,17 +54,29 @@ const LoginButton = styled.button`
 `;
 
 export function Accessibility(props) {
-    const navigate = useNavigate();
-    const login = () => {
+  const navigate = useNavigate();
+  const { user } = useAuth();
+  const login = () => {
     navigate("/login", { replace: true });
   };
   const signup = () => {
     navigate("/signup", { replace: true });
   };
-  return (
+  const appointments = () => {
+    navigate("/appointments", { replace: true });
+  };
+  const profile = () => {
+    navigate("/profile", { replace: true });
+  };
+  return user === null ? (
     <AccessibilityContainer>
-      <RegisterButton onClick={signup}>Sign Up</RegisterButton>
-      <LoginButton onClick={login}>Login</LoginButton>
+      <LeftButton onClick={login}>Login</LeftButton>
+      <RightButton onClick={signup}>Sign Up</RightButton>
+    </AccessibilityContainer>
+  ) : (
+    <AccessibilityContainer>
+     <LeftButton onClick={appointments}>Appointments</LeftButton>
+      <RightButton onClick={profile}>Profile</RightButton>
     </AccessibilityContainer>
   );
 }
