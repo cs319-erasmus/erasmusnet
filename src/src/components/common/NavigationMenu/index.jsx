@@ -14,7 +14,7 @@ function NavigationMenu() {
             onMouseEnter={() => setActive(item[1])}
             onMouseLeave={() => setActive(window.location.pathname)}
             className={
-                "justify-center md:px-6 px-2 py-3 lg:text-base text-xs transition-all ease-in-out delay-50 hover:text-white hover:bg-indigo-700 hover:rounded-full"
+                "justify-center md:px-6 px-2 py-3 2xl:text-base text-xs transition-all ease-in-out delay-50 hover:text-white hover:bg-indigo-700 hover:rounded-full"
                 + (active === item[1] ? " bg-indigo-700 rounded-full text-white" : " text-indigo-700")
             }>{item[0]}</button>
     });

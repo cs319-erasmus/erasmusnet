@@ -1,5 +1,6 @@
 import React from "react";
 import { auth } from "../firebase";
+import { signInWithEmailAndPassword, signOut, onAuthStateChanged } from "firebase/auth";
 
 const AuthContext = React.createContext();
 
@@ -10,14 +11,14 @@ export const useAuth = () => {
 const AuthProvider = ({ children }) => {
   const [user, setUser] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
-  // const api = "http://18.185.6.57:3333";
-    const api = "http://localhost:3333";
+  const api = "http://18.185.6.57:3333";
+
   const login = (email, password) => {
-    return auth.signInWithEmailAndPassword(email, password);
+    return signInWithEmailAndPassword(auth, email, password);
   };
 
   const logout = () => {
-    return auth.signOut();
+    return signOut(auth);
   };
 
   const signup = (first, last, email, password) => {
@@ -45,9 +46,18 @@ const AuthProvider = ({ children }) => {
     }
   };
 
+  const getUser = () => {
+    try {
+      return auth.currentUser;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
   // Observer pattern
   React.useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         setUser(JSON.parse(JSON.stringify(user)));
         setLoading(false);
@@ -58,7 +68,7 @@ const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
-  const value = { user, login, logout, signup, getToken };
+  const value = { user, login, logout, signup, getToken, getUser };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
