@@ -1,9 +1,8 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
-
-import { Header, Footer,  Landing, SignUp, Login, FAQ, Appointments, Dashboard, Profile, Placement, Error, StudentCourseApproval, StudentCourseRequest,CoordinatorApproval, StudentPlacement } from './components'
-
+import { Header, Footer,  Landing, SignUp, Login, FAQ, Appointments, Dashboard, Profile, Placement, Error, StudentCourseApproval, StudentCourseRequest, CoordinatorApproval, StudentPlacement } from './components'
+import { AuthProvider } from './contexts/AuthProvider'
 
 const App = () => {
   return (
