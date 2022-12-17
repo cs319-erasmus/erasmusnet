@@ -21,7 +21,7 @@ const course1={
 export default function StudentViewRequest() {
 
   return (
-    <div width= '100%' layout='fill' id="ViewCourse">
+    <div  layout='fill' >
         
      <Text h1 color="indigo" css={ {paddingLeft: "$10",}}>Approval Request</Text>
      <hr color="indigo"></hr>
@@ -100,10 +100,15 @@ export default function StudentViewRequest() {
           <Input readOnly  initialValue={course1.status} />
           </div>
           <Spacer y={1} />
+
       </Grid>
-      <Spacer y={2} />
-      <Button color="secondary" css={ {paddingLeft: "$10",}}>Back</Button>
       </Grid.Container> 
+      <Grid  css={ {paddingLeft: "$10",}} sm={6} md={6}>
+            <Grid >
+                <Spacer y={0.75} />
+                <Button color="secondary" css={ {paddingLeft: "$10",}}>Back</Button>
+            </Grid>
+        </Grid>
     </div>
   )
 }
