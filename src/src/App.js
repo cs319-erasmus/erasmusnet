@@ -1,7 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
-import { Header, Footer,  Landing, SignUp, Login, FAQ, Appointments, Dashboard, Profile, Placement, Error, StudentCourseApproval, StudentCourseRequest, CoordinatorApproval, StudentPlacement } from './components'
+import { Header, Footer,  Landing, SignUp, Login, FAQ, Appointments, Dashboard, Profile, Placement, Error, StudentCourseApproval, StudentCourseRequest, CoordinatorApproval, StudentPlacement, NavigationMenu } from './components'
 import { AuthProvider } from './contexts/AuthProvider'
 
 const App = () => {
@@ -10,7 +10,7 @@ const App = () => {
       <div className='w-screen m-auto flex flex-col'>
         <AuthProvider>
         <Header />
-
+        <NavigationMenu />
         <main className='py-8 px-1 lg:p-8 lg:px-0'>
           <Routes>
             <Route path='/' element={<Landing />} />

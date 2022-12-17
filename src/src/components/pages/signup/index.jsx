@@ -26,8 +26,11 @@ export default function SignUp() {
     try {
       setError("");
       setLoading(true);
+      if (passwordRef.current.value !== passwordConfRef.current.value) {
+        return; 
+      }
       const res = await signup(firstRef.current.value , lastRef.current.value, emailRef.current.value, passwordRef.current.value);
-      navigate("/dashboard", { replace: true });
+      navigate("/login", { replace: true });
     } catch (err) {
       console.log(err);
       setError("Failed to signup");
