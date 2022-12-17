@@ -17,10 +17,9 @@ const course1={
   Esyllabus:"syllabus.pdf",
   Ecredits:"6.5",
 }
-export default function Approval() {
-
+export default function InstructorView() {
   return (
-    <div width= '100%' layout='fill'>
+    <div width= '100%' layout='fill' id="ViewCourse">
      <Grid.Container gap={4}><Text h1 color="indigo" css={ {paddingLeft: "$10",}}>Approval Request</Text> </Grid.Container> 
     <hr color="indigo"></hr>
     <Grid.Container gap={4}>
@@ -93,9 +92,14 @@ export default function Approval() {
           <Spacer y={1} />
 
       </Grid>
-      <Spacer y={2} />
-      <Button color="secondary" css={ {paddingLeft: "$10",}}><Link href="/instructor-approve">Back</Link> </Button>
+     
       </Grid.Container>
+      <Grid  css={ {paddingLeft: "$10",}} sm={6} md={6}>
+            <Grid >
+                <Spacer y={0.75} />
+                <Button color="secondary" css={ {paddingLeft: "$10",}}>Back</Button>
+            </Grid>
+        </Grid>
        
     </div>
     
