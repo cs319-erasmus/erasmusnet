@@ -17,6 +17,10 @@ export default function SignUp() {
   const [error, setError] = useState("");
   const { user } = useAuth();
 
+  if (user !== null) {
+    navigate("/dashboard", { replace: true });
+  }
+  
   const login = () => {
     navigate("/login", { replace: true });
   };
@@ -40,7 +44,7 @@ export default function SignUp() {
   };
 
   return (
-    <section class="bg-white max-w-screen-xl mx-auto">
+    <section class="bg-white max-w-screen-xl mt-8 mx-auto">
       <div class="lg:grid lg:min-h-screen lg:grid-cols-12">
         <aside class="relative block lg:order-last lg:col-span-5 lg:h-full xl:col-span-6">
           <img
