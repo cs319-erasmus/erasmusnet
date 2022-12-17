@@ -5,9 +5,13 @@ import { Text } from '@nextui-org/react';
 import { Input,Spacer} from "@nextui-org/react";
 import { Link} from "@nextui-org/react";
 
+import { Route, Routes } from 'react-router-dom';
+import {InstructorView } from './components/pages/instructor-view-course';
+
+
 import {SSRProvider} from '@react-aria/ssr';
 
-export default function Home() {
+export default function InstructorApprove() {
   const columns = [
     {
       key: "name",
