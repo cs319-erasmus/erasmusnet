@@ -7,7 +7,7 @@ import { Link} from "@nextui-org/react";
 
 import {SSRProvider} from '@react-aria/ssr';
 
-export default function Home() {
+export default function InstructorView() {
   const columns = [
     {
       key: "name",
