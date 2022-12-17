@@ -13,6 +13,3 @@ export {default as StudentCourseApproval} from './pages/studentCourseApproval'
 export {default as StudentCourseRequest } from './pages/request'
 export {default as CoordinatorApproval } from './pages/coordinatorAppointmentApproval'
 export {default as Error } from './pages/error'
-export {default as InstructorApprove } from './pages/instructor-approve'
-export {default as InstructorView } from './pages/instructor-view-course'
-
