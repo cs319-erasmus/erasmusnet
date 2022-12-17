@@ -36,6 +36,14 @@ const AuthProvider = ({ children }) => {
     console.log(res);
     return res;
   };
+  const getToken = async () => {
+    try {
+      return await auth.currentUser.getIdToken();
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
 
   // Observer pattern
   React.useEffect(() => {
@@ -50,7 +58,7 @@ const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
-  const value = { user, login, logout, signup };
+  const value = { user, login, logout, signup, getToken };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
