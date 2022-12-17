@@ -90,7 +90,7 @@ function Dashboard() {
       className="flex flex-col px-4 sm:px-6 lg:px-8  mx-auto max-w-screen-2xl"
     >
       <text className="text-4xl font-bold tracking-wider text-gray-500 border-b-4 pb-4 w-full">
-        Welcome, {user.displayName}
+        Welcome, {user}
       </text>
       <text className="text-2xl font-bold tracking-wider text-gray-500 mt-4">
         token: {token}

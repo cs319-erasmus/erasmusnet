@@ -10,8 +10,8 @@ export const useAuth = () => {
 const AuthProvider = ({ children }) => {
   const [user, setUser] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
-  // const api = "http://18.185.6.57:3333";
-    const api = "http://localhost:3333";
+  const api = "http://18.185.6.57:3333";
+
   const login = (email, password) => {
     return auth.signInWithEmailAndPassword(email, password);
   };
