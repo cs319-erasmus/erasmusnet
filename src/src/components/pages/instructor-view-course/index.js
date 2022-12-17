@@ -19,10 +19,10 @@ const course1={
   Esyllabus:"syllabus.pdf",
   Ecredits:"6.5",
 }
-export default function InstructorView() {
+export default function Approval() {
 
   return (
-    <div width= '100%' layout='fill' id="ViewCourse">
+    <div width= '100%' layout='fill'>
      <Grid.Container gap={4}><Text h1 color="indigo" css={ {paddingLeft: "$10",}}>Approval Request</Text> </Grid.Container> 
     <hr color="indigo"></hr>
     <Grid.Container gap={4}>

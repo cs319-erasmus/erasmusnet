@@ -4,12 +4,10 @@ import { Grid } from '@nextui-org/react';
 import { Text } from '@nextui-org/react';
 import { Input,Spacer} from "@nextui-org/react";
 import { Link} from "@nextui-org/react";
-import { Route, Routes } from 'react-router-dom';
-import {InstructorView } from './components/pages/instructor-view-course';
-import {SSRProvider} from '@react-aria/ssr';
-import InstructorView from '../instructor-view-course';
 
-export default function InstructorApprove() {
+import {SSRProvider} from '@react-aria/ssr';
+
+export default function Home() {
   const columns = [
     {
       key: "name",
@@ -84,8 +82,8 @@ export default function InstructorApprove() {
           {(item) => (
             <Table.Row key={item.key}>
             
-            <Table.Cell><Text  b color="indigo">{item.name}</Text></Table.Cell>           
-            <Table.Cell><Button color="indigo" > <Route path='/instructor-view-course' element={<InstructorView />} />View</Button> </Table.Cell>
+            <Table.Cell><Text  b color="indigo">{item.name}</Text></Table.Cell>
+            <Table.Cell><Button color="indigo" ><Link href="/instructor-view-course" color="secondary">View</Link> </Button> </Table.Cell>
             <Table.Cell><Button color="success">Approve</Button></Table.Cell>
             <Table.Cell ><Button color="error" >Reject</Button></Table.Cell>
           </Table.Row>
