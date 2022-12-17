@@ -1,15 +1,14 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
-
-import { Header, Footer,  Landing, SignUp, Login, FAQ, Appointments, Dashboard, Profile, 
-Placement, Error,InstructorApprove,InstructorView } from './components'
-
+import { Header, Footer,  Landing, SignUp, Login, FAQ, Appointments, Dashboard, Profile, Placement, Error, StudentCourseApproval, StudentCourseRequest, CoordinatorApproval, InstructorApprove, InstructorView } from './components'
+import { AuthProvider } from './contexts/AuthProvider'
 
 const App = () => {
   return (
     <AnimatePresence>
       <div className='w-screen m-auto flex flex-col'>
+        <AuthProvider>
         <Header />
 
         <main className='py-8 px-1 lg:p-8 lg:px-0'>
@@ -24,11 +23,15 @@ const App = () => {
             <Route path='/placement' element={<Placement />} />
             <Route path='/instructor-approve' element={<InstructorApprove />} />
             <Route path='/instructor-view-course' element={<InstructorView />} />
+            <Route path='/studentCourseApproval' element={<StudentCourseApproval />} />
+            <Route path="/request" element={<StudentCourseRequest />} />
+            <Route path="/request" element={<CoordinatorApproval />} />
             <Route path='*' element={<Error />} />
           </Routes>
         </main>
+        <Footer />
+        </AuthProvider>
       </div>
-      <Footer />
     </AnimatePresence>
   )
 }

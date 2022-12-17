@@ -14,12 +14,6 @@ const common_1 = require("@nestjs/common");
 const admin = require("firebase-admin");
 let AuthService = class AuthService {
     constructor() { }
-    async login(email, password) {
-        try {
-        }
-        catch (error) {
-        }
-    }
     async signup(displayName, password, email, role) {
         try {
             const { uid } = await admin.auth().createUser({
