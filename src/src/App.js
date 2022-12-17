@@ -2,7 +2,7 @@ import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { AnimatePresence } from 'framer-motion'
 
-import { Header, Footer,  Landing, SignUp, Login, FAQ, Appointments, Dashboard, Profile, Placement, Error } from './components'
+import { Header, Footer,  Landing, SignUp, Login, FAQ, Appointments, Dashboard, Profile, Placement, Error, StudentCourseApproval, StudentCourseRequest,CoordinatorApproval } from './components'
 
 
 const App = () => {
@@ -22,6 +22,9 @@ const App = () => {
             <Route path='/dashboard' element={<Dashboard />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/placement' element={<Placement />} />
+            <Route path='/studentCourseApproval' element={<StudentCourseApproval />} />
+            <Route path="/request" element={<StudentCourseRequest />} />
+            <Route path="/request" element={<CoordinatorApproval />} />
             <Route path='*' element={<Error />} />
           </Routes>
         </main>
