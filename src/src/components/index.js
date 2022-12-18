@@ -15,3 +15,4 @@ export {default as CoordinatorApproval } from './pages/coordinatorAppointmentApp
 export {default as StudentPlacement} from './pages/studentPlacement'
 export {default as Error } from './pages/error'
 export {default as NavigationMenu } from './common/NavigationMenu'
+export {default as Debug } from './common/debug'
