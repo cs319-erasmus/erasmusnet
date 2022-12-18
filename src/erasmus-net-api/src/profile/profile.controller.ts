@@ -78,13 +78,22 @@ export class ProfileController {
     return this.profileService.findAll(roleObj.role);
   }
   @Roles('admin')
-  @Get('admin/find')
+  @Get('admin')
   findOne(@Body() uidObj: { uid: string; role: string }) {
     return this.profileService.findOne(uidObj.uid, uidObj.role);
   }
 
   @Delete()
-  removeOwn(@Body() uidObj: { uid: string; role: string }) {
-    return this.profileService.remove(uidObj.uid, uidObj.role);
+  async removeOwn(@Req() req: Request) {
+    const authToken = req.headers.authorization;
+    try {
+      const { uid, email, role } = await this.authService.authenticate(
+        authToken,
+      );
+      return this.profileService.remove(uid, role);
+    } catch (error) {
+      throw new UnauthorizedException(error.message);
+    }
+
   }
 }

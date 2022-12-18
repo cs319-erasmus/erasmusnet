@@ -7,30 +7,29 @@ import { UserDTO } from './profileDto/user.dto';
 @Injectable()
 export class ProfileService {
   async create(userProfile: UserDTO, role: string) {
-    const res = await admin
+    return await admin
       .firestore()
       .collection(role + 'Profile')
       .doc(userProfile.uid)
       .set(userProfile);
-    return res;
   }
-  findAll(role: string) {
-    return admin
+  async findAll(role: string) {
+    return await admin
       .firestore()
       .collection(role + 'Profile')
       .get();
   }
 
-  findOne(uid: string, role: string) {
-    return admin
+  async findOne(uid: string, role: string) {
+    return await admin
       .firestore()
       .collection(role + 'Profile')
       .doc(uid)
       .get();
   }
 
-  remove(uid: string, role: string) {
-    return admin
+  async remove(uid: string, role: string) {
+    return await admin
       .firestore()
       .collection(role + 'Profile')
       .doc(uid)
