@@ -15,46 +15,29 @@ export default function CoordinatorAppointment() {
       key: "col2",
       label: "",
     },
-    {
-      key: "col3",
-      label: "",
-    },
-    {
-      key: "col4",
-      label: "",
-    },
   ];
   const rows = [
     {
       key: "1",
       name: "Alperen Toprak",
       col2: "",
-      col3: "",
-      col4: "",
 
     },
     {
       key: "2",
       name: "Eda Yılmaz",
       col2: "",
-      col3: "",
-      col4: "",
 
     },
     {
       key: "3",
       name: "Melis Titiz",
       col2: "",
-      col3: "",
-      col4: "",
-
     },
     {
       key: "4",
       name: "Ali Dalaslan",
       col2: "",
-      col3: "",
-      col4: "",
     },
   ];
  
@@ -84,8 +67,6 @@ export default function CoordinatorAppointment() {
             <Table.Cell><Text  b color="indigo">{item.name}</Text></Table.Cell>           
 
             <Table.Cell><Button color="indigo" >View </Button> </Table.Cell>
-            <Table.Cell><Button color="success">Approve</Button></Table.Cell>
-            <Table.Cell ><Button color="error" >Reject</Button></Table.Cell>
           </Table.Row>
           )}
         
