@@ -2,7 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 
 function NavigationMenu() {
-    const studentItems = [["Dashboard", "/dashboard"], ["Student Stories", "/stories"], ["Knowledge Library", "/faq"], ["Document Templates", "/docs"], ["Placement Quiz", "/quiz"], ["Past Applications", "/past"]];
+    const studentItems = [["Dashboard", "/dashboard"], ["Appointments", "/appointments"], ["Student Stories", "/stories"], ["Knowledge Library", "/faq"], ["Document Templates", "/docs"], ["Placement Quiz", "/quiz"], ["Past Applications", "/past"]];
     const coordinatorItems = [["Dashboard", "/dashboard"], ["Student List", "/studentlist"], ["Placement List", "/placementlist"], ["Appointment Requests", "/appointmentrequests"], ["Course Approvals", "/curseapprovals"]];
     const navigate = useNavigate();
     const [active, setActive] = React.useState(window.location.pathname);

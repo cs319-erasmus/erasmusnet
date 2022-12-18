@@ -62,8 +62,8 @@ export function Accessibility(props) {
   const signup = () => {
     navigate("/signup", { replace: true });
   };
-  const appointments = () => {
-    navigate("/appointments", { replace: true });
+  const dashboard = () => {
+    navigate("/dashboard", { replace: true });
   };
   const profile = () => {
     navigate("/profile", { replace: true });
@@ -75,7 +75,7 @@ export function Accessibility(props) {
     </AccessibilityContainer>
   ) : (
     <AccessibilityContainer>
-     <LeftButton onClick={appointments}>Appointments</LeftButton>
+     <LeftButton onClick={dashboard}>Dashboard</LeftButton>
       <RightButton onClick={profile}>Profile</RightButton>
     </AccessibilityContainer>
   );
