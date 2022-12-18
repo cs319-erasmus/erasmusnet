@@ -9,9 +9,9 @@ async function bootstrap() {
     credential: admin.credential.cert({
       private_key: process.env.FIREBASE_PRIVATE_KEY,
       client_email: process.env.FIREBASE_CLIENT_EMAIL,
-      project_id: process.env.FIREBASE_PROJECT_ID
+      project_id: process.env.FIREBASE_PROJECT_ID,
     } as Partial<admin.ServiceAccount>),
-    databaseURL: process.env.FIREBASE_DATABASE_URL
+    databaseURL: process.env.FIREBASE_DATABASE_URL,
   });
   const app = await NestFactory.create(AppModule);
   app.enableCors();
