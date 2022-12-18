@@ -18,7 +18,9 @@ import {
   CoordinatorApproval,
   StudentPlacement,
   StudentViewRequest,
-  InstructorView,InstructorApprove,
+  InstructorView,
+  InstructorApprove,
+  PastApplications,
   CoordinatorAppointment,
   Debug,
 } from "./components";
@@ -83,6 +85,10 @@ const App = () => {
                     element={<CoordinatorAppointment />}
                   />
                 </Route>
+                      path="/past"
+                      element={<PastApplications />}
+                    />
+                  </Route>
               </Routes>
             </main>
             <Footer />
