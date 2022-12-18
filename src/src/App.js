@@ -18,8 +18,11 @@ import {
   CoordinatorApproval,
   StudentPlacement,
   StudentViewRequest,
-  InstructorView,InstructorApprove,
+  InstructorView,
+  InstructorApprove,
+  PastApplications,
   Debug,
+  DocumentTemplates,
 } from "./components";
 import { AuthProvider } from "./contexts/AuthProvider";
 import { UserRoutes } from "./utils/UserRoutes";
@@ -45,7 +48,6 @@ const App = () => {
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="*" element={<Error />} />
-
                 <Route element={<UserRoutes />}>
                   <Route path="/faq" element={<FAQ />} />
                   <Route path="/appointments" element={<Appointments />} />
@@ -77,7 +79,15 @@ const App = () => {
                     path="/instructor-approve"
                     element={<InstructorApprove />}
                   />
-                </Route>
+                  <Route
+                      path="/past"
+                      element={<PastApplications />}
+                    />
+                  </Route>
+                  <Route 
+                    path="/docs"
+                    element={<DocumentTemplates />}
+                    />
               </Routes>
             </main>
             <Footer />
