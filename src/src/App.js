@@ -84,11 +84,12 @@ const App = () => {
                     path="/coordinator-appointment"
                     element={<CoordinatorAppointment />}
                   />
-                </Route>
+                <Route
                       path="/past"
                       element={<PastApplications />}
                     />
                   </Route>
+                  
               </Routes>
             </main>
             <Footer />
