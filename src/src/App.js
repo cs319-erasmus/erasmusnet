@@ -22,6 +22,7 @@ import {
   InstructorApprove,
   PastApplications,
   CoordinatorAppointment,
+  UploadPreapproval,
   Debug,
   DocumentTemplates,
 } from "./components";
@@ -89,6 +90,10 @@ const App = () => {
                       element={<PastApplications />}
                     />
                   <Route 
+                    path='/uploadpreapproval'
+                    element={<UploadPreapproval />}
+                    />
+                  <Route
                     path="/docs"
                     element={<DocumentTemplates />}
                     />
