@@ -2,11 +2,28 @@ import React from "react";
 import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
 
-const bilkentList = [];
+const bilkentList = [
+  {
+    code: "CS 465",
+    name: "Computer Graphics",
+    coordinator: "Uğur Güdükbay",
+    deparment: "CS",
+    type: "Technical Elective",
+    credits: "6.5",
+  },
+];
 
-const erasmusList = [];
+const erasmusList = [
+  {
+    code: "1TD388",
+    name: "Computer Graphics",
+    syllabus: "1TD388_Syllabus.pdf",
+    credits: "6.5",
+    school: "Uppsala University",
+  },
+];
 
-function StudentCreateRequest() {
+function InstructorViewCourse() {
   const [bilkentCourses, setBilkentCourses] = useState(bilkentList);
   const [erasmusCourses, setErasmusCourses] = useState(erasmusList);
 
@@ -183,39 +200,41 @@ function StudentCreateRequest() {
   }, [erasmusCourses]);
 
   return (
-    <div
-      id="StudentCourseApproval"
-      class="ml-12 mr-12 mt-20 mb-32 flex flex-col"
-    >
-      <div className="text-2xl mb-7 font-bold text-indigo-900">
-        <h1>Course Approval Request</h1>
-        <hr class="my-4 h-0.5 bg-indigo-900 border-0"></hr>
-      </div>
-      <div className="m-12">
-        <h1 className="text-xl mb-4 font-bold text-indigo-900">Bilkent</h1>
+    <div className="max-w-screen-2xl mx-auto justify-center">
+      <div
+        id="StudentCourseApproval"
+        class="ml-12 mr-12 mt-8 mb-32 flex flex-col"
+      >
+        <div className="text-2xl mb-7 font-bold text-indigo-900">
+          <h1>Course Approval Request</h1>
+          <hr class="my-4 h-0.5 bg-indigo-900 border-0"></hr>
+        </div>
+        <div className="mx-12">
+          <h1 className="text-xl mb-4 font-bold text-indigo-900">Bilkent</h1>
           {bilkentTable}
-      </div>
-      <div className="m-12">
-        <h1 className="text-xl mb-4 font-bold text-indigo-900">Erasmus</h1>
+        </div>
+        <div className="m-12">
+          <h1 className="text-xl mb-4 font-bold text-indigo-900">Erasmus</h1>
           {erasmusTable}
-      </div>
+        </div>
 
-      <div className="">
-        <motion.button
-          whileTap={{ scale: 0.9 }}
-          class="bg-indigo-900 border-2 font-semibold border-indigo-900 p-2 px-12 ml-12 rounded-lg hover:bg-transparent hover:text-indigo-900 text-white"
-        >
-          Approve
-        </motion.button>
-        <motion.button
-          whileTap={{ scale: 0.9 }}
-          class="bg-indigo-900 border-2 font-semibold border-indigo-900 p-2 px-12 ml-12 rounded-lg hover:bg-transparent hover:text-indigo-900 text-white"
-        >
-          Reject
-        </motion.button>
+        <div className="">
+          <motion.button
+            whileTap={{ scale: 0.9 }}
+            class="bg-indigo-900 border-2 font-semibold border-indigo-900 p-2 px-12 ml-12 rounded-lg hover:bg-transparent hover:text-indigo-900 text-white"
+          >
+            Approve
+          </motion.button>
+          <motion.button
+            whileTap={{ scale: 0.9 }}
+            class="bg-indigo-900 border-2 font-semibold border-indigo-900 p-2 px-12 ml-12 rounded-lg hover:bg-transparent hover:text-indigo-900 text-white"
+          >
+            Reject
+          </motion.button>
+        </div>
       </div>
     </div>
   );
 }
 
-export default StudentCreateRequest;
+export default InstructorViewCourse;
