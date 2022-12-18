@@ -11,14 +11,19 @@ const common_1 = require("@nestjs/common");
 const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const auth_module_1 = require("./auth/auth.module");
-const host_university_module_1 = require("./host-university/host-university.module");
 const course_module_1 = require("./course/course.module");
 const config_1 = require("@nestjs/config");
+const auth_middleware_1 = require("./middleware/auth.middleware");
 let AppModule = class AppModule {
+    configure(consumer) {
+        consumer
+            .apply(auth_middleware_1.AuthMiddleware)
+            .forRoutes({ path: '/api/v1', method: common_1.RequestMethod.ALL });
+    }
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [auth_module_1.AuthModule, host_university_module_1.HostUniversityModule,
+        imports: [auth_module_1.AuthModule,
             course_module_1.CourseModule, config_1.ConfigModule.forRoot()
         ],
         controllers: [app_controller_1.AppController],
