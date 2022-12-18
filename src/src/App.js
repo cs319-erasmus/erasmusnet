@@ -18,6 +18,7 @@ import {
   CoordinatorApproval,
   StudentPlacement,
   StudentViewRequest,
+  UploadPreapproval,
   Debug,
 } from "./components";
 import { AuthProvider } from "./contexts/AuthProvider";
@@ -68,6 +69,7 @@ const App = () => {
                     path="/student-view-request"
                     element={<StudentViewRequest />}
                   />
+                  <Route path='/uploadpreapproval' element={<UploadPreapproval/>}/>
                 </Route>
               </Routes>
             </main>
