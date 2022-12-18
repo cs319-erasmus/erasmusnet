@@ -1,26 +1,25 @@
 import { Injectable } from '@nestjs/common';
-import { CreateCourseDto } from './dto/create-course.dto';
-import { UpdateCourseDto } from './dto/update-course.dto';
+import admin from 'src/main';
+import { CourseLinkDTO } from './courseDto/courseLink.dto';
 
 @Injectable()
 export class CourseService {
-  create(createCourseDto: CreateCourseDto) {
-    return 'This action adds a new course';
+  create(courseLinkDTO:CourseLinkDTO) {
+    admin
+    .firestore()
+    .collection('courses')
+    .doc(courseLinkDTO.uid)
+    .update({
+      linkObjects: admin.firestore.FieldValue.arrayUnion([courseLinkDTO])
+    });
+    return true;
   }
 
-  findAll() {
-    return `This action returns all course`;
+  findOne(uid: string) {
+    return admin.firestore().collection('courses').doc(uid).get();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} course`;
-  }
-
-  update(id: number, updateCourseDto: UpdateCourseDto) {
-    return `This action updates a #${id} course`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} course`;
+  remove(uid: string) {
+    return admin.firestore().collection('courses').doc(uid).delete();
   }
 }
