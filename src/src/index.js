@@ -1,10 +1,10 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import "./index.css";
 
 import { BrowserRouter as Router } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 import { useLayoutEffect } from "react";
+import { createRoot } from "react-dom/client";
 
 import App from "./App";
 
@@ -17,11 +17,12 @@ function Wrapper({ children }) {
   return children;
 }
 
-ReactDOM.render(
+const root = createRoot(document.getElementById("root"))
+
+root.render(
   <Router>
     <Wrapper>
       <App />
     </Wrapper>
-  </Router>,
-  document.getElementById("root")
+  </Router>
 );

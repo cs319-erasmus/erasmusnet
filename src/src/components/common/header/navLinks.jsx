@@ -56,7 +56,7 @@ export function NavLinks(props) {
     document.getElementById("contact").scrollIntoView();
   };
   return (
-    <NavLinksContainer aria-label="Site Nav" class="hidden md:block" >
+    <NavLinksContainer aria-label="Site Nav" className="hidden md:block" >
         <LinksWrapper>
           <LinkItem>
             <Link onClick={home}>Home</Link>
