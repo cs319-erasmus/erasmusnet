@@ -11,14 +11,14 @@ export class CourseController {
     return this.courseService.create(courseLinkDTO);
   }
 
-  //gets a course by its uid
+  //gets a courseLink by its uid
   @Get()
-  findOne(@Param('uid') uid: string) {
+  findOne(@Body('uid') uid: string) {
     return this.courseService.findOne(uid);
   }
 
   @Delete()
-  remove(@Param('uid') uid: string) {
+  remove(@Body('uid') uid: string) {
     return this.courseService.remove(uid);
   }
 }
