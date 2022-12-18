@@ -1,3 +1,4 @@
 *.vpp.bak_000f
 /.idea
 .DS_STORE
+src/erasmus-net-api/dist
