@@ -8,8 +8,6 @@ export default function Login() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const { login } = useAuth();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState("");
   const { user } = useAuth();
 
   const navigate = useNavigate();

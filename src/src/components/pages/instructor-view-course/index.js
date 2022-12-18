@@ -5,23 +5,27 @@ import { Text } from '@nextui-org/react';
 import { Input, Spacer } from "@nextui-org/react";
 import { Card } from "@nextui-org/react";
 import { useNavigate} from "react-router-dom";
+import rows from '../instructor-approve';
+import React, { useState, useRef } from "react";
 
-const course1={
-  code:"CS 465",
-  name:"Computer Graphics",
-  instructor:"Uğur Güdükbay",
-  deparment:"CS",
-  type:"Technical Elective",
-  credits:"6.5",
 
-  Ecode:"1TD388",
-  Ename:"Computer Graphics",
-  Esyllabus:"syllabus.pdf",
-  Ecredits:"6.5",
-}
-export default function InstructorView() {
+  const course1={
+    code:"CS 465",
+    name:"Computer Graphics",
+    instructor:"Uğur Güdükbay",
+    deparment:"CS",
+    type:"Technical Elective",
+    credits:"6.5",
+  
+    Ecode:"1TD388",
+    Ename:"Computer Graphics",
+    Esyllabus:"syllabus.pdf",
+    Ecredits:"6.5",
+  }
+
+export default function InstructorView( ) {
   const navigate = useNavigate();
-
+  
   const instructorApprove = () => {
     navigate("/instructor-approve", { replace: true });
   };
@@ -41,7 +45,7 @@ export default function InstructorView() {
         <div>
           <Text color="indigo">Bilkent Course Name</Text>
        
-          <Input readOnly  initialValue={course1.name} />
+          <Input readOnly   />
         </div>
         <Spacer y={1} />
         <div>
