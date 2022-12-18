@@ -7,8 +7,14 @@ import { Card } from "@nextui-org/react";
 import { useNavigate} from "react-router-dom";
 import rows from '../instructor-approve';
 import React, { useState, useRef } from "react";
+ import { instructorApproval} from "./src/mockData";
 
-
+export default function InstructorView( props) {
+  const navigate = useNavigate();
+  
+  const instructorApprove = () => {
+    navigate("/instructor-approve", { replace: true });
+  };
   const course1={
     code:"CS 465",
     name:"Computer Graphics",
@@ -22,13 +28,6 @@ import React, { useState, useRef } from "react";
     Esyllabus:"syllabus.pdf",
     Ecredits:"6.5",
   }
-
-export default function InstructorView( ) {
-  const navigate = useNavigate();
-  
-  const instructorApprove = () => {
-    navigate("/instructor-approve", { replace: true });
-  };
 
   return (
     <div width= '100%' layout='fill'>
@@ -45,7 +44,7 @@ export default function InstructorView( ) {
         <div>
           <Text color="indigo">Bilkent Course Name</Text>
        
-          <Input readOnly   />
+          <Input readOnly  initialValue={course1.name} />
         </div>
         <Spacer y={1} />
         <div>
@@ -55,7 +54,7 @@ export default function InstructorView( ) {
           <Spacer y={1} />
           <div>
             <Text color="indigo">Department</Text>
-            <Input readOnly  initialValue={course1.deparment} />
+            <Input readOnly  initialValue={course1.department} />
           </div>
           <Spacer y={1} />
          
