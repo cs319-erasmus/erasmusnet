@@ -13,7 +13,7 @@ import {
   Profile,
   Placement,
   Error,
-StudentViewRequest,  StudentCourseApproval,
+StudentViewRequest, StudentCourseApproval,
   StudentCourseRequest,
   CoordinatorApproval,
   StudentPlacement,
