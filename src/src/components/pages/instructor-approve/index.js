@@ -4,10 +4,17 @@ import { Grid } from '@nextui-org/react';
 import { Text } from '@nextui-org/react';
 import { Input,Spacer} from "@nextui-org/react";
 import { Link} from "@nextui-org/react";
+import { useNavigate, Route } from "react-router-dom";
 
-import {SSRProvider} from '@react-aria/ssr';
+
 
 export default function InstructorApprove() {
+  const navigate = useNavigate();
+
+  const instructorView = () => {
+    navigate("/instructor-view-course", { replace: true });
+  };
+
   const columns = [
     {
       key: "name",
@@ -83,7 +90,7 @@ export default function InstructorApprove() {
             <Table.Row key={item.key}>
             
             <Table.Cell><Text  b color="indigo">{item.name}</Text></Table.Cell>
-            <Table.Cell><Button color="indigo" ><Link href="/instructor-view-course" color="secondary">View</Link> </Button> </Table.Cell>
+            <Table.Cell><Button onClick={instructorView} color="secondary" ><Text color="white">View</Text></Button> </Table.Cell>
             <Table.Cell><Button color="success">Approve</Button></Table.Cell>
             <Table.Cell ><Button color="error" >Reject</Button></Table.Cell>
           </Table.Row>

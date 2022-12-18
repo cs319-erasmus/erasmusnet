@@ -4,6 +4,8 @@ import { Grid } from '@nextui-org/react';
 import { Text } from '@nextui-org/react';
 import { Input, Spacer } from "@nextui-org/react";
 import { Card } from "@nextui-org/react";
+import { useNavigate} from "react-router-dom";
+
 const course1={
   code:"CS 465",
   name:"Computer Graphics",
@@ -18,6 +20,11 @@ const course1={
   Ecredits:"6.5",
 }
 export default function InstructorView() {
+  const navigate = useNavigate();
+
+  const instructorApprove = () => {
+    navigate("/instructor-approve", { replace: true });
+  };
 
   return (
     <div width= '100%' layout='fill'>
@@ -94,7 +101,7 @@ export default function InstructorView() {
 
       </Grid>
       <Spacer y={2} />
-      <Button color="secondary" css={ {paddingLeft: "$10",}}><Link href="/instructor-approve">Back</Link> </Button>
+      <Button color="secondary" onClick={instructorApprove}css={ {paddingLeft: "$10",}}><Text color="white">Back</Text> </Button>
       </Grid.Container>
        
     </div>
