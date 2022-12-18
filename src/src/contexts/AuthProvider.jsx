@@ -11,7 +11,7 @@ export const useAuth = () => {
 const AuthProvider = ({ children }) => {
   const [user, setUser] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
-  const api = "http://18.185.6.57:3333";
+  const API = process.env.REACT_APP_API_URL;
 
   const login = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
@@ -22,7 +22,7 @@ const AuthProvider = ({ children }) => {
   };
 
   const signup = (first, last, email, password) => {
-    const res = fetch(api + "/auth/signup", {
+    const res = fetch(API + "/auth/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
