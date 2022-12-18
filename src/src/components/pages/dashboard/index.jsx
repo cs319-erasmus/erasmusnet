@@ -1,11 +1,21 @@
 import React, {useEffect, useState} from "react";
 import { useAuth } from "../../../contexts/AuthProvider";
-import {auth} from "../../../firebase"; // Should be UserContext fix later
+import { calendarInfo } from "./Calendar.js";
+import { studentSteps } from "./Student.js";
+import { coordinatorSteps } from "./Coordinator.js";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
 function Dashboard() {
-  const { user } = useAuth();
-  const { getToken} = useAuth();
+  const [step, setStep] = useState(3);
+  const { getToken, getUser } = useAuth();
   const [token, setToken] = useState("");
+  const [user, setUser] = useState(null);
+  const [stepItems, setStepItems] = useState(null);
+  const [userType, setUserType] = useState(1);
+  const [nextSteps, setNextSteps] = useState(null);
+  const navigate = useNavigate();
+
   //set token using getToken function in useAuth
   useEffect(() => {
     async function fetchToken() {
@@ -14,66 +24,98 @@ function Dashboard() {
     }
     fetchToken();
   }, [getToken]);
+
+  useEffect(() => {
+    async function fetchUser() {
+      const user = await getUser();
+      setUser(user);
+    }
+    fetchUser();
+  }, [getUser]);
+
   const indicatorTextCss = "text-2xl tracking-wider text-gray-500";
-  const userType = 0;
   const coordinatorInfo = {
     name: "Can Alkan",
     email: "calkan@cs.bilkent.edu.tr",
   };
-  const calendarInfo = [
-    { Task: "New Appointment Request", Date: "2021-05-01" },
-    { Task: "New Appointment Request", Date: "2021-05-01" },
-    { Task: "New Appointment Request", Date: "2021-05-01" },
-    { Task: "New Appointment Request", Date: "2021-05-01" },
-    { Task: "New Appointment Request", Date: "2021-05-01" },
-    { Task: "New Appointment Request", Date: "2021-05-01" },
-    { Task: "New Appointment Request", Date: "2021-05-01" },
-    { Task: "New Appointment Request", Date: "2021-05-01" },
-    { Task: "New Appointment Request", Date: "2021-05-01" },
-    { Task: "New Appointment Request", Date: "2021-05-01" },
-    { Task: "New Appointment Request", Date: "2021-05-01" },
-    { Task: "New Appointment Request", Date: "2021-05-01" },
-    { Task: "New Appointment Request", Date: "2021-05-01" },
-    { Task: "New Appointment Request", Date: "2021-05-01" },
-    { Task: "New Appointment Request", Date: "2021-05-01" },
-    { Task: "New Appointment Request", Date: "2021-05-01" },
-    { Task: "New Appointment Request", Date: "2021-05-01" },
-  ];
-  const stage = 3;
 
-  const studentSteps = [
-    "Application",
-    "Placement",
-    "Apply to Placed University",
-    "Further Documents",
-    "Pre-Approval Form",
-    "Complete",
-  ];
-  const coordinatorSteps = [
-    "Student Applications",
-    "Placement",
-    "Student Applications to Placed Universities",
-    "Further Documents",
-    "Pre-Approval Forms",
-    "Complete",
-  ];
-  
-  let stepItems;
-  if (userType === 0) {
-    stepItems = studentSteps.map((step, idx) => {
-      let css = "step" + (idx < stage ? " step-primary" : " ");
-      return <li className={css}>{step}</li>;
-    });
-  } else {
-    stepItems = coordinatorSteps.map((step, idx) => {
-      let css = "step" + (idx < stage ? " step-primary" : " ");
-      return <li className={css}>{step}</li>;
-    });
-  }
+  useEffect(() => {
+    const stepList = userType === 0 ? studentSteps : coordinatorSteps;
+      setStepItems(() => stepList.map((item, idx) => {
+        let css = "step" + (idx <= step ? " step-primary" : " ");
+        return <li key={idx} className={css}>{item}</li>;
+      }));
+  }, [userType, step]);
+
+  useEffect(() => {
+
+  }, [stepItems]);
+
+  useEffect(() => {
+    if (userType === 0) {
+      const nextStepList = () => {
+        if (step === 0) {
+          return <label>Complete Application Using Regular Website</label>
+        } else if (step === 1) {
+          return (
+          <motion.button
+          className="bg-indigo-700 hover:bg-indigo-900 rounded-2xl p-4 text-white"
+          onClick={() => navigate("/studentPlacement")}
+          >View Your Placement</motion.button>)
+        } else if (step === 2) {
+          return <label>Apply to Host University</label>
+        } else if (step === 3) {
+          return (
+            <motion.button
+            className="bg-indigo-700 hover:bg-indigo-900 rounded-2xl p-4 text-white"
+            onClick={() => navigate("/studentCourseApproval")}
+            >Course Approvals</motion.button>)
+        } else if (step === 4) {
+          return (
+            <motion.button
+            className="bg-indigo-700 hover:bg-indigo-900 rounded-2xl p-4 text-white"
+            onClick={() => navigate("/uploadPreApproval")}
+            >Upload Pre-Approval</motion.button>)
+        } else if (step === 5) {
+          return <label>No Further Action Necessary</label>
+        }
+      }
+      setNextSteps(nextStepList())
+    } else {
+      const nextStepList = () => {
+        if (step === 0) {
+          return <label>View For Student Applications</label>
+        } else if (step === 1) {
+          return (
+            <motion.button
+            className="bg-indigo-700 hover:bg-indigo-900 rounded-2xl p-4 text-white"
+            onClick={() => navigate("/placement")}
+            >Start Placement Process</motion.button>)
+        } else if (step === 2) {
+          return <label>Send Application Links</label>
+        } else if (step === 3) {
+          return (
+            <label>Wait for instructors to approve courses</label>
+          )
+        } else if (step === 4) {
+          return (
+            <motion.button
+            className="bg-indigo-700 hover:bg-indigo-900 rounded-2xl p-4 text-white"
+            onClick={() => navigate("/studentPlacement")}
+            >Approve Pre-Approvals</motion.button>)
+        } else if (step === 5) {
+          return <label>No Further Action Necessary</label>
+        }
+      }
+      setNextSteps(nextStepList())
+    }
+  }, [userType, step]);
+
+
 
   const calendarItems = calendarInfo.map((item, idx) => {
     return (
-      <tr>
+      <tr key={idx}>
         <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900">
           {item.Task}
         </td>
@@ -84,17 +126,14 @@ function Dashboard() {
     );
   });
 
-  return (
+  return ( user &&
     <div
       id="Dashboard"
       className="flex flex-col px-4 sm:px-6 lg:px-8  mx-auto max-w-screen-2xl"
     >
-      <text className="text-4xl font-bold tracking-wider text-gray-500 border-b-4 pb-4 w-full">
+      <label className="text-4xl font-bold tracking-wider text-gray-500 border-b-4 pb-4 mt-8 w-full">
         Welcome, {user.displayName}
-      </text>
-      <text className="text-2xl font-bold tracking-wider text-gray-500 mt-4">
-        token: {token}
-      </text>
+      </label>
       <div id="Status" className="mt-6 md:mt-12">
         <div id="Status-Text" className={indicatorTextCss}>
           Status
@@ -113,7 +152,7 @@ function Dashboard() {
               id="Next-Step-Info"
               className="border-2 lg:text-xl text-sm mt-1 sm:mt-2 lg:mt-4 rounded-2xl p-6"
             >
-              Contact Your Coordinator
+              {nextSteps}
             </div>
           </div>
           <div id="Coordinator-Info" className="flex-col">

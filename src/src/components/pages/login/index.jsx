@@ -13,6 +13,7 @@ export default function Login() {
   const { user } = useAuth();
 
   const navigate = useNavigate();
+
   const signup = () => {
     navigate("/signup", { replace: true });
   };
@@ -35,7 +36,7 @@ export default function Login() {
   };
 
   return (
-    <div className="flex flex-col items-center max-w-screen-xl m-auto">
+    <div className="flex flex-col items-center mt-8 max-w-screen-xl m-auto">
       <Logo className="text-3xl" />
       <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
         Don't have an account?{" "}

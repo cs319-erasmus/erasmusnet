@@ -8,7 +8,35 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProfileService = void 0;
 const common_1 = require("@nestjs/common");
+const main_1 = require("../main");
 let ProfileService = class ProfileService {
+    async create(userProfile, role) {
+        return await main_1.default
+            .firestore()
+            .collection(role + 'Profile')
+            .doc(userProfile.uid)
+            .set(userProfile);
+    }
+    async findAll(role) {
+        return await main_1.default
+            .firestore()
+            .collection(role + 'Profile')
+            .get();
+    }
+    async findOne(uid, role) {
+        return await main_1.default
+            .firestore()
+            .collection(role + 'Profile')
+            .doc(uid)
+            .get();
+    }
+    async remove(uid, role) {
+        return await main_1.default
+            .firestore()
+            .collection(role + 'Profile')
+            .doc(uid)
+            .delete();
+    }
 };
 ProfileService = __decorate([
     (0, common_1.Injectable)()
