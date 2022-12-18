@@ -1,75 +1,52 @@
 import { Table } from '@nextui-org/react';
 import { Button } from '@nextui-org/react';
+import { Grid } from '@nextui-org/react';
 import { Text } from '@nextui-org/react';
 import { Input,Spacer} from "@nextui-org/react";
 import { Link} from "@nextui-org/react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Route } from "react-router-dom";
+import InstructorView from '../instructor-view-course';
 
-export default function CoordinatorAppointment() {
-  const columns = [
-    {
-      key: "name",
-      label: "STUDENT NAME",
-    },
-    {
-      key: "col2",
-      label: "",
-    },
-  ];
-  const rows = [
-    {
-      key: "1",
-      name: "Alperen Toprak",
-      col2: "",
+import  { useState, useRef } from "react";
 
-    },
-    {
-      key: "2",
-      name: "Eda Yılmaz",
-      col2: "",
 
-    },
-    {
-      key: "3",
-      name: "Melis Titiz",
-      col2: "",
-    },
-  ];
+export default function InstructorApprove() {
+  const navigate = useNavigate();
+
+  const coordinatorView = () => {
+    navigate("/coordinatorAppointmentApproval");
+  };
+
+  const students = [ 
+    { name: "John M. Doe" } ,
+    { name: "Jane Doe"}, 
+    { name: "Jay Doe" } ];
+
+    const viewItems = students.map((item) => {
+      return (
+        <Grid.Container gap={4}>
+      <Grid sm={12} md={12}>
+        <Grid sm={3} md={3}>
+          <Text  b color="indigo">{item.name}</Text>
+        </Grid>
+        <Spacer x={4} />
+        <Grid sm={3} md={3}>
+        <Button onClick={coordinatorView} color="secondary" ><Text color="white">View</Text></Button> 
+        </Grid>
+
+        </Grid>
+        </Grid.Container>
  
+      );
+    });
+  
   return (
-    <div width= '100%' height= '100%'layout='fill'>
-      <Table
-        aria-label="Example table with dynamic content"
-        css={{
-          height: '600px',
-          width: '85%',
-          px: "$5",
-          margin:"$5",
-          layout:'fill'
-        }}
-      >
-        <Table.Header columns={columns}>
-          {(column) => (
-            <Table.Column key={column.key}>  <Text css={{
-              fontSize:"15px",color:"indigo"
-            }}>{column.label} </Text></Table.Column>
-          )}
-        </Table.Header>
-        <Table.Body items={rows}>
-          {(item) => (
-            <Table.Row key={item.key}>
-            
-            <Table.Cell><Text  b color="indigo">{item.name}</Text></Table.Cell>           
-
-            <Table.Cell><Button color="secondary" ><Text color="white">View</Text> </Button> </Table.Cell>
-          </Table.Row>
-          )}
-        
-        </Table.Body>
-      </Table>
+    <div>
+      <Grid.Container gap={4}><Text b size="$2xl"  color="indigo" css={ {paddingLeft: "$10"}}>Student Names</Text> </Grid.Container> 
+      <hr color="indigo"></hr>
+     {viewItems}
+       
+    </div>
   );
-    
-  </div>
-
-  )
+  
 }
