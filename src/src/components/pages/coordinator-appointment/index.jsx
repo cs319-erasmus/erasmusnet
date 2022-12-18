@@ -34,11 +34,6 @@ export default function CoordinatorAppointment() {
       name: "Melis Titiz",
       col2: "",
     },
-    {
-      key: "4",
-      name: "Ali Dalaslan",
-      col2: "",
-    },
   ];
  
   return (
@@ -47,7 +42,7 @@ export default function CoordinatorAppointment() {
         aria-label="Example table with dynamic content"
         css={{
           height: '600px',
-          width: '100%',
+          width: '85%',
           px: "$5",
           margin:"$5",
           layout:'fill'
@@ -66,7 +61,7 @@ export default function CoordinatorAppointment() {
             
             <Table.Cell><Text  b color="indigo">{item.name}</Text></Table.Cell>           
 
-            <Table.Cell><Button color="indigo" >View </Button> </Table.Cell>
+            <Table.Cell><Button color="secondary" ><Text color="white">View</Text> </Button> </Table.Cell>
           </Table.Row>
           )}
         
