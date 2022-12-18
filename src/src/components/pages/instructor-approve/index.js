@@ -4,96 +4,49 @@ import { Grid } from '@nextui-org/react';
 import { Text } from '@nextui-org/react';
 import { Input,Spacer} from "@nextui-org/react";
 import { Link} from "@nextui-org/react";
+import { useNavigate, Route } from "react-router-dom";
+import InstructorView from '../instructor-view-course';
 
-import {SSRProvider} from '@react-aria/ssr';
+import  { useState, useRef } from "react";
+
 
 export default function InstructorApprove() {
-  const columns = [
-    {
-      key: "name",
-      label: "STUDENT NAME",
-    },
-    {
-      key: "col2",
-      label: "",
-    },
-    {
-      key: "col3",
-      label: "",
-    },
-    {
-      key: "col4",
-      label: "",
-    },
-  ];
-  const rows = [
-    {
-      key: "1",
-      name: "Alperen Toprak",
-      col2: "",
-      col3: "",
-      col4: "",
+  const navigate = useNavigate();
 
-    },
-    {
-      key: "2",
-      name: "Eda Yılmaz",
-      col2: "",
-      col3: "",
-      col4: "",
+  const instructorView = () => {
+    navigate("/instructor-view-course");
+  };
 
-    },
-    {
-      key: "3",
-      name: "Melis Titiz",
-      col2: "",
-      col3: "",
-      col4: "",
+  const students = [ 
+    { name: "John M. Doe" } ,
+    { name: "Jane Doe"}, 
+    { name: "Jane Doe" } ];
 
-    },
-    {
-      key: "4",
-      name: "Ali Dalaslan",
-      col2: "",
-      col3: "",
-      col4: "",
-    },
-  ];
+    const viewItems = students.map((item) => {
+      return (
+        <Grid.Container gap={4}>
+      <Grid sm={12} md={12}>
+        <Grid sm={3} md={3}>
+          <Text  b color="indigo">{item.name}</Text>
+        </Grid>
+
+        <Grid sm={3} md={3}>
+        <Button onClick={instructorView} color="secondary" ><Text color="white">View</Text></Button> 
+        </Grid>
+
+        </Grid>
+        </Grid.Container>
+ 
+      );
+    });
+  
   return (
-    <div width= '100%' height= '100%'layout='fill'>
-      <Table
-        aria-label="Example table with dynamic content"
-        css={{
-          height: '600px',
-          width: '100%',
-          px: "$5",
-          margin:"$5",
-          layout:'fill'
-        }}
-      >
-        <Table.Header columns={columns}>
-          {(column) => (
-            <Table.Column key={column.key}>  <Text css={{
-              fontSize:"15px",color:"indigo"
-            }}>{column.label} </Text></Table.Column>
-          )}
-        </Table.Header>
-        <Table.Body items={rows}>
-          {(item) => (
-            <Table.Row key={item.key}>
-            
-            <Table.Cell><Text  b color="indigo">{item.name}</Text></Table.Cell>
-            <Table.Cell><Button color="indigo" ><Link href="/instructor-view-course" color="secondary">View</Link> </Button> </Table.Cell>
-            <Table.Cell><Button color="success">Approve</Button></Table.Cell>
-            <Table.Cell ><Button color="error" >Reject</Button></Table.Cell>
-          </Table.Row>
-          )}
-        
-        </Table.Body>
-      </Table>
+    <div>
+      <Grid.Container gap={4}><Text b size="$2xl"  color="indigo" css={ {paddingLeft: "$10"}}>Student Names</Text> </Grid.Container> 
+      <hr color="indigo"></hr>
+     {viewItems}
+       
+    </div>
   );
-    
-  </div>
-
-  )
+  
 }
