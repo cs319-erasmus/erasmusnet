@@ -80,7 +80,7 @@ const App = () => {
                     element={<InstructorApprove />}
                   />
                   <Route
-                      path="/pastApplications"
+                      path="/past"
                       element={<PastApplications />}
                     />
                   </Route>
