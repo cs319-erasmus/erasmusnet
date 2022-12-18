@@ -14,17 +14,23 @@ const auth_module_1 = require("./auth/auth.module");
 const course_module_1 = require("./course/course.module");
 const config_1 = require("@nestjs/config");
 const auth_middleware_1 = require("./middleware/auth.middleware");
+const profile_module_1 = require("./profile/profile.module");
+const preapproval_module_1 = require("./preapproval/preapproval.module");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer
             .apply(auth_middleware_1.AuthMiddleware)
-            .forRoutes({ path: '/api/v1', method: common_1.RequestMethod.ALL });
+            .forRoutes({ path: '/api', method: common_1.RequestMethod.ALL });
     }
 };
 AppModule = __decorate([
     (0, common_1.Module)({
-        imports: [auth_module_1.AuthModule,
-            course_module_1.CourseModule, config_1.ConfigModule.forRoot()
+        imports: [
+            auth_module_1.AuthModule,
+            course_module_1.CourseModule,
+            config_1.ConfigModule.forRoot(),
+            profile_module_1.ProfileModule,
+            preapproval_module_1.PreapprovalModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
