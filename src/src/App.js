@@ -23,6 +23,7 @@ import {
   PastApplications,
   UploadPreapproval,
   Debug,
+  DocumentTemplates,
 } from "./components";
 import { AuthProvider } from "./contexts/AuthProvider";
 import { UserRoutes } from "./utils/UserRoutes";
@@ -48,7 +49,6 @@ const App = () => {
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="*" element={<Error />} />
-
                 <Route element={<UserRoutes />}>
                   <Route path="/faq" element={<FAQ />} />
                   <Route path="/appointments" element={<Appointments />} />
@@ -88,6 +88,10 @@ const App = () => {
                   <Route 
                     path='/uploadpreapproval'
                     element={<UploadPreapproval />}
+                    />
+                  <Route
+                    path="/docs"
+                    element={<DocumentTemplates />}
                     />
               </Routes>
             </main>
