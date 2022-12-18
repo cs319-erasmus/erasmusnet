@@ -1,18 +1,25 @@
-import { Module } from '@nestjs/common';
+import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-// import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
-import { HostUniversityModule } from './host-university/host-university.module';
 import { CourseModule } from './course/course.module';
-// import { FirebaseService } from './firebase/firebase.service';
 import { ConfigModule } from '@nestjs/config';
+import { AuthMiddleware } from './middleware/auth.middleware';
+import { ProfileModule } from './profile/profile.module';
+import { PreapprovalModule } from './preapproval/preapproval.module';
+import { PreapprovalModule } from './preapproval/preapproval.module';
 
 @Module({
-  imports: [AuthModule,  HostUniversityModule,
-     CourseModule,ConfigModule.forRoot()
+  imports: [AuthModule, 
+     CourseModule,ConfigModule.forRoot(), ProfileModule, PreapprovalModule
 ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule {
+  public configure(consumer: MiddlewareConsumer) {
+    consumer
+      .apply(AuthMiddleware)
+      .forRoutes({path: '/api', method: RequestMethod.ALL});
+  }
+}
