@@ -18,7 +18,9 @@ import {
   CoordinatorApproval,
   StudentPlacement,
   StudentViewRequest,
-  InstructorView,InstructorApprove,
+  InstructorView,
+  InstructorApprove,
+  PastApplications,
   Debug,
 } from "./components";
 import { AuthProvider } from "./contexts/AuthProvider";
@@ -77,7 +79,11 @@ const App = () => {
                     path="/instructor-approve"
                     element={<InstructorApprove />}
                   />
-                </Route>
+                  <Route
+                      path="/past"
+                      element={<PastApplications />}
+                    />
+                  </Route>
               </Routes>
             </main>
             <Footer />
