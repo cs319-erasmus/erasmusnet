@@ -12,6 +12,7 @@ import { ConfigModule } from '@nestjs/config';
 import { AuthMiddleware } from './middleware/auth.middleware';
 import { ProfileModule } from './profile/profile.module';
 import { PreapprovalModule } from './preapproval/preapproval.module';
+import { CourseApprovalModule } from './course-approval/course-approval.module';
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { PreapprovalModule } from './preapproval/preapproval.module';
     ConfigModule.forRoot(),
     ProfileModule,
     PreapprovalModule,
+    CourseApprovalModule,
   ],
   controllers: [AppController],
   providers: [AppService],

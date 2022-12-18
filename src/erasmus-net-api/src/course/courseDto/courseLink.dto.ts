@@ -4,4 +4,5 @@ export class CourseLinkDTO{
     uid: string;
     bilkentCourses: CourseDTO[];
     erasmusCourses: CourseDTO[];
+    approvalId: string;
 }
