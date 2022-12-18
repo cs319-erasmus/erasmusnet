@@ -21,6 +21,7 @@ import {
   InstructorView,
   InstructorApprove,
   PastApplications,
+  UploadPreapproval,
   Debug,
   DocumentTemplates,
 } from "./components";
@@ -85,6 +86,10 @@ const App = () => {
                     />
                   </Route>
                   <Route 
+                    path='/uploadpreapproval'
+                    element={<UploadPreapproval />}
+                    />
+                  <Route
                     path="/docs"
                     element={<DocumentTemplates />}
                     />

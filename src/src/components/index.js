@@ -17,7 +17,7 @@ export {default as StudentViewRequest } from './pages/student-view-request'
 export {default as InstructorView } from './pages/instructor-view-course'
 export {default as InstructorApprove } from './pages/instructor-approve'
 export {default as PastApplications } from './pages/past'
-
+export {default as UploadPreapproval} from './pages/uploadpreapproval'
 export {default as Error } from './pages/error'
 export {default as NavigationMenu } from './common/NavigationMenu'
 export {default as Debug } from './common/debug'
