@@ -4,6 +4,8 @@ import { Grid } from '@nextui-org/react';
 import { Text } from '@nextui-org/react';
 import { Input, Spacer } from "@nextui-org/react";
 import { Card } from "@nextui-org/react";
+import { useNavigate} from "react-router-dom";
+
 const course1={
   code:"CS 465",
   name:"Computer Graphics",
@@ -11,18 +13,19 @@ const course1={
   deparment:"CS",
   type:"Technical Elective",
   credits:"6.5",
+  status: "Approved",
 
   Ecode:"1TD388",
   Ename:"Computer Graphics",
   Esyllabus:"syllabus.pdf",
   Ecredits:"6.5",
 }
-export default function InstructorView() {
+export default function StudentViewRequest() {
 
   return (
-    <div width= '100%' layout='fill'>
-     <Grid.Container gap={4}><Text h1 color="indigo" css={ {paddingLeft: "$10",}}>Approval Request</Text> </Grid.Container> 
-    <hr color="indigo"></hr>
+    <div  >   
+     <Text h1 color="indigo" css={ {paddingLeft: "$10",}}>Approval Request</Text>
+     <hr color="indigo"></hr>
     <Grid.Container gap={4}>
       <Grid sm={12} md={12}>
       <div rows="6">
@@ -88,16 +91,25 @@ export default function InstructorView() {
           <div>
           <Text  px={"$3"} color="indigo">ECTS Credits</Text>
           <Spacer y={0.5} />
-          <Input readOnly  color="error"  initialValue={course1.Ecredits} />
+          <Input readOnly initialValue={course1.Ecredits} />
+          </div>
+          <Spacer y={1} />
+
+          <div>
+          <Text  px={"$3"} color="indigo">Status</Text>
+          <Spacer y={0.5} />
+          <Input readOnly  initialValue={course1.status} />
           </div>
           <Spacer y={1} />
 
       </Grid>
-      <Spacer y={2} />
-      <Button color="secondary" css={ {paddingLeft: "$10",}}><Link href="/instructor-approve">Back</Link> </Button>
-      </Grid.Container>
-       
+      </Grid.Container> 
+      <Grid  css={ {paddingLeft: "$10",}} sm={6} md={6}>
+            <Grid >
+                <Spacer y={0.75} />
+                <Button color="secondary" css={ {paddingLeft: "$10",}}>Back</Button>
+            </Grid>
+        </Grid>
     </div>
-    
   )
 }

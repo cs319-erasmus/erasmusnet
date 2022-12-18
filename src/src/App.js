@@ -17,6 +17,8 @@ import {
   StudentCourseRequest,
   CoordinatorApproval,
   StudentPlacement,
+  StudentViewRequest,
+  InstructorView,InstructorApprove,
   Debug,
 } from "./components";
 import { AuthProvider } from "./contexts/AuthProvider";
@@ -62,6 +64,18 @@ const App = () => {
                   <Route
                     path="/studentPlacement"
                     element={<StudentPlacement />}
+                  />
+                  <Route
+                    path="/student-view-request"
+                    element={<StudentViewRequest />}
+                  />
+                  <Route
+                    path="/instructor-view-course"
+                    element={<InstructorView />}
+                  />
+                  <Route
+                    path="/instructor-approve"
+                    element={<InstructorApprove />}
                   />
                 </Route>
               </Routes>
