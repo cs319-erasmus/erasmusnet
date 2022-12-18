@@ -13,7 +13,7 @@ import {
   Profile,
   Placement,
   Error,
-  StudentCourseApproval,
+StudentViewRequest,  StudentCourseApproval,
   StudentCourseRequest,
   CoordinatorApproval,
   StudentPlacement,
@@ -50,7 +50,8 @@ const App = () => {
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/profile" element={<Profile />} />
                   <Route path="/placement" element={<Placement />} />
-                  <Route
+                  <Route path='/student-view-request' element={<StudentViewRequest />} />
+            <Route
                     path="/studentCourseApproval"
                     element={<StudentCourseApproval />}
                   />
