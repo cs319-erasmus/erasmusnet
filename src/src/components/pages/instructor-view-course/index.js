@@ -17,7 +17,7 @@ const course1={
   Esyllabus:"syllabus.pdf",
   Ecredits:"6.5",
 }
-export default function Approval() {
+export default function InstructorView() {
 
   return (
     <div width= '100%' layout='fill'>
