@@ -18,7 +18,9 @@ import {
   CoordinatorApproval,
   StudentPlacement,
   StudentViewRequest,
-  InstructorView,InstructorApprove,
+  InstructorView,
+  InstructorApprove,
+  PastApplications,
   Debug,
   DocumentTemplates,
 } from "./components";
@@ -77,8 +79,15 @@ const App = () => {
                     path="/instructor-approve"
                     element={<InstructorApprove />}
                   />
-                  <Route path="/docs" element={<DocumentTemplates/>}/>
-                </Route>
+                  <Route
+                      path="/past"
+                      element={<PastApplications />}
+                    />
+                  </Route>
+                  <Route 
+                    path="/docs"
+                    element={<DocumentTemplates />}
+                    />
               </Routes>
             </main>
             <Footer />
