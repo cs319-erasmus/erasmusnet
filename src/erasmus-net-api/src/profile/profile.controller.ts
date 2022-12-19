@@ -59,41 +59,49 @@ export class ProfileController {
   createInStudent(@Body() inStudentDto: InStudentDto) {
     return this.profileService.create(inStudentDto, 'inStudent');
   }
-
+   // @Get()
+  // async findOwnProfile(@Req() req: Request) {
+  //   const authToken = req.headers.authorization;
+  //   try {
+  //     const { uid, email, role } = await this.authService.authenticate(
+  //       authToken,
+  //     );
+  //     return this.profileService.findOne(uid, role);
+  //   } catch (error) {
+  //     throw new UnauthorizedException(error.message);
+  //   }
+  // }
   @Get()
-  async findOwnProfile(@Req() req: Request) {
-    const authToken = req.headers.authorization;
-    try {
-      const { uid, email, role } = await this.authService.authenticate(
-        authToken,
-      );
-      return this.profileService.findOne(uid, role);
-    } catch (error) {
-      throw new UnauthorizedException(error.message);
-    }
+  async findOwnProfile(@Body() uidObj: { uid: string; role: string }) {
+      return this.profileService.findOne(uidObj.uid, uidObj.role);
   }
+  
   // @Roles('admin')
   @Get('admin/all')
   findAll(@Body() roleObj: { role: string }) {
     return this.profileService.findAll(roleObj.role);
   }
-  // @Roles('admin')
+  @Roles('admin')
   @Get('admin')
   findOne(@Body() uidObj: { uid: string; role: string }) {
     return this.profileService.findOne(uidObj.uid, uidObj.role);
   }
 
-  @Delete()
-  async removeOwn(@Req() req: Request) {
-    const authToken = req.headers.authorization;
-    try {
-      const { uid, email, role } = await this.authService.authenticate(
-        authToken,
-      );
-      return this.profileService.remove(uid, role);
-    } catch (error) {
-      throw new UnauthorizedException(error.message);
-    }
+  // @Delete()
+  // async removeOwn(@Req() req: Request) {
+  //   const authToken = req.headers.authorization;
+  //   try {
+  //     const { uid, email, role } = await this.authService.authenticate(
+  //       authToken,
+  //     );
+  //     return this.profileService.remove(uid, role);
+  //   } catch (error) {
+  //     throw new UnauthorizedException(error.message);
+  //   }
 
+  // }
+  @Delete()
+  async removeOwn(@Body() uidObj: { uid: string; role: string }) {
+      return this.profileService.remove(uidObj.uid, uidObj.role);
   }
 }

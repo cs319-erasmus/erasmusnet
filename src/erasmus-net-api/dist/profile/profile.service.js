@@ -18,17 +18,19 @@ let ProfileService = class ProfileService {
             .set(userProfile);
     }
     async findAll(role) {
-        return await main_1.default
+        const collection = await main_1.default
             .firestore()
             .collection(role + 'Profile')
             .get();
+        return collection.docs.map((doc) => doc.data());
     }
     async findOne(uid, role) {
-        return await main_1.default
+        const doc = await main_1.default
             .firestore()
             .collection(role + 'Profile')
             .doc(uid)
             .get();
+        return doc.data();
     }
     async remove(uid, role) {
         return await main_1.default

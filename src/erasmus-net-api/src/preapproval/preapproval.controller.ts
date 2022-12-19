@@ -34,17 +34,21 @@ export class PreapprovalController {
     return this.preapprovalService.findAll();
   }
 
+  // @Get()
+  // async findOwn(@Req() req: Request) {
+  //   const authToken = req.headers.authorization;
+  //   try {
+  //     const { uid, email, role } = await this.authService.authenticate(
+  //       authToken,
+  //     );
+  //     return this.preapprovalService.findOne(uid);
+  //   } catch (error) {
+  //     throw new UnauthorizedException(error.message);
+  //   }
+  // }
   @Get()
-  async findOwn(@Req() req: Request) {
-    const authToken = req.headers.authorization;
-    try {
-      const { uid, email, role } = await this.authService.authenticate(
-        authToken,
-      );
-      return this.preapprovalService.findOne(uid);
-    } catch (error) {
-      throw new UnauthorizedException(error.message);
-    }
+  async findOwn(@Body() uidObj: { uid: string; }) {
+      return this.preapprovalService.findOne(uidObj.uid);
   }
   // @Roles('admin', 'coordinator')
   @Get('admin')
@@ -52,17 +56,21 @@ export class PreapprovalController {
     return this.preapprovalService.findOne(uidObj.uid);
   }
 
-  @Delete()
-  async removeOwn(@Req() req: Request) {
-    const authToken = req.headers.authorization;
-    try {
-      const { uid, email, role } = await this.authService.authenticate(
-        authToken,
-      );
-      return this.preapprovalService.remove(uid);
-    } catch (error) {
-      throw new UnauthorizedException(error.message);
-    }
+  // @Delete()
+  // async removeOwn(@Req() req: Request) {
+  //   const authToken = req.headers.authorization;
+  //   try {
+  //     const { uid, email, role } = await this.authService.authenticate(
+  //       authToken,
+  //     );
+  //     return this.preapprovalService.remove(uid);
+  //   } catch (error) {
+  //     throw new UnauthorizedException(error.message);
+  //   }
 
+  // }
+  @Delete()
+  async removeOwn(@Body() uidObj: { uid: string; }){
+      return this.preapprovalService.remove(uidObj.uid);
   }
 }
