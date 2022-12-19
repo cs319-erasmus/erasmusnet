@@ -18,15 +18,7 @@ export declare class ProfileController {
         uid: string;
         role: string;
     }): Promise<FirebaseFirestore.DocumentData>;
-    findAll(roleObj: {
-        role: string;
-    }): Promise<FirebaseFirestore.DocumentData[]>;
-    findOne(uidObj: {
-        uid: string;
-        role: string;
-    }): Promise<FirebaseFirestore.DocumentData>;
-    removeOwn(uidObj: {
-        uid: string;
-        role: string;
-    }): Promise<FirebaseFirestore.WriteResult>;
+    findAll(role: string): Promise<FirebaseFirestore.DocumentData[]>;
+    findOne(uid: string, role: string): Promise<FirebaseFirestore.DocumentData>;
+    removeOwn(uid: string, role: string): Promise<FirebaseFirestore.WriteResult>;
 }
