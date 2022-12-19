@@ -17,7 +17,7 @@ export class CourseService {
 
   async findOne(uid: string) {
     const doc = await admin.firestore().collection('courses').doc(uid).get();
-    return doc.data();
+    return JSON.stringify(doc.data());
   }
 
   remove(uid: string) {

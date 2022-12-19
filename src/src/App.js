@@ -40,85 +40,80 @@ const App = () => {
       setDebug(true);
     }
   }, []);
-  
+
   return (
-      <AnimatePresence>
-        <div className="w-screen m-auto flex flex-col">
-          <AuthProvider>
-
+    <AnimatePresence>
+      <div className="w-screen m-auto flex flex-col">
+        <AuthProvider>
           <StageProvider>
-              <StudentProvider>
-          {debug && <Debug />}
-            <Header />
-            <main className="px-1 lg:px-0">
-              <Routes>
-                <Route path="/" element={<Landing />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="*" element={<Error />} />
-                <Route element={<UserRoutes />}>
-                  <Route path="/faq" element={<FAQ />} />
-                  <Route path="/appointments" element={<Appointments />} />
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/profile" element={<Profile />} />
+            <StudentProvider>
+              {debug && <Debug />}
+              <Header />
+              <main className="px-1 lg:px-0">
+                <Routes>
+                  <Route path="/" element={<Landing />} />
+                  <Route path="/signup" element={<SignUp />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="*" element={<Error />} />
+                  <Route element={<UserRoutes />}>
+                    <Route path="/faq" element={<FAQ />} />
+                    <Route path="/appointments" element={<Appointments />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/profile" element={<Profile />} />
 
-
-                  
-                  <Route
-                    path="/studentCourseApproval"
-                    element={<StudentCourseApproval />}
-                  />
-                  <Route path="/request" element={<StudentCourseRequest />} />
-                  <Route
-                    path="/coordinatorAppointmentApproval"
-                    element={<CoordinatorApproval />}
-                  />
-                  <Route
-                    path="/studentPlacement"
-                    element={<StudentPlacement />}
-                  />
-                  <Route
-                    path="/student-view-request"
-                    element={<StudentViewRequest />}
-                  />
-                  <Route
-                    path="/instructor-view-course"
-                    element={<InstructorView />}
-                  />
-                  <Route
-                    path="/instructor-approve"
-                    element={<InstructorApprove />}
-                  />
-                  <Route
-                    path="/coordinator-appointment"
-                    element={<CoordinatorAppointment />}
-                  />
-                <Route
-                      path="/past"
-                      element={<PastApplications />}
+                    <Route element={<StudentRoutes />}>
+                      <Route
+                        path="/studentCourseApproval"
+                        element={<StudentCourseApproval />}
+                      />
+                    </Route>
+                    <Route element={<StudentRoutes />}>
+                      <Route path="/studentCreateRequest" element={<StudentCourseRequest />} />
+                    </Route>
+                    
+                    <Route
+                      path="/coordinatorAppointmentApproval"
+                      element={<CoordinatorApproval />}
                     />
-                  <Route 
-                    path='/uploadpreapproval'
-                    element={<UploadPreapproval />}
+                    <Route
+                      path="/studentPlacement"
+                      element={<StudentPlacement />}
                     />
-                  <Route
-                    path="/docs"
-                    element={<DocumentTemplates />}
+                    <Route
+                      path="/student-view-request"
+                      element={<StudentViewRequest />}
                     />
-                </Route>
-
-                <Route element={<StudentRoutes />}>
-                    <Route path="/placement" element={<Placement />} />
+                    <Route
+                      path="/instructor-view-course"
+                      element={<InstructorView />}
+                    />
+                    <Route
+                      path="/instructor-approve"
+                      element={<InstructorApprove />}
+                    />
+                    <Route
+                      path="/coordinator-appointment"
+                      element={<CoordinatorAppointment />}
+                    />
+                    <Route path="/past" element={<PastApplications />} />
+                    <Route
+                      path="/uploadpreapproval"
+                      element={<UploadPreapproval />}
+                    />
+                    <Route path="/docs" element={<DocumentTemplates />} />
                   </Route>
 
-              </Routes>
-            </main>
-            <Footer />
-              </StudentProvider>
-              </StageProvider>
-          </AuthProvider>
-        </div>
-      </AnimatePresence>
+                  <Route element={<StudentRoutes />}>
+                    <Route path="/placement" element={<Placement />} />
+                  </Route>
+                </Routes>
+              </main>
+              <Footer />
+            </StudentProvider>
+          </StageProvider>
+        </AuthProvider>
+      </div>
+    </AnimatePresence>
   );
 };
 

@@ -37,9 +37,9 @@ const AuthProvider = ({ children }) => {
     console.log(res);
     return res;
   };
-  const getToken = () => {
+  const getToken = async () => {
     try {
-      return auth.currentUser.getIdToken();
+      return await auth.currentUser.getIdToken();
     } catch (error) {
       console.error(error);
       throw error;
