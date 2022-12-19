@@ -18,7 +18,7 @@ import { Roles } from 'src/middleware/role.decorator';
 import { AuthService } from 'src/auth/auth.service';
 import { Request } from 'express';
 
-@UseGuards(RolesGuard)
+// @UseGuards(RolesGuard)
 @Controller('api/preapproval')
 export class PreapprovalController {
   constructor(private readonly preapprovalService: PreapprovalService,
@@ -28,7 +28,7 @@ export class PreapprovalController {
   create(@Body() preApprovalDTO: PreApprovalDTO) {
     return this.preapprovalService.create(preApprovalDTO);
   }
-  @Roles('admin', 'coordinator')
+  // @Roles('admin', 'coordinator')
   @Get()
   findAll() {
     return this.preapprovalService.findAll();
@@ -46,7 +46,7 @@ export class PreapprovalController {
       throw new UnauthorizedException(error.message);
     }
   }
-  @Roles('admin', 'coordinator')
+  // @Roles('admin', 'coordinator')
   @Get('admin')
   findOne(@Body() uidObj: { uid: string; }) {
     return this.preapprovalService.findOne(uidObj.uid);
