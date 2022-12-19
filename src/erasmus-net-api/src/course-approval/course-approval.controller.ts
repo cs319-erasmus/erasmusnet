@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Headers } from '@nestjs/common';
 import { CourseApprovalService } from './course-approval.service';
 import { CourseApprovalDTO } from './courseApprovalDto/courseApproval.dto';
 
@@ -12,13 +12,13 @@ export class CourseApprovalController {
   }
 
   @Get()
-  findAll(@Body('instructorId') instructorId: string ) {
+  findAll(@Headers('instructorId') instructorId: string ) {
     return this.courseApprovalService.findAll(instructorId);
   }
 
 
   @Delete()
-  remove(@Body('approvalId') courseApprovalId: string, @Body('instructorId') instructorId: string) {
+  remove(@Headers('approvalId') courseApprovalId: string, @Headers('instructorId') instructorId: string) {
     return this.courseApprovalService.remove(courseApprovalId, instructorId);
   }
 }
