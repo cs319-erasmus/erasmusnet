@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { CourseService } from './course.service';
 import { CourseLinkDTO } from './courseDto/courseLink.dto';
 
-@Controller('course')
+@Controller('api/course')
 export class CourseController {
   constructor(private readonly courseService: CourseService) {}
 

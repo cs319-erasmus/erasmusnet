@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/commo
 import { CourseApprovalService } from './course-approval.service';
 import { CourseApprovalDTO } from './courseApprovalDto/courseApproval.dto';
 
-@Controller('course-approval')
+@Controller('api/course-approval')
 export class CourseApprovalController {
   constructor(private readonly courseApprovalService: CourseApprovalService) {}
 
@@ -12,13 +12,13 @@ export class CourseApprovalController {
   }
 
   @Get()
-  findAll(@Body() instructorId: string ) {
+  findAll(@Body('instructorId') instructorId: string ) {
     return this.courseApprovalService.findAll(instructorId);
   }
 
 
   @Delete()
-  remove(@Body() courseApprovalId: string) {
-    return this.courseApprovalService.remove(courseApprovalId);
+  remove(@Body('approvalId') courseApprovalId: string, @Body('instructorId') instructorId: string) {
+    return this.courseApprovalService.remove(courseApprovalId, instructorId);
   }
 }
