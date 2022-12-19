@@ -27,7 +27,10 @@ import {
   DocumentTemplates,
 } from "./components";
 import { AuthProvider } from "./contexts/AuthProvider";
+import { StudentProvider } from "./contexts/StudentProvider";
+import { StageProvider } from "./contexts/StageProvider";
 import { UserRoutes } from "./utils/UserRoutes";
+import { StudentRoutes } from "./utils/StudentRoutes";
 
 const App = () => {
   const [debug, setDebug] = React.useState(false);
@@ -42,6 +45,9 @@ const App = () => {
       <AnimatePresence>
         <div className="w-screen m-auto flex flex-col">
           <AuthProvider>
+
+          <StageProvider>
+              <StudentProvider>
           {debug && <Debug />}
             <Header />
             <main className="px-1 lg:px-0">
@@ -55,7 +61,9 @@ const App = () => {
                   <Route path="/appointments" element={<Appointments />} />
                   <Route path="/dashboard" element={<Dashboard />} />
                   <Route path="/profile" element={<Profile />} />
-                  <Route path="/placement" element={<Placement />} />
+
+
+                  
                   <Route
                     path="/studentCourseApproval"
                     element={<StudentCourseApproval />}
@@ -99,9 +107,15 @@ const App = () => {
                     />
                 </Route>
 
+                <Route element={<StudentRoutes />}>
+                    <Route path="/placement" element={<Placement />} />
+                  </Route>
+
               </Routes>
             </main>
             <Footer />
+              </StudentProvider>
+              </StageProvider>
           </AuthProvider>
         </div>
       </AnimatePresence>
