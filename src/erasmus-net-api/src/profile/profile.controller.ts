@@ -10,6 +10,7 @@ import {
   Req,
   UnauthorizedException,
   HttpStatus,
+  Headers,
 } from '@nestjs/common';
 import { ProfileService } from './profile.service';
 import { RolesGuard } from 'src/middleware/auth.guard';
@@ -72,19 +73,19 @@ export class ProfileController {
   //   }
   // }
   @Get()
-  async findOwnProfile(@Body() uidObj: { uid: string; role: string }) {
-      return this.profileService.findOne(uidObj.uid, uidObj.role);
+  async findOwnProfile(@Headers('uid') uid: string, @Headers('role')  role: string) {
+      return this.profileService.findOne(uid, role);
   }
   
   // @Roles('admin')
   @Get('admin/all')
-  findAll(@Body() roleObj: { role: string }) {
-    return this.profileService.findAll(roleObj.role);
+  findAll(@Headers('role')  role: string) {
+    return this.profileService.findAll(role);
   }
   @Roles('admin')
   @Get('admin')
-  findOne(@Body() uidObj: { uid: string; role: string }) {
-    return this.profileService.findOne(uidObj.uid, uidObj.role);
+  findOne(@Headers('uid') uid: string, @Headers('role')  role: string) {
+    return this.profileService.findOne(uid, role);
   }
 
   // @Delete()
@@ -101,7 +102,7 @@ export class ProfileController {
 
   // }
   @Delete()
-  async removeOwn(@Body() uidObj: { uid: string; role: string }) {
-      return this.profileService.remove(uidObj.uid, uidObj.role);
+  async removeOwn(@Headers('uid') uid: string, @Headers('role')  role: string) {
+      return this.profileService.remove(uid,role);
   }
 }

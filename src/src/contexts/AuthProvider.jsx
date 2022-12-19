@@ -59,6 +59,7 @@ const AuthProvider = ({ children }) => {
   React.useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
+        console.log(user);
         setUser(JSON.parse(JSON.stringify(user)));
         setLoading(false);
       } else {

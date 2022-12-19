@@ -12,6 +12,7 @@ import {
   Req,
   UnauthorizedException,
   HttpStatus,
+  Headers,
 } from '@nestjs/common';
 import { RolesGuard } from 'src/middleware/auth.guard';
 import { Roles } from 'src/middleware/role.decorator';
@@ -47,13 +48,13 @@ export class PreapprovalController {
   //   }
   // }
   @Get()
-  async findOwn(@Body() uidObj: { uid: string; }) {
-      return this.preapprovalService.findOne(uidObj.uid);
+  async findOwn(@Headers('uid') uid: string) {
+      return this.preapprovalService.findOne(uid);
   }
   // @Roles('admin', 'coordinator')
   @Get('admin')
-  findOne(@Body() uidObj: { uid: string; }) {
-    return this.preapprovalService.findOne(uidObj.uid);
+  findOne(@Headers('uid') uid: string) {
+    return this.preapprovalService.findOne(uid);
   }
 
   // @Delete()
@@ -70,7 +71,7 @@ export class PreapprovalController {
 
   // }
   @Delete()
-  async removeOwn(@Body() uidObj: { uid: string; }){
-      return this.preapprovalService.remove(uidObj.uid);
+  async removeOwn(@Headers('uid') uid: string){
+      return this.preapprovalService.remove(uid);
   }
 }
