@@ -22,7 +22,7 @@ import { InStudentDto } from './profileDto/inStudent.dto';
 import { AuthService } from 'src/auth/auth.service';
 import { Request } from 'express';
 
-@UseGuards(RolesGuard)
+// @UseGuards(RolesGuard)
 @Controller('api/profile')
 export class ProfileController {
   constructor(
@@ -30,31 +30,31 @@ export class ProfileController {
     private readonly authService: AuthService,
   ) {}
 
-  @Roles('student')
+  // @Roles('student')
   @Post('student')
   createStudent(@Body() studentDto: StudentDto) {
     return this.profileService.create(studentDto, 'student');
   }
 
-  @Roles('coordinator')
+  // @Roles('coordinator')
   @Post('coordinator')
   createCoordinator(@Body() coordinatorDTO: CoordinatorDTO) {
     return this.profileService.create(coordinatorDTO, 'coordinator');
   }
 
-  @Roles('admin')
+  // @Roles('admin')
   @Post('admin')
   createAdmin(@Body() adminDTO: AdminDTO) {
     return this.profileService.create(adminDTO, 'admin');
   }
 
-  @Roles('instructor')
+  // @Roles('instructor')
   @Post('instructor')
   createInstructor(@Body() instructorDto: InstructorDto) {
     return this.profileService.create(instructorDto, 'instructor');
   }
 
-  @Roles('inStudent')
+  // @Roles('inStudent')
   @Post('inStudent')
   createInStudent(@Body() inStudentDto: InStudentDto) {
     return this.profileService.create(inStudentDto, 'inStudent');
@@ -72,12 +72,12 @@ export class ProfileController {
       throw new UnauthorizedException(error.message);
     }
   }
-  @Roles('admin')
+  // @Roles('admin')
   @Get('admin/all')
   findAll(@Body() roleObj: { role: string }) {
     return this.profileService.findAll(roleObj.role);
   }
-  @Roles('admin')
+  // @Roles('admin')
   @Get('admin')
   findOne(@Body() uidObj: { uid: string; role: string }) {
     return this.profileService.findOne(uidObj.uid, uidObj.role);

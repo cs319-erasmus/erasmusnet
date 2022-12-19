@@ -15,8 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProfileController = void 0;
 const common_1 = require("@nestjs/common");
 const profile_service_1 = require("./profile.service");
-const auth_guard_1 = require("../middleware/auth.guard");
-const role_decorator_1 = require("../middleware/role.decorator");
 const student_dto_1 = require("./profileDto/student.dto");
 const coordinator_dto_1 = require("./profileDto/coordinator.dto");
 const admin_dto_1 = require("./profileDto/admin.dto");
@@ -71,7 +69,6 @@ let ProfileController = class ProfileController {
     }
 };
 __decorate([
-    (0, role_decorator_1.Roles)('student'),
     (0, common_1.Post)('student'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -79,7 +76,6 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ProfileController.prototype, "createStudent", null);
 __decorate([
-    (0, role_decorator_1.Roles)('coordinator'),
     (0, common_1.Post)('coordinator'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -87,7 +83,6 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ProfileController.prototype, "createCoordinator", null);
 __decorate([
-    (0, role_decorator_1.Roles)('admin'),
     (0, common_1.Post)('admin'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -95,7 +90,6 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ProfileController.prototype, "createAdmin", null);
 __decorate([
-    (0, role_decorator_1.Roles)('instructor'),
     (0, common_1.Post)('instructor'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -103,7 +97,6 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ProfileController.prototype, "createInstructor", null);
 __decorate([
-    (0, role_decorator_1.Roles)('inStudent'),
     (0, common_1.Post)('inStudent'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -118,7 +111,6 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ProfileController.prototype, "findOwnProfile", null);
 __decorate([
-    (0, role_decorator_1.Roles)('admin'),
     (0, common_1.Get)('admin/all'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -126,7 +118,6 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ProfileController.prototype, "findAll", null);
 __decorate([
-    (0, role_decorator_1.Roles)('admin'),
     (0, common_1.Get)('admin'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -141,7 +132,6 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], ProfileController.prototype, "removeOwn", null);
 ProfileController = __decorate([
-    (0, common_1.UseGuards)(auth_guard_1.RolesGuard),
     (0, common_1.Controller)('api/profile'),
     __metadata("design:paramtypes", [profile_service_1.ProfileService,
         auth_service_1.AuthService])
