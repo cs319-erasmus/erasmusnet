@@ -13,14 +13,14 @@ import  { useState, useRef } from "react";
 export default function InstructorApprove() {
   const navigate = useNavigate();
 
-  const instructorView = () => {
-    navigate("/instructor-view-course");
+  const coordinatorView = () => {
+    navigate("/coordinatorAppointmentApproval");
   };
 
   const students = [ 
     { name: "John M. Doe" } ,
     { name: "Jane Doe"}, 
-    { name: "Jane Doe" } ];
+    { name: "Jay Doe" } ];
 
     const viewItems = students.map((item) => {
       return (
@@ -29,9 +29,9 @@ export default function InstructorApprove() {
         <Grid sm={3} md={3}>
           <Text  b color="indigo">{item.name}</Text>
         </Grid>
-
+        <Spacer x={4} />
         <Grid sm={3} md={3}>
-        <Button onClick={instructorView} color="secondary" ><Text color="white">View</Text></Button> 
+        <Button onClick={coordinatorView} color="secondary" ><Text color="white">View</Text></Button> 
         </Grid>
 
         </Grid>

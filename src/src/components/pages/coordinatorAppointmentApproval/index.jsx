@@ -4,8 +4,7 @@ import React from "react";
 const student = { 
     name: "John Doe",
     message: "I'd like to schedule a meeting on 01/01/2023."
-}
-
+    }
 export default function coordinatorApprove()
 {
     return(
@@ -48,14 +47,20 @@ export default function coordinatorApprove()
         
                     </div>
                 </div>
-                <div className='flex items-center justify-center'>
+                <div className='flex items-center justify-center gap-4'>
                     <motion.button
-                    whileTap={{ scale: 0.9 }}
-                    class="bg-transparent border-2 font-semibold border-indigo-900 text-indigo-900 p-2 px-12 rounded-lg hover:bg-indigo-900 hover:text-white">
-                    Approve
+                        whileTap={{ scale: 0.9 }}
+                        class="bg-transparent border-2 font-semibold border-indigo-900 text-indigo-900 p-2 px-12 rounded-lg hover:bg-indigo-900 hover:text-white">
+                        Approve
+                    </motion.button>
+                    <motion.button
+                        whileTap={{ scale: 0.9 }}
+                        class="bg-transparent border-2 font-semibold border-indigo-900 text-indigo-900 p-2 px-12 rounded-lg hover:bg-indigo-900 hover:text-white">
+                        Reject 
                     </motion.button>
                 </div>
             </div>
         </div>
     );
+
 }
