@@ -45,14 +45,14 @@ let ProfileController = class ProfileController {
     async findOwnProfile(uidObj) {
         return this.profileService.findOne(uidObj.uid, uidObj.role);
     }
-    findAll(roleObj) {
-        return this.profileService.findAll(roleObj.role);
+    findAll(role) {
+        return this.profileService.findAll(role);
     }
-    findOne(uidObj) {
-        return this.profileService.findOne(uidObj.uid, uidObj.role);
+    findOne(uid, role) {
+        return this.profileService.findOne(uid, role);
     }
-    async removeOwn(uidObj) {
-        return this.profileService.remove(uidObj.uid, uidObj.role);
+    async removeOwn(uid, role) {
+        return this.profileService.remove(uid, role);
     }
 };
 __decorate([
@@ -99,24 +99,26 @@ __decorate([
 ], ProfileController.prototype, "findOwnProfile", null);
 __decorate([
     (0, common_1.Get)('admin/all'),
-    __param(0, (0, common_1.Body)()),
+    __param(0, (0, common_1.Headers)('role')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], ProfileController.prototype, "findAll", null);
 __decorate([
     (0, role_decorator_1.Roles)('admin'),
     (0, common_1.Get)('admin'),
-    __param(0, (0, common_1.Body)()),
+    __param(0, (0, common_1.Headers)('uid')),
+    __param(1, (0, common_1.Headers)('role')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", void 0)
 ], ProfileController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Delete)(),
-    __param(0, (0, common_1.Body)()),
+    __param(0, (0, common_1.Headers)('uid')),
+    __param(1, (0, common_1.Headers)('role')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", Promise)
 ], ProfileController.prototype, "removeOwn", null);
 ProfileController = __decorate([
