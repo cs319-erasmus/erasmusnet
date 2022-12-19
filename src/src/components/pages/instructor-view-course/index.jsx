@@ -1,34 +1,15 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-
-const bilkentList = [
-  {
-    code: "CS 465",
-    name: "Computer Graphics",
-    coordinator: "Uğur Güdükbay",
-    deparment: "CS",
-    type: "Technical Elective",
-    credits: "6.5",
-  },
-];
-
-const erasmusList = [
-  {
-    code: "1TD388",
-    name: "Computer Graphics",
-    syllabus: "1TD388_Syllabus.pdf",
-    credits: "6.5",
-    school: "Uppsala University",
-  },
-];
+import { useLocation } from "react-router-dom";
 
 function InstructorViewCourse() {
-  const [bilkentCourses, setBilkentCourses] = useState(bilkentList);
-  const [erasmusCourses, setErasmusCourses] = useState(erasmusList);
-
+  const location = useLocation();
+  const [bilkentCourses, setBilkentCourses] = useState(location.state.course.bilkentCourses);
+  const [erasmusCourses, setErasmusCourses] = useState(location.state.course.erasmusCourses);
   const [bilkentTable, setBilkentTable] = useState(null);
   const [erasmusTable, setErasmusTable] = useState(null);
+  // const approveId = location.state.course.approveId;
 
   useEffect(() => {
     const bilkentItems = bilkentCourses.map((course) => {

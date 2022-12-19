@@ -1,32 +1,50 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useStudent } from "../../../contexts/StudentProvider";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const courses = [
-    { bilkent: "CS465",
-    erasmus: "1TD388",
-    status: "Approved" },
-    { bilkent: "CS476",
-    erasmus: "1DL311",
-    status: "Rejected" }
-]
-
-export default function studentCourseApproval()
+export default function StudentCourseApproval()
 {
-    const courseItems = courses.map((course) => {
+    const { student } = useStudent();
+    const [curStudent, setCurStudent] = useState(null);
+    const [courses, setCourses] = useState([]);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        setCurStudent(() => student);
+    }, [student]);
+
+    useEffect(() => {
+        if (curStudent !== null) {
+            setCourses(() => curStudent.courses.map((req) => {
+                return {
+                    id: req.approvalId,
+                    bilkent: req.bilkentCourses[0].courseCode,
+                    erasmus: req.erasmusCourses[0].courseCode,
+                    status: "Approved"
+                }
+            }));
+        }
+    }, [curStudent]);
+    
+    const courseItems = courses.map((curCourse, idx) => {
         return(
             <div>
                 <div class="grid gap-12 mb-6 md:grid-cols-4">
                     <button type="button" class="bg-gray-50 border border-gray-300 text-gray-700 text-ml rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" disabled>
-                        { course.bilkent }
+                        { curCourse.bilkent }
                     </button>
                     <button type="button" class="bg-gray-50 border border-gray-300 text-gray-700 text-ml rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" disabled>
-                        { course.erasmus }
+                        { curCourse.erasmus }
                     </button>
                     <button type="button" class="bg-gray-50 border border-gray-300 text-gray-700 text-ml rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" disabled>
-                        { course.status }
+                        { curCourse.status }
                     </button>    
                     <motion.button
                         whileTap={{ scale: 0.9 }}
+                        onClick={() => navigate("/student-view-request", { state: { course: curStudent.courses[idx] }})}
+
                         class="bg-transparent border-2 font-semibold border-indigo-900 text-indigo-900 p-2 px-12 rounded-lg hover:bg-indigo-900 hover:text-white">
                     View Request
                     </motion.button>                  
@@ -54,27 +72,13 @@ export default function studentCourseApproval()
                 <div className='flex items-center justify-center'>
                     <motion.button
                     whileTap={{ scale: 0.9 }}
+                    onClick={() => navigate("/studentCreateRequest")}
                     class="bg-transparent border-2 font-semibold border-indigo-900 text-indigo-900 p-2 px-12 rounded-lg hover:bg-indigo-900 hover:text-white"
                     >
                     Create Request
                     </motion.button>   
                 </div> 
             </div>
-
-            <div className="absolute bottom-8 left-12">
-                <motion.button whileTap={{ scale: 0.9 }}
-                    class="bg-transparent border-2 font-semibold border-indigo-900 text-indigo-900 p-2 px-12 rounded-lg hover:bg-indigo-900 hover:text-white">
-                    Back
-                </motion.button> 
-            </div>
-            <div className="absolute bottom-8 right-12">
-                <motion.button whileTap={{ scale: 0.9 }}
-                    class="bg-transparent border-2 font-semibold border-indigo-900 text-indigo-900 p-2 px-12 rounded-lg hover:bg-indigo-900 hover:text-white">
-                    Next
-                </motion.button> 
-            </div>
         </div>
     );
 }
-
-//export default studentCourseApproval;

@@ -1,16 +1,11 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-
-const bilkentList = [
-];
-
-const erasmusList = [
-];
+import { useStudent } from "../../../contexts/StudentProvider";
 
 function StudentCreateRequest() {
-  const [bilkentCourses, setBilkentCourses] = useState(bilkentList);
-  const [erasmusCourses, setErasmusCourses] = useState(erasmusList);
+  const [bilkentCourses, setBilkentCourses] = useState([]);
+  const [erasmusCourses, setErasmusCourses] = useState([]);
   const bilkentCode = useRef();
   const bilkentName = useRef();
   const bilkentCoordinator = useRef();
@@ -21,6 +16,7 @@ function StudentCreateRequest() {
   const erasmusSyllabus = useRef();
   const erasmusCredits = useRef();
   const erasmusSchool = useRef();
+  const { sendStudentCourses } = useStudent();
 
   const [bilkentTable, setBilkentTable] = useState(null);
   const [erasmusTable, setErasmusTable] = useState(null);
@@ -183,11 +179,16 @@ function StudentCreateRequest() {
     setBilkentCourses(() => [
       ...bilkentCourses,
       {
-        code: bilkentCode.current.value,
-        name: bilkentName.current.value,
-        coordinator: bilkentCoordinator.current.value,
-        type: bilkentType.current.value,
-        credits: bilkentCredits.current.value,
+        courseCode: bilkentCode.current.value,
+        courseName: bilkentName.current.value,
+        instructorName: bilkentCoordinator.current.value,
+        electiveName: bilkentType.current.value,
+        credit: bilkentCredits.current.value,
+        department: "Computer Engineering",
+        university: "Bilkent University",
+        isMustCourse: bilkentType.current.value === "Must",
+        courseApprovalRef: "",
+        syllabusRef: "",
       },
     ]);
   };
@@ -201,20 +202,29 @@ function StudentCreateRequest() {
     setErasmusCourses(() => [
       ...erasmusCourses,
       {
-        code: erasmusCode.current.value,
-        name: erasmusName.current.value,
-        syllabus: erasmusSyllabus.current.value,
-        credits: erasmusCredits.current.value,
-        school: erasmusSchool.current.value,
+        courseCode: erasmusCode.current.value,
+        courseName: erasmusName.current.value,
+        syllabusRef: erasmusSyllabus.current.value,
+        credit: erasmusCredits.current.value,
+        university: erasmusSchool.current.value,
+        isMustCourse: false,
+        courseApprovalRef: "",
+        syllabusRef: "",
+        electiveName: "",
+        instructorName: "",
+        department: "Computer Science",
       },
     ]);
+  };
 
-    // Clear the input fields
-    erasmusCode.current.value = "";
-    erasmusName.current.value = "";
-    erasmusSyllabus.current.value = "";
-    erasmusCredits.current.value = "";
-    erasmusSchool.current.value = "";
+  const submit = (e) => {
+    e.preventDefault();
+    if (bilkentCourses.length === 0 && erasmusCourses.length === 0) {
+      alert("Please add courses to your request");
+      return;
+    }
+    
+    sendStudentCourses(bilkentCourses, erasmusCourses);
   };
 
   return (
@@ -415,6 +425,7 @@ function StudentCreateRequest() {
       <div className="">
         <motion.button
           whileTap={{ scale: 0.9 }}
+          onClick={(e) => submit(e)}
           class="bg-indigo-900 border-2 font-semibold border-indigo-900 p-2 px-12 ml-12 rounded-lg hover:bg-transparent hover:text-indigo-900 text-white"
         >
           Submit
