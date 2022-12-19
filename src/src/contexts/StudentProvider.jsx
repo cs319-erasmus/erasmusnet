@@ -74,12 +74,21 @@ function StudentProvider({children}) {
   const { getToken } = useAuth();
   const { user } = useAuth();
 
-  const fetchStudentProfile = () => {
-    return studentProfileMock; // TODO: fetch from backend
+  const fetchStudentProfile = async () => {
+    const token = await getToken();
+    const res = await fetch(API + "/api/profile", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "role": "student",
+        "uid": "12345",
+      },
+    }).then(res => res.json());
+    return res;
   }
 
   const getCourseApprovalStatus = (approvalId) => {
-    return true; // TODO: fetch from backend
+    return true;
   }
 
   const fetchStudentCourses = async () => {
@@ -146,6 +155,7 @@ function StudentProvider({children}) {
 
     async function fetchData() {
       studentProfile = await fetchStudentProfile();
+      console.log("Student Profile" + JSON.stringify(studentProfile))
       studentCourses = await getStudentCourses();
       studentStage = await getStudentStage();
       studentAppointments = await getStudentAppointments();
@@ -155,8 +165,9 @@ function StudentProvider({children}) {
         email: studentProfile.email,
         password: studentProfile.password,
         role: "student",
-        stage: studentStage,
+        stage: studentProfile.stageRef,
         courses: studentCourses,
+        id: studentProfile.id,
       };
       console.log(student)
       setStudent(student);

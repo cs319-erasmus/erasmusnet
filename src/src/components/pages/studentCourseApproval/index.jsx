@@ -4,15 +4,6 @@ import { useStudent } from "../../../contexts/StudentProvider";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// const courses = [
-//     { bilkent: "CS465",
-//     erasmus: "1TD388",
-//     status: "Approved" },
-//     { bilkent: "CS476",
-//     erasmus: "1DL311",
-//     status: "Rejected" }
-// ]
-
 export default function StudentCourseApproval()
 {
     const { student } = useStudent();
