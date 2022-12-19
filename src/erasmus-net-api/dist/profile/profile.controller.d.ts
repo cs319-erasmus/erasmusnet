@@ -5,7 +5,6 @@ import { AdminDTO } from './profileDto/admin.dto';
 import { InstructorDto } from './profileDto/instructor.dto';
 import { InStudentDto } from './profileDto/inStudent.dto';
 import { AuthService } from 'src/auth/auth.service';
-import { Request } from 'express';
 export declare class ProfileController {
     private readonly profileService;
     private readonly authService;
@@ -15,13 +14,19 @@ export declare class ProfileController {
     createAdmin(adminDTO: AdminDTO): Promise<FirebaseFirestore.WriteResult>;
     createInstructor(instructorDto: InstructorDto): Promise<FirebaseFirestore.WriteResult>;
     createInStudent(inStudentDto: InStudentDto): Promise<FirebaseFirestore.WriteResult>;
-    findOwnProfile(req: Request): Promise<FirebaseFirestore.DocumentSnapshot<FirebaseFirestore.DocumentData>>;
+    findOwnProfile(uidObj: {
+        uid: string;
+        role: string;
+    }): Promise<FirebaseFirestore.DocumentData>;
     findAll(roleObj: {
         role: string;
-    }): Promise<FirebaseFirestore.QuerySnapshot<FirebaseFirestore.DocumentData>>;
+    }): Promise<FirebaseFirestore.DocumentData[]>;
     findOne(uidObj: {
         uid: string;
         role: string;
-    }): Promise<FirebaseFirestore.DocumentSnapshot<FirebaseFirestore.DocumentData>>;
-    removeOwn(req: Request): Promise<FirebaseFirestore.WriteResult>;
+    }): Promise<FirebaseFirestore.DocumentData>;
+    removeOwn(uidObj: {
+        uid: string;
+        role: string;
+    }): Promise<FirebaseFirestore.WriteResult>;
 }

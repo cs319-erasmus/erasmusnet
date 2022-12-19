@@ -10,11 +10,13 @@ export class PreapprovalService {
   }
 
   async findAll() {
-    return await admin.firestore().collection('preapproval').get();
+    const collection = await admin.firestore().collection('preapproval').get();
+    return collection.docs.map((doc) => doc.data());
   }
 
   async findOne(uid:string) {
-    return await admin.firestore().collection('preapproval').doc(uid).get();
+    const doc =  await admin.firestore().collection('preapproval').doc(uid).get();
+    return doc.data();
   }
 
   async remove(uid:string) {
