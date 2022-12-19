@@ -72,6 +72,7 @@ function StudentProvider({children}) {
   const { stage } = useStage();
   const API = "http://localhost:3333";
   const { getToken } = useAuth();
+  const { user } = useAuth();
 
   const fetchStudentProfile = () => {
     return studentProfileMock; // TODO: fetch from backend
@@ -89,14 +90,14 @@ function StudentProvider({children}) {
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + token,
-        "uid": "12345"
+        "uid": "12345",
       },
-    });
-    console.log(res);
-    return res; // TODO: fetch from backend
+    }).then(res => res.json());
+    
+    return res["linkObjects"];
   }
 
-  const sendStudentCourses = async () => {
+  const sendStudentCourses = async (bilkent, erasmus) => {
     const token = await getToken();
 
     const res = await fetch(API + "/api/course", {
@@ -108,57 +109,18 @@ function StudentProvider({children}) {
       body: JSON.stringify(
         {
           "uid": "12345",
-          "bilkentCourses": [
-            {
-              "courseName": "Introduction to Computer Science",
-              "courseCode": "CS 101",
-              "instructorName": "John Doe",
-              "department": "Computer Science",
-              "university": "Bilkent University",
-              "isMustCourse": true,
-              "credit": "3",
-              "electiveName": "",
-              "courseApprovalRef": "123456",
-              "syllabusRef": "654321"
-            },
-            {
-              "courseName": "Data Structures and Algorithms",
-              "courseCode": "CS 102",
-              "instructorName": "Jane Doe",
-              "department": "Computer Science",
-              "university": "Bilkent University",
-              "isMustCourse": true,
-              "credit": "3",
-              "electiveName": "",
-              "courseApprovalRef": "789123",
-              "syllabusRef": "321987"
-            }
-          ],
-          "erasmusCourses": [
-            {
-              "courseName": "Software Engineering",
-              "courseCode": "SE 201",
-              "instructorName": "John Smith",
-              "department": "Computer Science",
-              "university": "Erasmus University",
-              "isMustCourse": false,
-              "credit": "3",
-              "electiveName": "Software Engineering Elective",
-              "courseApprovalRef": "456789",
-              "syllabusRef": "987654"
-            }
-          ],
-          "approvalId": "9876543210"
+          "bilkentCourses": bilkent,
+          "erasmusCourses": erasmus,
+          "approvalId": Math.floor(Math.random() * 100000),
         }
       )
     });
-    console.log(res);
-    return res; // TODO: fetch from backend
+    return res;
   }
 
-  sendStudentCourses();
-  const getStudentCourses = () => {
-    const courses = fetchStudentCourses();
+  const getStudentCourses = async () => {
+    const courses = await fetchStudentCourses();
+    return courses;
     const studentCourses = [];
     return;
     courses.forEach(course => {
@@ -175,26 +137,33 @@ function StudentProvider({children}) {
 
   const getStudentAppointments = () => {
   }
-  const flag = 1;
+
   useEffect(() => {
-    const studentProfile = fetchStudentProfile();
-    const studentCourses = getStudentCourses();
-    const studentStage = getStudentStage();
-    const studentAppointments = getStudentAppointments();
-    const student = {
-      uid: studentProfile.uid,
-      name: studentProfile.name,
-      email: studentProfile.email,
-      password: studentProfile.password,
-      role: "student",
-      stage: studentStage,
-      courses: studentCourses,
-    };
-    if (flag === 0)
-    setStudent(student);
-    else
-    setStudent(null);
-  }, [flag]);
+    let studentProfile;
+    let studentCourses;
+    let studentStage;
+    let studentAppointments;
+
+    async function fetchData() {
+      studentProfile = await fetchStudentProfile();
+      studentCourses = await getStudentCourses();
+      studentStage = await getStudentStage();
+      studentAppointments = await getStudentAppointments();
+      const student = {
+        uid: studentProfile.uid,
+        name: studentProfile.name,
+        email: studentProfile.email,
+        password: studentProfile.password,
+        role: "student",
+        stage: studentStage,
+        courses: studentCourses,
+      };
+      console.log(student)
+      setStudent(student);
+    }
+
+    fetchData();
+  }, [user]);
   
   const getStudent = () => {
     try {
@@ -205,7 +174,7 @@ function StudentProvider({children}) {
     }
   }
 
-  const value = { student, getStudent };
+  const value = { student, getStudent, sendStudentCourses };
 
   return <StudentContext.Provider value={value}>{children}</StudentContext.Provider>;
 }
