@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Headers } from '@nes
 import { PlacementService } from './placement.service';
 import { PlacementDTO } from './placementDto/placement.dto';
 
-@Controller('placement')
+@Controller('api/placement')
 export class PlacementController {
   constructor(private readonly placementService: PlacementService) {}
 

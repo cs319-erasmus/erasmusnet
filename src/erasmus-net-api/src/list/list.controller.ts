@@ -7,7 +7,7 @@ import { WaitingListDTO } from './listDto/waitinglist.dto';
 export class ListController {
   constructor(private readonly listService: ListService) {}
 
-  @Post('waitinglist')
+  @Post()
   create(@Body('waitinglist') waitingListDTO: WaitingListDTO,
   @Body('placedstudentslist') placedStudentsListDTO: PlacedStudentsListDTO) {
     return this.listService.create(waitingListDTO, placedStudentsListDTO);
