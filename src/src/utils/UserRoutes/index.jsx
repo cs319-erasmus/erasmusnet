@@ -15,7 +15,7 @@ function UserRoutes() {
 
   return (
     user === null ? (
-      <Error />
+      <div>Not Allowed</div>
     ) :
     user &&
     <>
