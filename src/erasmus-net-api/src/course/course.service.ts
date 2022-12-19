@@ -10,13 +10,14 @@ export class CourseService {
     .collection('courses')
     .doc(courseLinkDTO.uid)
     .update({
-      linkObjects: admin.firestore.FieldValue.arrayUnion([courseLinkDTO])
+      linkObjects: admin.firestore.FieldValue.arrayUnion(courseLinkDTO)
     });
     return true;
   }
 
-  findOne(uid: string) {
-    return admin.firestore().collection('courses').doc(uid).get();
+  async findOne(uid: string) {
+    const doc = await admin.firestore().collection('courses').doc(uid).get();
+    return JSON.stringify(doc.data());
   }
 
   remove(uid: string) {

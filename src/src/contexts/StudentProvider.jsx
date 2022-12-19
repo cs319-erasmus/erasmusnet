@@ -70,6 +70,9 @@ Student template
 function StudentProvider({children}) {
   const [student, setStudent] = useState(null);
   const { stage } = useStage();
+  const API = "http://localhost:3333";
+  const { getToken } = useAuth();
+  const { user } = useAuth();
 
   const fetchStudentProfile = () => {
     return studentProfileMock; // TODO: fetch from backend
@@ -79,14 +82,47 @@ function StudentProvider({children}) {
     return true; // TODO: fetch from backend
   }
 
-  const fetchStudentCourses = () => {
-    return studentCoursesMock; // TODO: fetch from backend
+  const fetchStudentCourses = async () => {
+    const token = await getToken();
+
+    const res = await fetch(API + "/api/course", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+        "uid": "12345",
+      },
+    }).then(res => res.json());
+    
+    return res["linkObjects"];
   }
 
-  const getStudentCourses = () => {
-    const courses = fetchStudentCourses();
+  const sendStudentCourses = async (bilkent, erasmus) => {
+    const token = await getToken();
+
+    const res = await fetch(API + "/api/course", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+      },
+      body: JSON.stringify(
+        {
+          "uid": "12345",
+          "bilkentCourses": bilkent,
+          "erasmusCourses": erasmus,
+          "approvalId": Math.floor(Math.random() * 100000),
+        }
+      )
+    });
+    return res;
+  }
+
+  const getStudentCourses = async () => {
+    const courses = await fetchStudentCourses();
+    return courses;
     const studentCourses = [];
-    
+    return;
     courses.forEach(course => {
       const isApproved = getCourseApprovalStatus(course.approvalId);
       studentCourses.push({isApproved: isApproved, bilkentCourses: course.bilkentCourses, erasmusCourses: course.erasmusCourses});
@@ -101,26 +137,33 @@ function StudentProvider({children}) {
 
   const getStudentAppointments = () => {
   }
-  const flag = 1;
+
   useEffect(() => {
-    const studentProfile = fetchStudentProfile();
-    const studentCourses = getStudentCourses();
-    const studentStage = getStudentStage();
-    const studentAppointments = getStudentAppointments();
-    const student = {
-      uid: studentProfile.uid,
-      name: studentProfile.name,
-      email: studentProfile.email,
-      password: studentProfile.password,
-      role: "student",
-      stage: studentStage,
-      courses: studentCourses,
-    };
-    if (flag === 0)
-    setStudent(student);
-    else
-    setStudent(null);
-  }, [flag]);
+    let studentProfile;
+    let studentCourses;
+    let studentStage;
+    let studentAppointments;
+
+    async function fetchData() {
+      studentProfile = await fetchStudentProfile();
+      studentCourses = await getStudentCourses();
+      studentStage = await getStudentStage();
+      studentAppointments = await getStudentAppointments();
+      const student = {
+        uid: studentProfile.uid,
+        name: studentProfile.name,
+        email: studentProfile.email,
+        password: studentProfile.password,
+        role: "student",
+        stage: studentStage,
+        courses: studentCourses,
+      };
+      console.log(student)
+      setStudent(student);
+    }
+
+    fetchData();
+  }, [user]);
   
   const getStudent = () => {
     try {
@@ -131,7 +174,7 @@ function StudentProvider({children}) {
     }
   }
 
-  const value = { student, getStudent };
+  const value = { student, getStudent, sendStudentCourses };
 
   return <StudentContext.Provider value={value}>{children}</StudentContext.Provider>;
 }

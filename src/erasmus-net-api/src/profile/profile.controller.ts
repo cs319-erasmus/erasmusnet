@@ -10,6 +10,7 @@ import {
   Req,
   UnauthorizedException,
   HttpStatus,
+  Headers,
 } from '@nestjs/common';
 import { ProfileService } from './profile.service';
 import { RolesGuard } from 'src/middleware/auth.guard';
@@ -22,7 +23,7 @@ import { InStudentDto } from './profileDto/inStudent.dto';
 import { AuthService } from 'src/auth/auth.service';
 import { Request } from 'express';
 
-@UseGuards(RolesGuard)
+// @UseGuards(RolesGuard)
 @Controller('api/profile')
 export class ProfileController {
   constructor(
@@ -30,70 +31,78 @@ export class ProfileController {
     private readonly authService: AuthService,
   ) {}
 
-  @Roles('student')
+  // @Roles('student')
   @Post('student')
   createStudent(@Body() studentDto: StudentDto) {
     return this.profileService.create(studentDto, 'student');
   }
 
-  @Roles('coordinator')
+  // @Roles('coordinator')
   @Post('coordinator')
   createCoordinator(@Body() coordinatorDTO: CoordinatorDTO) {
     return this.profileService.create(coordinatorDTO, 'coordinator');
   }
 
-  @Roles('admin')
+  // @Roles('admin')
   @Post('admin')
   createAdmin(@Body() adminDTO: AdminDTO) {
     return this.profileService.create(adminDTO, 'admin');
   }
 
-  @Roles('instructor')
+  // @Roles('instructor')
   @Post('instructor')
   createInstructor(@Body() instructorDto: InstructorDto) {
     return this.profileService.create(instructorDto, 'instructor');
   }
 
-  @Roles('inStudent')
+  // @Roles('inStudent')
   @Post('inStudent')
   createInStudent(@Body() inStudentDto: InStudentDto) {
     return this.profileService.create(inStudentDto, 'inStudent');
   }
-
+   // @Get()
+  // async findOwnProfile(@Req() req: Request) {
+  //   const authToken = req.headers.authorization;
+  //   try {
+  //     const { uid, email, role } = await this.authService.authenticate(
+  //       authToken,
+  //     );
+  //     return this.profileService.findOne(uid, role);
+  //   } catch (error) {
+  //     throw new UnauthorizedException(error.message);
+  //   }
+  // }
   @Get()
-  async findOwnProfile(@Req() req: Request) {
-    const authToken = req.headers.authorization;
-    try {
-      const { uid, email, role } = await this.authService.authenticate(
-        authToken,
-      );
+  async findOwnProfile(@Headers('uid') uid: string, @Headers('role')  role: string) {
       return this.profileService.findOne(uid, role);
-    } catch (error) {
-      throw new UnauthorizedException(error.message);
-    }
   }
-  @Roles('admin')
+  
+  // @Roles('admin')
   @Get('admin/all')
-  findAll(@Body() roleObj: { role: string }) {
-    return this.profileService.findAll(roleObj.role);
+  findAll(@Headers('role')  role: string) {
+    return this.profileService.findAll(role);
   }
   @Roles('admin')
   @Get('admin')
-  findOne(@Body() uidObj: { uid: string; role: string }) {
-    return this.profileService.findOne(uidObj.uid, uidObj.role);
+  findOne(@Headers('uid') uid: string, @Headers('role')  role: string) {
+    return this.profileService.findOne(uid, role);
   }
 
-  @Delete()
-  async removeOwn(@Req() req: Request) {
-    const authToken = req.headers.authorization;
-    try {
-      const { uid, email, role } = await this.authService.authenticate(
-        authToken,
-      );
-      return this.profileService.remove(uid, role);
-    } catch (error) {
-      throw new UnauthorizedException(error.message);
-    }
+  // @Delete()
+  // async removeOwn(@Req() req: Request) {
+  //   const authToken = req.headers.authorization;
+  //   try {
+  //     const { uid, email, role } = await this.authService.authenticate(
+  //       authToken,
+  //     );
+  //     return this.profileService.remove(uid, role);
+  //   } catch (error) {
+  //     throw new UnauthorizedException(error.message);
+  //   }
 
+  // }
+  @Delete()
+  async removeOwn(@Headers('uid') uid: string, @Headers('role')  role: string) {
+      return this.profileService.remove(uid,role);
   }
 }

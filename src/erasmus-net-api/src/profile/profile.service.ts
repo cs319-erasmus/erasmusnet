@@ -14,18 +14,20 @@ export class ProfileService {
       .set(userProfile);
   }
   async findAll(role: string) {
-    return await admin
+    const collection = await admin
       .firestore()
       .collection(role + 'Profile')
       .get();
+      return collection.docs.map((doc) => doc.data());
   }
 
   async findOne(uid: string, role: string) {
-    return await admin
+    const doc = await admin
       .firestore()
       .collection(role + 'Profile')
       .doc(uid)
       .get();
+    return doc.data();
   }
 
   async remove(uid: string, role: string) {

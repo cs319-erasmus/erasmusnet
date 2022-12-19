@@ -15,7 +15,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProfileController = void 0;
 const common_1 = require("@nestjs/common");
 const profile_service_1 = require("./profile.service");
-const auth_guard_1 = require("../middleware/auth.guard");
 const role_decorator_1 = require("../middleware/role.decorator");
 const student_dto_1 = require("./profileDto/student.dto");
 const coordinator_dto_1 = require("./profileDto/coordinator.dto");
@@ -43,35 +42,20 @@ let ProfileController = class ProfileController {
     createInStudent(inStudentDto) {
         return this.profileService.create(inStudentDto, 'inStudent');
     }
-    async findOwnProfile(req) {
-        const authToken = req.headers.authorization;
-        try {
-            const { uid, email, role } = await this.authService.authenticate(authToken);
-            return this.profileService.findOne(uid, role);
-        }
-        catch (error) {
-            throw new common_1.UnauthorizedException(error.message);
-        }
-    }
-    findAll(roleObj) {
-        return this.profileService.findAll(roleObj.role);
-    }
-    findOne(uidObj) {
+    async findOwnProfile(uidObj) {
         return this.profileService.findOne(uidObj.uid, uidObj.role);
     }
-    async removeOwn(req) {
-        const authToken = req.headers.authorization;
-        try {
-            const { uid, email, role } = await this.authService.authenticate(authToken);
-            return this.profileService.remove(uid, role);
-        }
-        catch (error) {
-            throw new common_1.UnauthorizedException(error.message);
-        }
+    findAll(role) {
+        return this.profileService.findAll(role);
+    }
+    findOne(uid, role) {
+        return this.profileService.findOne(uid, role);
+    }
+    async removeOwn(uid, role) {
+        return this.profileService.remove(uid, role);
     }
 };
 __decorate([
-    (0, role_decorator_1.Roles)('student'),
     (0, common_1.Post)('student'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -79,7 +63,6 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ProfileController.prototype, "createStudent", null);
 __decorate([
-    (0, role_decorator_1.Roles)('coordinator'),
     (0, common_1.Post)('coordinator'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -87,7 +70,6 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ProfileController.prototype, "createCoordinator", null);
 __decorate([
-    (0, role_decorator_1.Roles)('admin'),
     (0, common_1.Post)('admin'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -95,7 +77,6 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ProfileController.prototype, "createAdmin", null);
 __decorate([
-    (0, role_decorator_1.Roles)('instructor'),
     (0, common_1.Post)('instructor'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -103,7 +84,6 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ProfileController.prototype, "createInstructor", null);
 __decorate([
-    (0, role_decorator_1.Roles)('inStudent'),
     (0, common_1.Post)('inStudent'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -112,36 +92,36 @@ __decorate([
 ], ProfileController.prototype, "createInStudent", null);
 __decorate([
     (0, common_1.Get)(),
-    __param(0, (0, common_1.Req)()),
+    __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], ProfileController.prototype, "findOwnProfile", null);
 __decorate([
-    (0, role_decorator_1.Roles)('admin'),
     (0, common_1.Get)('admin/all'),
-    __param(0, (0, common_1.Body)()),
+    __param(0, (0, common_1.Headers)('role')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], ProfileController.prototype, "findAll", null);
 __decorate([
     (0, role_decorator_1.Roles)('admin'),
     (0, common_1.Get)('admin'),
-    __param(0, (0, common_1.Body)()),
+    __param(0, (0, common_1.Headers)('uid')),
+    __param(1, (0, common_1.Headers)('role')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", void 0)
 ], ProfileController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Delete)(),
-    __param(0, (0, common_1.Req)()),
+    __param(0, (0, common_1.Headers)('uid')),
+    __param(1, (0, common_1.Headers)('role')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", Promise)
 ], ProfileController.prototype, "removeOwn", null);
 ProfileController = __decorate([
-    (0, common_1.UseGuards)(auth_guard_1.RolesGuard),
     (0, common_1.Controller)('api/profile'),
     __metadata("design:paramtypes", [profile_service_1.ProfileService,
         auth_service_1.AuthService])

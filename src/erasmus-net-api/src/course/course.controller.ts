@@ -1,8 +1,8 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Header, Headers } from '@nestjs/common';
 import { CourseService } from './course.service';
 import { CourseLinkDTO } from './courseDto/courseLink.dto';
 
-@Controller('course')
+@Controller('api/course')
 export class CourseController {
   constructor(private readonly courseService: CourseService) {}
 
@@ -13,12 +13,12 @@ export class CourseController {
 
   //gets a courseLink by its uid
   @Get()
-  findOne(@Body('uid') uid: string) {
+  findOne(@Headers('uid') uid: string) {
     return this.courseService.findOne(uid);
   }
 
   @Delete()
-  remove(@Body('uid') uid: string) {
+  remove(@Headers('uid') uid: string) {
     return this.courseService.remove(uid);
   }
 }

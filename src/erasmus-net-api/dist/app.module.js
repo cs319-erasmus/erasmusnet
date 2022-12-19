@@ -16,6 +16,7 @@ const config_1 = require("@nestjs/config");
 const auth_middleware_1 = require("./middleware/auth.middleware");
 const profile_module_1 = require("./profile/profile.module");
 const preapproval_module_1 = require("./preapproval/preapproval.module");
+const course_approval_module_1 = require("./course-approval/course-approval.module");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer
@@ -31,6 +32,7 @@ AppModule = __decorate([
             config_1.ConfigModule.forRoot(),
             profile_module_1.ProfileModule,
             preapproval_module_1.PreapprovalModule,
+            course_approval_module_1.CourseApprovalModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],

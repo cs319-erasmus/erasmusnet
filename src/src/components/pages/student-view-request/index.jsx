@@ -1,14 +1,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
-const bilkentList = [];
-
-const erasmusList = [];
-
-function StudentCreateRequest() {
-  const [bilkentCourses, setBilkentCourses] = useState(bilkentList);
-  const [erasmusCourses, setErasmusCourses] = useState(erasmusList);
+function StudentViewRequest() {
+  const location = useLocation();
+  const [bilkentCourses, setBilkentCourses] = useState(location.state.course.bilkentCourses);
+  const [erasmusCourses, setErasmusCourses] = useState(location.state.course.erasmusCourses);
 
   const [bilkentTable, setBilkentTable] = useState(null);
   const [erasmusTable, setErasmusTable] = useState(null);
@@ -43,21 +41,21 @@ function StudentCreateRequest() {
               id="courseCode"
               class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             >
-              {course.code}
+              {course.courseCode}
             </label>
             <label
               type="text"
               id="courseName"
               class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             >
-              {course.name}
+              {course.courseName}
             </label>
             <label
               type="text"
               id="courseCoordinator"
               class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             >
-              {course.coordinator}
+              {course.instructorName}
             </label>
           </div>
 
@@ -81,14 +79,14 @@ function StudentCreateRequest() {
               id="courseType"
               class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             >
-              {course.type}
+              {course.electiveName}
             </label>
             <label
               type="text"
               id="courseCredits"
               class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             >
-              {course.credits}
+              {course.credit}
             </label>
           </div>
         </div>
@@ -99,6 +97,9 @@ function StudentCreateRequest() {
   }, [bilkentCourses]);
 
   useEffect(() => {
+    if (!erasmusCourses) {
+      return;
+    }
     const erasmusItems = erasmusCourses.map((course) => {
       return (
         <div>
@@ -128,21 +129,21 @@ function StudentCreateRequest() {
               id="courseName"
               class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             >
-              {course.code}
+              {course.courseCode}
             </label>
             <label
               type="text"
               id="courseName"
               class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             >
-              {course.name}
+              {course.courseName}
             </label>
             <label
               type="text"
               id="courseSchool"
               class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             >
-              {course.school}
+              {course.university}
             </label>
           </div>
 
@@ -166,14 +167,14 @@ function StudentCreateRequest() {
               id="file_input"
               class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             >
-              {course.syllabus}
+              {course.syllabusRef}
             </label>
             <label
               type="text"
               id="courseCredits"
               class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             >
-              {course.credits}
+              {course.credit}
             </label>
           </div>
         </div>
@@ -199,23 +200,8 @@ function StudentCreateRequest() {
         <h1 className="text-xl mb-4 font-bold text-indigo-900">Erasmus</h1>
           {erasmusTable}
       </div>
-
-      <div className="">
-        <motion.button
-          whileTap={{ scale: 0.9 }}
-          class="bg-indigo-900 border-2 font-semibold border-indigo-900 p-2 px-12 ml-12 rounded-lg hover:bg-transparent hover:text-indigo-900 text-white"
-        >
-          Approve
-        </motion.button>
-        <motion.button
-          whileTap={{ scale: 0.9 }}
-          class="bg-indigo-900 border-2 font-semibold border-indigo-900 p-2 px-12 ml-12 rounded-lg hover:bg-transparent hover:text-indigo-900 text-white"
-        >
-          Reject
-        </motion.button>
-      </div>
     </div>
   );
 }
 
-export default StudentCreateRequest;
+export default StudentViewRequest;

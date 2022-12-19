@@ -13,6 +13,7 @@ import { AuthMiddleware } from './middleware/auth.middleware';
 import { ProfileModule } from './profile/profile.module';
 import { PreapprovalModule } from './preapproval/preapproval.module';
 import { CourseApprovalModule } from './course-approval/course-approval.module';
+import { ListModule } from './list/list.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { CourseApprovalModule } from './course-approval/course-approval.module';
     ProfileModule,
     PreapprovalModule,
     CourseApprovalModule,
+    ListModule,
   ],
   controllers: [AppController],
   providers: [AppService],
