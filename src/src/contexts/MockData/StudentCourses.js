@@ -1,6 +1,7 @@
 export const studentCoursesMock = [
     { // CourseLinkDTO
         uid: "123456789",
+        approvalId: "12345",
         bilkentCourses: [
             {
                 courseName: "Computer Graphics",

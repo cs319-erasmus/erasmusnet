@@ -6,9 +6,11 @@ const useCoordinator = () => {
     return useContext(CoordinatorContext);
 }
 
-function CoordinatorProvider() {
+function CoordinatorProvider({children}) {
   const [coordinator, setCoordinator] = useState(null);
     
+
+  return <CoordinatorContext.Provider value={value}>{children}</CoordinatorContext.Provider>;
 }
 
 export default CoordinatorProvider

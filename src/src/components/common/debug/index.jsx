@@ -3,6 +3,7 @@ import { useAuth } from '../../../contexts/AuthProvider'
 
 function Debug() {
     const { user } = useAuth();
+    console.log(user);
 
   return (
     user === null ? <div>User Null</div> :

@@ -1,10 +1,12 @@
-import React, { createContext, useContext, useState } from 'react'
+import React, { createContext, useContext, useState, useEffect } from 'react'
 import { studentProfileMock } from "./MockData/StudentProfile"
 import { studentCoursesMock } from "./MockData/StudentCourses"
+import { useStage } from "./StageProvider"
+import { useAuth } from "./AuthProvider"
 
 export const StudentContext = createContext()
 
-const useStudent = () => {
+export const useStudent = () => {
     return useContext(StudentContext);
 }
 
@@ -65,14 +67,16 @@ Student template
 
 */
 
-function StudentProvider() {
+function StudentProvider({children}) {
   const [student, setStudent] = useState(null);
+  const { stage } = useStage();
 
   const fetchStudentProfile = () => {
     return studentProfileMock; // TODO: fetch from backend
   }
 
-  const getCourseApprovalStatus = () => {
+  const getCourseApprovalStatus = (approvalId) => {
+    return true; // TODO: fetch from backend
   }
 
   const fetchStudentCourses = () => {
@@ -84,7 +88,7 @@ function StudentProvider() {
     const studentCourses = [];
     
     courses.forEach(course => {
-      const isApproved = getCourseApprovalStatus(course.id);
+      const isApproved = getCourseApprovalStatus(course.approvalId);
       studentCourses.push({isApproved: isApproved, bilkentCourses: course.bilkentCourses, erasmusCourses: course.erasmusCourses});
     });
 
@@ -92,12 +96,13 @@ function StudentProvider() {
   }
 
   const getStudentStage = () => {
+      return stage;
   }
 
   const getStudentAppointments = () => {
   }
-
-  const studentBuilder = () => {
+  const flag = 1;
+  useEffect(() => {
     const studentProfile = fetchStudentProfile();
     const studentCourses = getStudentCourses();
     const studentStage = getStudentStage();
@@ -111,11 +116,24 @@ function StudentProvider() {
       stage: studentStage,
       courses: studentCourses,
     };
-
+    if (flag === 0)
     setStudent(student);
-  };
+    else
+    setStudent(null);
+  }, [flag]);
+  
+  const getStudent = () => {
+    try {
+      return student;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  }
+
+  const value = { student, getStudent };
 
   return <StudentContext.Provider value={value}>{children}</StudentContext.Provider>;
 }
 
-export default StudentProvider
+export { StudentProvider }
