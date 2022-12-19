@@ -14,6 +14,8 @@ import { ProfileModule } from './profile/profile.module';
 import { PreapprovalModule } from './preapproval/preapproval.module';
 import { CourseApprovalModule } from './course-approval/course-approval.module';
 import { ListModule } from './list/list.module';
+import { PlacementModule } from './placement/placement.module';
+import { StageModule } from './stage/stage.module';
 
 @Module({
   imports: [
@@ -24,6 +26,8 @@ import { ListModule } from './list/list.module';
     PreapprovalModule,
     CourseApprovalModule,
     ListModule,
+    PlacementModule,
+    StageModule
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,25 +1,23 @@
 import { Injectable } from '@nestjs/common';
-import { CreateListDto } from './dto/create-list.dto';
-import { UpdateListDto } from './dto/update-list.dto';
+import admin from 'src/main';
+import { PlacedStudentsListDTO } from './listDto/placedStudentsList.dto';
+import { WaitingListDTO } from './listDto/waitinglist.dto';
 
 @Injectable()
 export class ListService {
-  create(createListDto: CreateListDto) {
+  create(waitinglist: WaitingListDTO, placedstudentslist: PlacedStudentsListDTO) {
+    admin.firestore().collection('lists').doc('lists').set({
+      waitinglist: waitinglist,
+      placedstudentslist: placedstudentslist
+    });
   }
 
-  findAll() {
-    return `This action returns all list`;
+  async findOne() {
+    const doc = await admin.firestore().collection('lists').doc('lists').get();
+    return doc.data();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} list`;
-  }
-
-  update(id: number, updateListDto: UpdateListDto) {
-    return `This action updates a #${id} list`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} list`;
+  remove() {
+    return admin.firestore().collection('lists').doc('lists').delete();
   }
 }
