@@ -21,6 +21,6 @@ export class ListController {
 
   @Delete()
   remove() {
-    return this.courseService.remove();
+    return this.listService.remove();
   }
 }
