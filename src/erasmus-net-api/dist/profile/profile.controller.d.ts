@@ -14,10 +14,7 @@ export declare class ProfileController {
     createAdmin(adminDTO: AdminDTO): Promise<FirebaseFirestore.WriteResult>;
     createInstructor(instructorDto: InstructorDto): Promise<FirebaseFirestore.WriteResult>;
     createInStudent(inStudentDto: InStudentDto): Promise<FirebaseFirestore.WriteResult>;
-    findOwnProfile(uidObj: {
-        uid: string;
-        role: string;
-    }): Promise<FirebaseFirestore.DocumentData>;
+    findOwnProfile(uid: string, role: string): Promise<FirebaseFirestore.DocumentData>;
     findAll(role: string): Promise<FirebaseFirestore.DocumentData[]>;
     findOne(uid: string, role: string): Promise<FirebaseFirestore.DocumentData>;
     removeOwn(uid: string, role: string): Promise<FirebaseFirestore.WriteResult>;
