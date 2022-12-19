@@ -29,7 +29,7 @@ export class PreapprovalController {
     return this.preapprovalService.create(preApprovalDTO);
   }
   // @Roles('admin', 'coordinator')
-  @Get()
+  @Get('all')
   findAll() {
     return this.preapprovalService.findAll();
   }
