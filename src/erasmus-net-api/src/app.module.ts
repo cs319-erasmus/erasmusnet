@@ -16,6 +16,7 @@ import { CourseApprovalModule } from './course-approval/course-approval.module';
 import { ListModule } from './list/list.module';
 import { PlacementModule } from './placement/placement.module';
 import { StageModule } from './stage/stage.module';
+import { AppointmentModule } from './appointments/appointment.module';
 
 @Module({
   imports: [
@@ -27,7 +28,8 @@ import { StageModule } from './stage/stage.module';
     CourseApprovalModule,
     ListModule,
     PlacementModule,
-    StageModule
+    StageModule,
+    AppointmentModule
   ],
   controllers: [AppController],
   providers: [AppService],
