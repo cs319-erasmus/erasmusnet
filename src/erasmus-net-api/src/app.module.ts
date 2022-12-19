@@ -17,6 +17,7 @@ import { ListModule } from './list/list.module';
 import { PlacementModule } from './placement/placement.module';
 import { StageModule } from './stage/stage.module';
 import { AppointmentModule } from './appointments/appointment.module';
+import { HostUniversityModule } from './hostuniversity/hostuniversity.module';
 
 @Module({
   imports: [
@@ -29,7 +30,8 @@ import { AppointmentModule } from './appointments/appointment.module';
     ListModule,
     PlacementModule,
     StageModule,
-    AppointmentModule
+    AppointmentModule,
+    HostUniversityModule
   ],
   controllers: [AppController],
   providers: [AppService],

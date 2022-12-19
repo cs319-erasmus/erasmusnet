@@ -42,8 +42,8 @@ let ProfileController = class ProfileController {
     createInStudent(inStudentDto) {
         return this.profileService.create(inStudentDto, 'inStudent');
     }
-    async findOwnProfile(uidObj) {
-        return this.profileService.findOne(uidObj.uid, uidObj.role);
+    async findOwnProfile(uid, role) {
+        return this.profileService.findOne(uid, role);
     }
     findAll(role) {
         return this.profileService.findAll(role);
@@ -92,9 +92,10 @@ __decorate([
 ], ProfileController.prototype, "createInStudent", null);
 __decorate([
     (0, common_1.Get)(),
-    __param(0, (0, common_1.Body)()),
+    __param(0, (0, common_1.Headers)('uid')),
+    __param(1, (0, common_1.Headers)('role')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [String, String]),
     __metadata("design:returntype", Promise)
 ], ProfileController.prototype, "findOwnProfile", null);
 __decorate([
