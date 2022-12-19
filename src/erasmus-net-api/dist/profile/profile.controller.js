@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.ProfileController = void 0;
 const common_1 = require("@nestjs/common");
 const profile_service_1 = require("./profile.service");
+const role_decorator_1 = require("../middleware/role.decorator");
 const student_dto_1 = require("./profileDto/student.dto");
 const coordinator_dto_1 = require("./profileDto/coordinator.dto");
 const admin_dto_1 = require("./profileDto/admin.dto");
@@ -41,15 +42,8 @@ let ProfileController = class ProfileController {
     createInStudent(inStudentDto) {
         return this.profileService.create(inStudentDto, 'inStudent');
     }
-    async findOwnProfile(req) {
-        const authToken = req.headers.authorization;
-        try {
-            const { uid, email, role } = await this.authService.authenticate(authToken);
-            return this.profileService.findOne(uid, role);
-        }
-        catch (error) {
-            throw new common_1.UnauthorizedException(error.message);
-        }
+    async findOwnProfile(uidObj) {
+        return this.profileService.findOne(uidObj.uid, uidObj.role);
     }
     findAll(roleObj) {
         return this.profileService.findAll(roleObj.role);
@@ -57,15 +51,8 @@ let ProfileController = class ProfileController {
     findOne(uidObj) {
         return this.profileService.findOne(uidObj.uid, uidObj.role);
     }
-    async removeOwn(req) {
-        const authToken = req.headers.authorization;
-        try {
-            const { uid, email, role } = await this.authService.authenticate(authToken);
-            return this.profileService.remove(uid, role);
-        }
-        catch (error) {
-            throw new common_1.UnauthorizedException(error.message);
-        }
+    async removeOwn(uidObj) {
+        return this.profileService.remove(uidObj.uid, uidObj.role);
     }
 };
 __decorate([
@@ -105,7 +92,7 @@ __decorate([
 ], ProfileController.prototype, "createInStudent", null);
 __decorate([
     (0, common_1.Get)(),
-    __param(0, (0, common_1.Req)()),
+    __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
@@ -118,6 +105,7 @@ __decorate([
     __metadata("design:returntype", void 0)
 ], ProfileController.prototype, "findAll", null);
 __decorate([
+    (0, role_decorator_1.Roles)('admin'),
     (0, common_1.Get)('admin'),
     __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
@@ -126,7 +114,7 @@ __decorate([
 ], ProfileController.prototype, "findOne", null);
 __decorate([
     (0, common_1.Delete)(),
-    __param(0, (0, common_1.Req)()),
+    __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
