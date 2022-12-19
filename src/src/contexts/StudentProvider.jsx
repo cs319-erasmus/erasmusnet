@@ -70,6 +70,8 @@ Student template
 function StudentProvider({children}) {
   const [student, setStudent] = useState(null);
   const { stage } = useStage();
+  const API = "http://localhost:3333";
+  const { getToken } = useAuth();
 
   const fetchStudentProfile = () => {
     return studentProfileMock; // TODO: fetch from backend
@@ -79,14 +81,86 @@ function StudentProvider({children}) {
     return true; // TODO: fetch from backend
   }
 
-  const fetchStudentCourses = () => {
-    return studentCoursesMock; // TODO: fetch from backend
+  const fetchStudentCourses = async () => {
+    const token = await getToken();
+
+    const res = await fetch(API + "/api/course", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+        "uid": "12345"
+      },
+    });
+    console.log(res);
+    return res; // TODO: fetch from backend
   }
 
+  const sendStudentCourses = async () => {
+    const token = await getToken();
+
+    const res = await fetch(API + "/api/course", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+      },
+      body: JSON.stringify(
+        {
+          "uid": "12345",
+          "bilkentCourses": [
+            {
+              "courseName": "Introduction to Computer Science",
+              "courseCode": "CS 101",
+              "instructorName": "John Doe",
+              "department": "Computer Science",
+              "university": "Bilkent University",
+              "isMustCourse": true,
+              "credit": "3",
+              "electiveName": "",
+              "courseApprovalRef": "123456",
+              "syllabusRef": "654321"
+            },
+            {
+              "courseName": "Data Structures and Algorithms",
+              "courseCode": "CS 102",
+              "instructorName": "Jane Doe",
+              "department": "Computer Science",
+              "university": "Bilkent University",
+              "isMustCourse": true,
+              "credit": "3",
+              "electiveName": "",
+              "courseApprovalRef": "789123",
+              "syllabusRef": "321987"
+            }
+          ],
+          "erasmusCourses": [
+            {
+              "courseName": "Software Engineering",
+              "courseCode": "SE 201",
+              "instructorName": "John Smith",
+              "department": "Computer Science",
+              "university": "Erasmus University",
+              "isMustCourse": false,
+              "credit": "3",
+              "electiveName": "Software Engineering Elective",
+              "courseApprovalRef": "456789",
+              "syllabusRef": "987654"
+            }
+          ],
+          "approvalId": "9876543210"
+        }
+      )
+    });
+    console.log(res);
+    return res; // TODO: fetch from backend
+  }
+
+  sendStudentCourses();
   const getStudentCourses = () => {
     const courses = fetchStudentCourses();
     const studentCourses = [];
-    
+    return;
     courses.forEach(course => {
       const isApproved = getCourseApprovalStatus(course.approvalId);
       studentCourses.push({isApproved: isApproved, bilkentCourses: course.bilkentCourses, erasmusCourses: course.erasmusCourses});
