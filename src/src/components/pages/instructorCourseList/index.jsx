@@ -5,7 +5,7 @@ import { Text } from '@nextui-org/react';
 import { Input,Spacer} from "@nextui-org/react";
 import { Link} from "@nextui-org/react";
 import { useNavigate, Route } from "react-router-dom";
-import InstructorView from '../instructor-view-course';
+import InstructorView from '../instructorViewCourse';
 
 import  { useState, useRef } from "react";
 
@@ -20,6 +20,7 @@ export default function InstructorApprove() {
   const students = [ 
     { name: "John M. Doe" } ,
     { name: "Jane Doe"}, 
+    { name: "Jane Doe" },
     { name: "Jane Doe" } ];
 
     const viewItems = students.map((item) => {

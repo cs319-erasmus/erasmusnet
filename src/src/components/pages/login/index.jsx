@@ -23,7 +23,7 @@ export default function Login() {
     try {
       setError("");
       setLoading(true);
-      if (user === null) {
+      if (user === null || user === undefined) {
         await login(emailRef.current.value, passwordRef.current.value);
       }
       navigate("/dashboard", { replace: true });

@@ -5,7 +5,7 @@ import { Text } from '@nextui-org/react';
 import { Input,Spacer} from "@nextui-org/react";
 import { Link} from "@nextui-org/react";
 import { useNavigate, Route } from "react-router-dom";
-import InstructorView from '../instructor-view-course';
+import InstructorView from '../instructorViewCourse';
 
 import  { useState, useRef } from "react";
 
