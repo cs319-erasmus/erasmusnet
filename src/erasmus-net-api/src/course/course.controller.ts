@@ -12,7 +12,7 @@ export class CourseController {
 
   @Post('package')
   createLink(@Body() courseLinkDTO: CourseLinkDTO, @Headers('uid') uid: string) {
-    return this.courseService.createLink(courseLinkDTO, uid);
+    return this.courseService.createLink(courseLinkDTO, uid, courseLinkDTO.approvalId);
   }
   @Post()
   create(@Body() courseDTO: CourseDTO , @Headers('uid') uid: string) {
@@ -21,10 +21,8 @@ export class CourseController {
 
   @Post('syllabus')
   @UseInterceptors(FileInterceptor('file'))
-  uploadFile( @UploadedFile() file: Express.Multer.File, @Headers('uid') uid: string) {
-    admin.firestore().collection('courses').doc('uid').update({
-      syllabus: file.buffer
-    });
+  uploadFile( @UploadedFile() file: Express.Multer.File, @Headers('uid') uid: string,@Headers('approvalId') approvalId: string) {
+    admin.firestore().collection('courses').doc('uid')
   }
 
 

@@ -5,14 +5,14 @@ import { CourseLinkDTO } from './courseDto/courseLink.dto';
 
 @Injectable()
 export class CourseService {
-  createLink(courseLinkDTO:CourseLinkDTO, uid: string) {
+  createLink(courseLinkDTO:CourseLinkDTO, uid: string, approvalId: string) {
     admin
     .firestore()
     .collection('courses')
     .doc(uid)
-    .update({
-      linkObjects: admin.firestore.FieldValue.arrayUnion(courseLinkDTO)
-    });
+    .set({
+      [approvalId]: courseLinkDTO
+    }, {merge: true});
     return true;
   }
 
