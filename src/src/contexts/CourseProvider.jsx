@@ -9,6 +9,7 @@ const useCourse = () => {
 function CourseProvider({children}) {
   const [course, setCourse] = useState(null);
     
+  
 
   return <CourseContext.Provider value={value}>{children}</CourseContext.Provider>;
 }
