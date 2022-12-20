@@ -1,16 +1,28 @@
 import { Injectable } from '@nestjs/common';
 import admin from 'src/main';
+import { CourseDTO } from './courseDto/course.dto';
 import { CourseLinkDTO } from './courseDto/courseLink.dto';
 
 @Injectable()
 export class CourseService {
-  create(courseLinkDTO:CourseLinkDTO) {
+  createLink(courseLinkDTO:CourseLinkDTO, uid: string) {
     admin
     .firestore()
     .collection('courses')
-    .doc(courseLinkDTO.uid)
+    .doc(uid)
     .update({
       linkObjects: admin.firestore.FieldValue.arrayUnion(courseLinkDTO)
+    });
+    return true;
+  }
+
+  create(courseDTO:CourseDTO, uid: string) {
+    admin
+    .firestore()
+    .collection('courses')
+    .doc(uid)
+    .update({
+      Objects: admin.firestore.FieldValue.arrayUnion(courseDTO)
     });
     return true;
   }
