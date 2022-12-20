@@ -9,7 +9,7 @@ export const useAuth = () => {
 };
 
 const AuthProvider = ({ children }) => {
-  const [user, setUser] = React.useState(null);
+  const [user, setUser] = React.useState(null); // null: loading, undefined: not logged in
   const [loading, setLoading] = React.useState(true);
   const API = process.env.REACT_APP_API_URL;
 
@@ -17,8 +17,15 @@ const AuthProvider = ({ children }) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
 
-  const logout = () => {
-    return signOut(auth);
+  const logout = async () => {
+    try {
+      const res = await signOut(auth);
+      setUser(undefined);
+      return res;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   };
 
   const signup = (first, last, email, password) => {
@@ -63,7 +70,7 @@ const AuthProvider = ({ children }) => {
         setUser(JSON.parse(JSON.stringify(user)));
         setLoading(false);
       } else {
-        setUser(null);
+        setUser(undefined);
       }
     });
     return unsubscribe;

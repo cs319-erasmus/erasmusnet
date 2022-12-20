@@ -68,7 +68,7 @@ export function Accessibility(props) {
   const profile = () => {
     navigate("/profile", { replace: true });
   };
-  return user === null ? (
+  return user === null || user === undefined ? (
     <AccessibilityContainer>
       <LeftButton onClick={login}>Login</LeftButton>
       <RightButton onClick={signup}>Sign Up</RightButton>
