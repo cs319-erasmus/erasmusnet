@@ -45,7 +45,7 @@ function NavigationMenu() {
 
   return (
     visible &&
-    <div className='w-screen py-3 justify-center mx-auto border-t-2 border-b-2'>
+    <div className='w-screen py-3 justify-center mx-auto border-t-2 border-b-2 overflow-auto'>
         <div className='max-w-screen-xl flex justify-center mx-auto'>
             {buttons}
         </div>
