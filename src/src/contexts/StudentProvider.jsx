@@ -87,93 +87,23 @@ function StudentProvider({children}) {
     return res;
   }
 
-  const getCourseApprovalStatus = (approvalId) => {
-    return true;
-  }
-
-  const fetchStudentCourses = async () => {
-    const token = await getToken();
-
-    const res = await fetch(API + "/api/course", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token,
-        "uid": "12345",
-      },
-    }).then(res => res.json());
-    
-    return res["linkObjects"];
-  }
-
-  const sendStudentCourses = async (bilkent, erasmus) => {
-    const token = await getToken();
-
-    const res = await fetch(API + "/api/course", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer " + token,
-      },
-      body: JSON.stringify(
-        {
-          "uid": "12345",
-          "bilkentCourses": bilkent,
-          "erasmusCourses": erasmus,
-          "approvalId": Math.floor(Math.random() * 100000),
-        }
-      )
-    });
-    return res;
-  }
-
-  const getStudentCourses = async () => {
-    const courses = await fetchStudentCourses();
-    return courses;
-    const studentCourses = [];
-    return;
-    courses.forEach(course => {
-      const isApproved = getCourseApprovalStatus(course.approvalId);
-      studentCourses.push({isApproved: isApproved, bilkentCourses: course.bilkentCourses, erasmusCourses: course.erasmusCourses});
-    });
-
-    return studentCourses;
-  }
-
-  const getStudentStage = () => {
-      return stage;
-  }
-
-  const getStudentAppointments = () => {
-  }
-
   useEffect(() => {
     let studentProfile;
-    let studentCourses;
-    let studentStage;
-    let studentAppointments;
 
     async function fetchData() {
       studentProfile = await fetchStudentProfile();
-      console.log("Student Profile" + JSON.stringify(studentProfile))
-      studentCourses = await getStudentCourses();
-      studentStage = await getStudentStage();
-      studentAppointments = await getStudentAppointments();
       const student = {
         uid: studentProfile.uid,
         name: studentProfile.name,
         email: studentProfile.email,
         password: studentProfile.password,
-        role: "student",
-        stage: studentProfile.stageRef,
-        courses: studentCourses,
         id: studentProfile.id,
       };
-      console.log(student)
       setStudent(student);
     }
-
-    fetchData();
+    
+    if (user?.role)
+      fetchData();
   }, [user]);
   
   const getStudent = () => {
@@ -185,7 +115,7 @@ function StudentProvider({children}) {
     }
   }
 
-  const value = { student, getStudent, sendStudentCourses };
+  const value = { student, getStudent };
 
   return <StudentContext.Provider value={value}>{children}</StudentContext.Provider>;
 }

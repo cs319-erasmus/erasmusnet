@@ -13,7 +13,6 @@ export class ListController {
     return this.listService.create(waitingListDTO, placedStudentsListDTO);
   }
 
-  //gets a courseLink by its uid
   @Get()
   findOne() {
     return this.listService.findOne();

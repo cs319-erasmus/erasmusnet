@@ -5,25 +5,15 @@ import { studentSteps } from "./Student.js";
 import { coordinatorSteps } from "./Coordinator.js";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
+import { useStage } from "../../../contexts/StageProvider";
 
 function Dashboard() {
-  const [step, setStep] = useState(3);
   const { getToken, getUser } = useAuth();
-  const [token, setToken] = useState("");
   const [user, setUser] = useState(null);
   const [stepItems, setStepItems] = useState(null);
-  const [userType, setUserType] = useState(1);
   const [nextSteps, setNextSteps] = useState(null);
   const navigate = useNavigate();
-
-  //set token using getToken function in useAuth
-  useEffect(() => {
-    async function fetchToken() {
-      const token = await getToken();
-      setToken(token);
-    }
-    fetchToken();
-  }, [getToken]);
+  const { stage } = useStage();
 
   useEffect(() => {
     async function fetchUser() {
@@ -40,76 +30,76 @@ function Dashboard() {
   };
 
   useEffect(() => {
-    const stepList = userType === 0 ? studentSteps : coordinatorSteps;
+    const stepList = user?.role === "student" ? studentSteps : coordinatorSteps;
       setStepItems(() => stepList.map((item, idx) => {
-        let css = "step" + (idx <= step ? " step-primary" : " ");
+        let css = "step" + (idx <= stage ? " step-primary" : " ");
         return <li key={idx} className={css}>{item}</li>;
       }));
-  }, [userType, step]);
+  }, [user, stage]);
 
   useEffect(() => {
 
   }, [stepItems]);
 
   useEffect(() => {
-    if (userType === 0) {
+    if (user?.role === "student") {
       const nextStepList = () => {
-        if (step === 0) {
+        if (stage === 0) {
           return <label>Complete Application Using Regular Website</label>
-        } else if (step === 1) {
+        } else if (stage === 1) {
           return (
           <motion.button
           className="bg-indigo-700 hover:bg-indigo-900 rounded-2xl p-4 text-white"
           onClick={() => navigate("/studentPlacement")}
           >View Your Placement</motion.button>)
-        } else if (step === 2) {
+        } else if (stage === 2) {
           return <label>Apply to Host University</label>
-        } else if (step === 3) {
+        } else if (stage === 3) {
           return (
             <motion.button
             className="bg-indigo-700 hover:bg-indigo-900 rounded-2xl p-4 text-white"
             onClick={() => navigate("/studentCourseApproval")}
             >Course Approvals</motion.button>)
-        } else if (step === 4) {
+        } else if (stage === 4) {
           return (
             <motion.button
             className="bg-indigo-700 hover:bg-indigo-900 rounded-2xl p-4 text-white"
             onClick={() => navigate("/uploadPreApproval")}
             >Upload Pre-Approval</motion.button>)
-        } else if (step === 5) {
+        } else if (stage === 5) {
           return <label>No Further Action Necessary</label>
         }
       }
       setNextSteps(nextStepList())
     } else {
       const nextStepList = () => {
-        if (step === 0) {
+        if (stage === 0) {
           return <label>View For Student Applications</label>
-        } else if (step === 1) {
+        } else if (stage === 1) {
           return (
             <motion.button
             className="bg-indigo-700 hover:bg-indigo-900 rounded-2xl p-4 text-white"
             onClick={() => navigate("/placement")}
             >Start Placement Process</motion.button>)
-        } else if (step === 2) {
+        } else if (stage === 2) {
           return <label>Send Application Links</label>
-        } else if (step === 3) {
+        } else if (stage === 3) {
           return (
             <label>Wait for instructors to approve courses</label>
           )
-        } else if (step === 4) {
+        } else if (stage === 4) {
           return (
             <motion.button
             className="bg-indigo-700 hover:bg-indigo-900 rounded-2xl p-4 text-white"
             onClick={() => navigate("/studentPlacement")}
             >Approve Pre-Approvals</motion.button>)
-        } else if (step === 5) {
+        } else if (stage === 5) {
           return <label>No Further Action Necessary</label>
         }
       }
       setNextSteps(nextStepList())
     }
-  }, [userType, step]);
+  }, [user, stage]);
 
 
 

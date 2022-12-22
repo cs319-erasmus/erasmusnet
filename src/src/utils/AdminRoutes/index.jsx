@@ -1,10 +1,10 @@
-import { Outlet, Navigate } from "react-router-dom";
-import { NavigationMenu } from "../../components";
-import { useAuth } from "../../contexts/AuthProvider";
-import { useEffect, useState } from "react";
-import { Error } from "../../components";
+import { AdminProvider } from '../../contexts/AdminProvider';
+import React from 'react'
+import { Outlet } from "react-router-dom";
+import { useAuth } from '../../contexts/AuthProvider';
+import { Error } from '../../components';
 
-function UserRoutes() {
+function AdminRoute() {
   const { user } = useAuth();
 
   return (
@@ -19,16 +19,13 @@ function UserRoutes() {
     </div>
 
     ) :
-    user === undefined ? (
+    user === undefined || user?.role !== "admin" ? (
       <Error />
     ) : 
-    <>
-      <NavigationMenu />
-      <div className="mt-4">
+      <AdminProvider>
         <Outlet />
-      </div>
-    </>
+      </AdminProvider>
   );
 }
 
-export { UserRoutes };
+export default AdminRoute

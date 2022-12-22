@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Put } from '@nestjs/common';
 import { StageDTO } from './stageDto/stage.dto';
 import { StageService } from './stage.service';
 
@@ -7,7 +7,7 @@ export class StageController {
   constructor(private readonly stageService: StageService) {}
 
   @Post()
-  create(@Body('stage') stageDto: StageDTO) {
+  create(@Body() stageDto: StageDTO) {
     return this.stageService.create(stageDto);
   }
 
@@ -15,6 +15,11 @@ export class StageController {
   @Get()
   findOne() {
     return this.stageService.findOne();
+  }
+
+  @Put()
+  update(@Body() stageDto: StageDTO) {
+    return this.stageService.update(stageDto);
   }
 
   @Delete()

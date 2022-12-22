@@ -22,9 +22,9 @@ function StudentCreateRequest() {
   const [erasmusTable, setErasmusTable] = useState(null);
 
   useEffect(() => {
-    const bilkentItems = bilkentCourses.map((course) => {
+    const bilkentItems = bilkentCourses.map((course, idx) => {
       return (
-        <div>
+        <div key={idx}>
           <div class="grid gap-12 md:grid-cols-3">
             <label
               for="code"
@@ -97,9 +97,9 @@ function StudentCreateRequest() {
   }, [bilkentCourses]);
 
   useEffect(() => {
-    const erasmusItems = erasmusCourses.map((course) => {
+    const erasmusItems = erasmusCourses.map((course, idx) => {
       return (
-        <div>
+        <div key={idx}>
           <div class="grid gap-12 md:grid-cols-3">
             <label
               for="code"
