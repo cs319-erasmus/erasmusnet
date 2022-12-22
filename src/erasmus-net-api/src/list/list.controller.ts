@@ -66,7 +66,6 @@ export class ListController {
           })
         });
       })
-      return JSON.stringify(jsonArray);
   }
   @Get()
   findOne() {
