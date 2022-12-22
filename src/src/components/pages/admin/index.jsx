@@ -1,25 +1,30 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { useAdmin } from "../../../contexts/AdminProvider";
+import { useEffect } from "react";
 
-export default function admin()
+const studentSteps = {
+    0: "Application",
+    1: "Placement",
+    2: "Apply to Placed University",
+    3: "Further Documents",
+    4: "Pre-Approval Form",
+    5: "Complete"
+}
+
+const coordinatorSteps = {
+    0: "Application",
+    1: "Placement",
+    2: "Apply to Placed University",
+    3: "Further Documents",
+    4: "Pre-Approval Form",
+    5: "Complete"
+}
+
+export default function Admin()
 {
-    const studentSteps = [
-        "Application",
-        "Placement",
-        "Apply to Placed University",
-        "Further Documents",
-        "Pre-Approval Form",
-        "Complete"
-    ]
-    
-    const coordinatorSteps = [
-        "Student Applications",
-        "Placements",
-        "Student Applications to Placed Universities",
-        "Request Documents",
-        "Approve Courses",
-        "Complete"
-    ]
+    const { admin, updateStage, sendExcel } = useAdmin();
+    const [excel, setExcel] = React.useState(null);
 
     const calendarInfo = [
         { Task: "New Appointment Request", Date: "2021-05-01" },
@@ -42,40 +47,77 @@ export default function admin()
         );
     });
 
+    const handleStudentStep = (e) => {
+        e.preventDefault();
+        updateStage("student", e.target.value);
+    }
+
+    const handleCoordinatorStep = (e) => {
+        e.preventDefault();
+        updateStage("coordinator", e.target.value);
+    }
+
+    const generateOptions = (steps) => {
+        let options = [];
+        for (let i = 0; i < Object.keys(steps).length; i++) {
+            options.push(<option value={i}>{steps[i]}</option>);
+        }
+        return options;
+    }
+
+    const handleExcel = (e) => {
+        e.preventDefault();
+        if (excel === null)
+            alert("Please upload an excel file");
+        else
+        sendExcel(excel);
+    }
+
+    const handleExcelChange = (e) => {
+        e.preventDefault();
+        console.log("File: " + e.target.files[0] + " " + e.target.files[0].name)
+        console.log(JSON.stringify(e.target.files[0]))
+        if (e.target.files[0].type === "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet") {
+            setExcel(e.target.files[0]);
+
+        }
+        else {
+            alert("Please upload an excel file");
+        }
+    }
+
     return(
-        <div id = "Admin" class= "ml-12 mr-12 mt-20 mb-32">
+        admin &&
+        <div id = "Admin" class= "ml-12 mr-12 mt-20 mb-32 xl:mx-auto max-w-screen-xl justify-center items-center">
             <div className="grid grid-cols-2 gap-8">
                 <div>
                     <div className="mb-8">
                         <label className='text-2xl mb-7 font-bold text-indigo-900'>Student Status</label>
-                        <select id="studentOptions" class="mt-4 bg-gray-50 border border-indigo-900 text-gray-900 text-lg rounded-lg focus:ring-indigo-900 focus:border-indigo-900 block w-full p-2.5">
-                            <option selected>{ studentSteps[0] }</option>
-                            <option>{studentSteps[1] }</option>
-                            <option>{studentSteps[2] }</option>
-                            <option>{studentSteps[3] }</option>
-                            <option>{studentSteps[4] }</option>
-                            <option>{studentSteps[5] }</option>
+                        <select id="studentOptions"
+                            onChange={handleStudentStep}
+                            defaultValue={admin.studentStage}
+                        className="mt-4 bg-gray-50 border border-indigo-900 text-gray-900 text-lg rounded-lg focus:ring-indigo-900 focus:border-indigo-900 block w-full p-2.5">
+                            {generateOptions(studentSteps)}
                         </select>
                     </div>
 
                     <div className="mb-8">
                         <label className='text-2xl mb-7 font-bold text-indigo-900'>Coordinator Status</label>
-                        <select id="coordinatorOptions" class="mt-4 bg-gray-50 border border-indigo-900 text-gray-900 text-lg rounded-lg focus:ring-indigo-900 focus:border-indigo-900 block w-full p-2.5">
-                            <option selected>{ coordinatorSteps[0] }</option>
-                            <option>{coordinatorSteps[1] }</option>
-                            <option>{coordinatorSteps[2] }</option>
-                            <option>{coordinatorSteps[3] }</option>
-                            <option>{coordinatorSteps[4] }</option>
-                            <option>{coordinatorSteps[5] }</option>
+                        <select id="coordinatorOptions"
+                        defaultValue={admin.coordinatorStage}
+                        onChange={handleCoordinatorStep}
+                        class="mt-4 bg-gray-50 border border-indigo-900 text-gray-900 text-lg rounded-lg focus:ring-indigo-900 focus:border-indigo-900 block w-full p-2.5">
+                            {generateOptions(coordinatorSteps)}
                         </select>
                     </div>
 
                     <div>
                         <label className='text-2xl mb-7 font-bold text-indigo-900'>Excel File</label>
                         <div className="mt-4">
-                        <input type="file" id="file_input"/>
+                        <input type="file" id="file_input" accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" onChange={e => handleExcelChange(e)}/>
                         <motion.button
                             whileTap={{ scale: 0.9 }}
+                            onClick={handleExcel}
                             class="bg-transparent border-2 font-semibold border-indigo-900 text-indigo-900 p-2 px-12 rounded-lg hover:bg-indigo-900 hover:text-white">
                             Save
                         </motion.button> 

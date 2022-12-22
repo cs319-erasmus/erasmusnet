@@ -11,6 +11,7 @@ export const useAuth = () => {
 const AuthProvider = ({ children }) => {
   const [user, setUser] = React.useState(null); // null: loading, undefined: not logged in
   const [loading, setLoading] = React.useState(true);
+  const [role, setRole] = React.useState(undefined);
   const API = process.env.REACT_APP_API_URL;
 
   const login = (email, password) => {
@@ -20,6 +21,7 @@ const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       const res = await signOut(auth);
+      console.log("Auth Provider" + res);
       setUser(undefined);
       return res;
     } catch (error) {
@@ -29,7 +31,8 @@ const AuthProvider = ({ children }) => {
   };
 
   const signup = (first, last, email, password) => {
-    const res = fetch(API + "/auth/signup", {
+    console.log(API);
+    const res = fetch(API, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -46,7 +49,7 @@ const AuthProvider = ({ children }) => {
   };
   const getToken = async () => {
     try {
-      return await auth.currentUser.getIdToken();
+      return await auth?.currentUser?.getIdToken();
     } catch (error) {
       console.error(error);
       throw error;
@@ -55,7 +58,16 @@ const AuthProvider = ({ children }) => {
 
   const getUser = () => {
     try {
-      return auth.currentUser;
+      return user;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  const getRole = () => {
+    try {
+      return role;
     } catch (error) {
       console.error(error);
       throw error;
@@ -66,9 +78,12 @@ const AuthProvider = ({ children }) => {
   React.useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        console.log(user);
-        setUser(JSON.parse(JSON.stringify(user)));
-        setLoading(false);
+        const setDetailedUser = async () => {
+          const userRole = await user.getIdTokenResult().then((idTokenResult) => { return idTokenResult.claims.role;});
+          setUser(() => ({ ...JSON.parse(JSON.stringify(user)),  role: userRole}));
+          setLoading(false);
+        };
+        setDetailedUser();
       } else {
         setUser(undefined);
       }
@@ -76,7 +91,7 @@ const AuthProvider = ({ children }) => {
     return unsubscribe;
   }, []);
 
-  const value = { user, login, logout, signup, getToken, getUser };
+  const value = { user, login, logout, signup, getToken, getUser, getRole };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };

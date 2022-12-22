@@ -1,4 +1,4 @@
 export class StageDTO {
-    studentStage: string;
-    coordinatorStage: string;
+    studentStage: number;
+    coordinatorStage: number;
 }

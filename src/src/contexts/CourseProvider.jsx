@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useState } from 'react'
+import { useEffect } from 'react';
 import { useAuth } from "./AuthProvider"
 
 export const CourseContext = createContext()
 
-const useCourse = () => {
+export const useCourse = () => {
     return useContext(CourseContext);
 }
 
@@ -11,25 +12,22 @@ function CourseProvider({children}) {
   const [courses, setCourses] = useState(null);
   const { getToken } = useAuth();
   const { getUser } = useAuth();
+  const { user } = useAuth();
   const API = process.env.REACT_APP_API_URL;
     
-  sendCourses = async (uid, studentId) => {
+  const sendCourses = async (uid, studentId) => {
   }
 
   const fetchCourses = async () => {
     const token = await getToken();
     const uid = await getUser().uid;
-
-    const res = await fetch(API + "/api/course", {
+    return await fetch(API + "/api/course", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         "Authorization": "Bearer " + token,
-        "uid": uid,
       },
     }).then(res => res.json());
-    
-    return res["linkObjects"];
   }
 
   // status boolean
@@ -57,8 +55,30 @@ function CourseProvider({children}) {
   //   return res;
   // }
 
+  // useEffect(() => {
+  //   fetchCourses();
+  // }, [user])
+
+  const getCourses = () => {
+    if (courses) {
+      return courses;
+    }
+
+    fetchCourses().then(
+      (res) => {
+        setCourses(res["linkObjects"]);
+        return res["linkObjects"];
+      }
+    );
+  }
+
+  const value = {
+    courses,
+    getCourses,
+  }
+
 
   return <CourseContext.Provider value={value}>{children}</CourseContext.Provider>;
 }
 
-export default CourseProvider
+export {CourseProvider}

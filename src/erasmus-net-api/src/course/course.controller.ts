@@ -1,4 +1,3 @@
-import { UploadFile } from '@mui/icons-material';
 import { Controller, Get, Post, Body, Patch, Param, Delete, Header, Headers, UseInterceptors, UploadedFile } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express/multer';
 import admin from 'src/main';
