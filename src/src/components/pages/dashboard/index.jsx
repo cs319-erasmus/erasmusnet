@@ -42,7 +42,7 @@ function Dashboard() {
   }, [stepItems]);
 
   useEffect(() => {
-    if (user?.role === "student") {
+    if (user && user.role && user.role === "student") {
       const nextStepList = () => {
         if (stage === 0) {
           return <label>Complete Application Using Regular Website</label>
@@ -70,7 +70,7 @@ function Dashboard() {
           return <label>No Further Action Necessary</label>
         }
       }
-      setNextSteps(nextStepList())
+      setNextSteps(() => nextStepList())
     } else {
       const nextStepList = () => {
         if (stage === 0) {
@@ -97,11 +97,9 @@ function Dashboard() {
           return <label>No Further Action Necessary</label>
         }
       }
-      setNextSteps(nextStepList())
+      setNextSteps(() => nextStepList())
     }
-  }, [user, stage]);
-
-
+  }, [stage]);
 
   const calendarItems = calendarInfo.map((item, idx) => {
     return (
