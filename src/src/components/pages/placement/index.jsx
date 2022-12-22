@@ -1,4 +1,5 @@
 import React from "react";
+import { usePlacementList } from "../../../contexts/PlacementListProvider";
 
 const students = [ 
     { name: "John M. Doe",
@@ -17,8 +18,11 @@ const students = [
     department: "CS",
     placement: "Bilkent University" } ]
 
-function placement() 
+function Placement() 
 {
+    const { placementList } = usePlacementList();
+
+    
     const placementItems = students.map((student) => {
         return (
         <select id="placements" class="bg-gray-50 border border-indigo-900 text-gray-900 text-base rounded-lg focus:ring-indigo-900 focus:border-indigo-900 block w-full p-2.5">
@@ -44,4 +48,4 @@ function placement()
     );
 }
 
-export default placement;
+export default Placement;

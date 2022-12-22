@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { useRef, useEffect, useState } from "react";
-import { useStudent } from "../../../contexts/StudentProvider";
+import { useCourse } from "../../../contexts/CourseProvider";
 
 function StudentCreateRequest() {
   const [bilkentCourses, setBilkentCourses] = useState([]);
@@ -16,7 +16,7 @@ function StudentCreateRequest() {
   const erasmusSyllabus = useRef();
   const erasmusCredits = useRef();
   const erasmusSchool = useRef();
-  const { sendStudentCourses } = useStudent();
+  const { sendStudentCourses } = useCourse();
 
   const [bilkentTable, setBilkentTable] = useState(null);
   const [erasmusTable, setErasmusTable] = useState(null);

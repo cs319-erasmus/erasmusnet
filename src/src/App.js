@@ -32,7 +32,7 @@ import { StudentProvider } from "./contexts/StudentProvider";
 import { StageProvider } from "./contexts/StageProvider";
 import { UserRoutes } from "./utils/UserRoutes";
 import { StudentRoutes } from "./utils/StudentRoutes";
-import { CourseRoute, StageRoute, AppointmentRoute, AdminRoute } from "./utils";
+import { CourseRoute, StageRoute, AppointmentRoute, AdminRoute, PlacementListRoute } from "./utils";
 
 const App = () => {
   const [debug, setDebug] = React.useState(false);
@@ -113,10 +113,12 @@ const App = () => {
                 />
                 <Route path="/docs" element={<DocumentTemplates />} />
               </Route>
-              <Route 
-                path="/placement"
-                element={<Placement /> /* Coordinator Route */}
-              />
+              <Route element={<PlacementListRoute />}>
+                <Route 
+                  path="/placement"
+                  element={<Placement /> /* Coordinator Route */}
+                />
+              </Route>
             </Routes>
           </main>
           <Footer />

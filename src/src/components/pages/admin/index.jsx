@@ -119,7 +119,7 @@ export default function Admin()
                             whileTap={{ scale: 0.9 }}
                             onClick={handleExcel}
                             class="bg-transparent border-2 font-semibold border-indigo-900 text-indigo-900 p-2 px-12 rounded-lg hover:bg-indigo-900 hover:text-white">
-                            Save
+                            Submit
                         </motion.button> 
                         </div>
                     </div>
