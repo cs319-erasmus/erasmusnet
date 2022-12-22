@@ -3,11 +3,17 @@ import { useAuth } from '../../../contexts/AuthProvider'
 
 function Debug() {
     const { user } = useAuth();
-    console.log(user);
+    const [debugInfo, setDebugInfo] = useState(null);
+    const {getRole} = useAuth();
+    useEffect(() => {
+      setDebugInfo(user === null ? <div>User Null</div> :
+      <pre className='overflow-auto'>{JSON.stringify(user, null, 4)}</pre>)
+
+      console.log("Getting Role" + getRole())
+    }, [user, getRole]);
 
   return (
-    user === null ? <div>User Null</div> :
-    <pre>{JSON.stringify(user, null, 4)}</pre>
+    debugInfo
   )
 }
 

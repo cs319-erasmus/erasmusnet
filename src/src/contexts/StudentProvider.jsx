@@ -92,20 +92,18 @@ function StudentProvider({children}) {
 
     async function fetchData() {
       studentProfile = await fetchStudentProfile();
-      console.log("Student Profile" + JSON.stringify(studentProfile))
       const student = {
         uid: studentProfile.uid,
         name: studentProfile.name,
         email: studentProfile.email,
         password: studentProfile.password,
-        role: "student",
         id: studentProfile.id,
       };
-      console.log(student)
       setStudent(student);
     }
-
-    fetchData();
+    
+    if (user?.role)
+      fetchData();
   }, [user]);
   
   const getStudent = () => {
