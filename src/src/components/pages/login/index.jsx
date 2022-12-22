@@ -3,6 +3,7 @@ import { Logo } from "../..";
 import { motion } from "framer-motion";
 import { useNavigate, Route } from "react-router-dom";
 import { useAuth } from "../../../contexts/AuthProvider";
+import { useEffect } from "react";
 
 export default function Login() {
   const emailRef = useRef();
@@ -26,14 +27,24 @@ export default function Login() {
       if (user === null || user === undefined) {
         await login(emailRef.current.value, passwordRef.current.value);
       }
-      navigate("/dashboard", { replace: true });
+        
     } catch (err) {
       console.log(err);
       setError("Failed to log in");
     }
-
+    
     setLoading(false);
   };
+
+  useEffect(() => {
+    if (user) {
+      if (user.role === "admin") {
+        navigate("/admin", { replace: true });
+      } else {
+        navigate("/dashboard", { replace: true });
+      }
+    }
+  }, [user]);
 
   return (
     <div className="flex flex-col items-center mt-8 max-w-screen-xl m-auto">

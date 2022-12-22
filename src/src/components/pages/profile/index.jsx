@@ -25,7 +25,8 @@ export default function Profile() {
         try {
             setError("");
             setLoading(true);
-            await logout();
+            const res = await logout();
+            console.log("Logout response: ", res);
             navigate("/login", { replace: true });
         } catch (err) {
             console.log(err);

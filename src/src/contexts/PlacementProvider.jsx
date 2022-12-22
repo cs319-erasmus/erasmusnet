@@ -8,6 +8,7 @@ export const usePlacement = () => {
 
 function PlacementProvider({children}) {
   const [placement, setPlacement] = useState(null);
+  const [placementList, setPlacementList] = useState([]);
 
   const fetchPlacement = async () => {
     const token = await getToken();

@@ -21,6 +21,7 @@ const AuthProvider = ({ children }) => {
   const logout = async () => {
     try {
       const res = await signOut(auth);
+      console.log("Auth Provider" + res);
       setUser(undefined);
       return res;
     } catch (error) {

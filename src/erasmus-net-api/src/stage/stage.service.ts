@@ -8,6 +8,10 @@ export class StageService {
     admin.firestore().collection('stage').doc('stage').set(stageDto);
   }
 
+  update(stageDto: StageDTO) {
+    admin.firestore().collection('stage').doc('stage').set(stageDto);
+  }
+
   async findOne() {
     const doc = await admin.firestore().collection('stage').doc('stage').get();
     return doc.data();

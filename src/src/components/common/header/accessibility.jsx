@@ -73,7 +73,11 @@ export function Accessibility(props) {
       <LeftButton onClick={login}>Login</LeftButton>
       <RightButton onClick={signup}>Sign Up</RightButton>
     </AccessibilityContainer>
-  ) : (
+  ) : user.role === "admin" ? 
+  <AccessibilityContainer>
+      <RightButton onClick={profile}>Profile</RightButton>
+    </AccessibilityContainer>
+  :(
     <AccessibilityContainer>
      <LeftButton onClick={dashboard}>Dashboard</LeftButton>
       <RightButton onClick={profile}>Profile</RightButton>
