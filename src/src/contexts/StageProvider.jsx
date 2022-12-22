@@ -30,9 +30,9 @@ function StageProvider({children}) {
         setStage(-1);
     } else {
       if (user.role === "student") {
-        setStage(res.studentStage);
+        setStage(parseInt(res.studentStage));
       } else {
-        setStage(res.coordinatorStage);
+        setStage(parseInt(res.coordinatorStage));
       }
     }
   }

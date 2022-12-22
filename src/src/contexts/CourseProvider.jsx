@@ -34,26 +34,26 @@ function CourseProvider({children}) {
   const sendCourseApprovalStatus = async (uid, approvalId, status) => {
   }
 
-  // const sendStudentCourses = async (bilkent, erasmus) => {
-  //   const token = await getToken();
+  const sendStudentCourses = async (bilkent, erasmus) => {
+    const token = await getToken();
 
-  //   const res = await fetch(API + "/api/course", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Authorization": "Bearer " + token,
-  //     },
-  //     body: JSON.stringify(
-  //       {
-  //         "uid": "12345",
-  //         "bilkentCourses": bilkent,
-  //         "erasmusCourses": erasmus,
-  //         "approvalId": Math.floor(Math.random() * 100000),
-  //       }
-  //     )
-  //   });
-  //   return res;
-  // }
+    const res = await fetch(API + "/api/course", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": "Bearer " + token,
+      },
+      body: JSON.stringify(
+        {
+          "uid": user.uid,
+          "bilkentCourses": bilkent,
+          "erasmusCourses": erasmus,
+          "approvalId": Math.floor(Math.random() * 100000),
+        }
+      )
+    });
+    return res;
+  }
 
   // useEffect(() => {
   //   fetchCourses();
