@@ -79,7 +79,7 @@ const AuthProvider = ({ children }) => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
         const setDetailedUser = async () => {
-          const userRole = await user.getIdTokenResult().then((idTokenResult) => { return idTokenResult.claims.role;});
+          const userRole = await user.getIdTokenResult().then((idTokenResult) => { console.log( idTokenResult.claims); return idTokenResult.claims.role;});
           setUser(() => ({ ...JSON.parse(JSON.stringify(user)),  role: userRole}));
           setLoading(false);
         };

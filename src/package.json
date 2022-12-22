@@ -26,6 +26,7 @@
     "start": "react-scripts start",
     "start:dev": "env-cmd -f ./dev.env npm start",
     "start:stag": "env-cmd -f ./stag.env npm start",
+    "start:prod": "env-cmd -f ./prod.env npm start",
     "build": "env-cmd -f ./prod.env react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
