@@ -47,7 +47,6 @@ function AdminProvider({children}) {
             coordinatorStage: admin.coordinatorStage,
         }),
     });
-    console.log("Update Stage" + JSON.stringify(res));
 }
 
   const sendExcel = async (file) => {
