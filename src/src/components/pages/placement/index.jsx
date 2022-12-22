@@ -22,15 +22,14 @@ function Placement()
 {
     const { placementList } = usePlacementList();
 
-    
-    const placementItems = students.map((student) => {
+
+    const placementItems = placementList.map((student) => {
         return (
         <select id="placements" class="bg-gray-50 border border-indigo-900 text-gray-900 text-base rounded-lg focus:ring-indigo-900 focus:border-indigo-900 block w-full p-2.5">
             <option selected>{ student.name }</option>
-            <option disabled value="email">Email: { student.email }</option>
             <option disabled value="idNo">Student ID: { student.studentID }</option>
-            <option disabled value="department">Department: { student.department }</option>
-            <option disabled value="placement">Placement: { student.placement }</option>
+            <option disabled value="department">Student Approved: { student.studentApproved }</option>
+            <option disabled value="placement">Placement: { student.placedSchoolName }</option>
         </select>
         );
       });
