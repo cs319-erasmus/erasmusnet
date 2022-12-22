@@ -32,7 +32,14 @@ import { StudentProvider } from "./contexts/StudentProvider";
 import { StageProvider } from "./contexts/StageProvider";
 import { UserRoutes } from "./utils/UserRoutes";
 import { StudentRoutes } from "./utils/StudentRoutes";
-import { CourseRoute, StageRoute, AppointmentRoute, AdminRoute, PlacementListRoute, PlacementRoute } from "./utils";
+import {
+  CourseRoute,
+  StageRoute,
+  AppointmentRoute,
+  AdminRoute,
+  PlacementListRoute,
+  PlacementRoute,
+} from "./utils";
 
 const App = () => {
   const [debug, setDebug] = React.useState(false);
@@ -62,6 +69,14 @@ const App = () => {
                 <Route path="/faq" element={<FAQ />} />
                 <Route element={<AppointmentRoute />}>
                   <Route path="/appointments" element={<Appointments />} />
+                  <Route
+                    path="/coordinator-appointment"
+                    element={<CoordinatorAppointment />}
+                  />
+                  <Route
+                    path="/coordinatorAppointmentApproval"
+                    element={<CoordinatorApproval />}
+                  />
                 </Route>
                 <Route element={<StageRoute />}>
                   <Route path="/dashboard" element={<Dashboard />} />
@@ -92,21 +107,12 @@ const App = () => {
                 </Route>
 
                 <Route
-                  path="/coordinatorAppointmentApproval"
-                  element={<CoordinatorApproval />}
-                />
-
-                <Route
                   path="/instructor-view-course"
                   element={<InstructorView />}
                 />
                 <Route
                   path="/instructor-approve"
                   element={<InstructorApprove />}
-                />
-                <Route
-                  path="/coordinator-appointment"
-                  element={<CoordinatorAppointment />}
                 />
                 <Route path="/past" element={<PastApplications />} />
                 <Route
@@ -116,7 +122,7 @@ const App = () => {
                 <Route path="/docs" element={<DocumentTemplates />} />
               </Route>
               <Route element={<PlacementListRoute />}>
-                <Route 
+                <Route
                   path="/placement"
                   element={<Placement /> /* Coordinator Route */}
                 />
