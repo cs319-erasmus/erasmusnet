@@ -27,6 +27,7 @@ function AppointmentProvider({children}) {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + token,
+                "uid": user?.uid,
             },
         }).then(res => res.json());
 
