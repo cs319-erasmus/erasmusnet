@@ -7,7 +7,7 @@ export class StageController {
   constructor(private readonly stageService: StageService) {}
 
   @Post()
-  create(@Body('stage') stageDto: StageDTO) {
+  create(@Body() stageDto: StageDTO) {
     return this.stageService.create(stageDto);
   }
 

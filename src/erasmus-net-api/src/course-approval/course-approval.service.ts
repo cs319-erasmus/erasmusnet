@@ -6,12 +6,10 @@ import { CourseApprovalDTO } from './courseApprovalDto/courseApproval.dto';
 export class CourseApprovalService {
   create(courseApprovalDto: CourseApprovalDTO) {
 
-    const approvalId = courseApprovalDto.approvalId;
-    const obj = {};
-    obj[approvalId] = courseApprovalDto;
-    console.log(obj);
     admin.firestore().collection('courseapproval')
-    .doc(courseApprovalDto.instructorId).update(obj);
+    .doc(courseApprovalDto.instructorId).update({
+      [courseApprovalDto.approvalId]: courseApprovalDto
+    });
   }
   //gets a single document, with all the approvals as fields
   async findAll(instructorId: string) {
