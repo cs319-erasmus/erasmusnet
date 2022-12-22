@@ -32,7 +32,7 @@ import { StudentProvider } from "./contexts/StudentProvider";
 import { StageProvider } from "./contexts/StageProvider";
 import { UserRoutes } from "./utils/UserRoutes";
 import { StudentRoutes } from "./utils/StudentRoutes";
-import { CourseRoute, StageRoute, AppointmentRoute, AdminRoute, PlacementListRoute } from "./utils";
+import { CourseRoute, StageRoute, AppointmentRoute, AdminRoute, PlacementListRoute, PlacementRoute } from "./utils";
 
 const App = () => {
   const [debug, setDebug] = React.useState(false);
@@ -83,10 +83,12 @@ const App = () => {
                       element={<StudentViewRequest />}
                     />
                   </Route>
-                  <Route
-                    path="/studentPlacement"
-                    element={<StudentPlacement />}
-                  />
+                  <Route element={<PlacementRoute />}>
+                    <Route
+                      path="/studentPlacement"
+                      element={<StudentPlacement />}
+                    />
+                  </Route>
                 </Route>
 
                 <Route
