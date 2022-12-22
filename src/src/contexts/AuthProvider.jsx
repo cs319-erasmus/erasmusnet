@@ -32,16 +32,15 @@ const AuthProvider = ({ children }) => {
 
   const signup = (first, last, email, password) => {
     console.log(API);
-    const res = fetch(API, {
+    const res = fetch(API + "auth/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        displayName: first + " " + last,
+        name: first + " " + last,
         email: email,
         password: password,
-        role: "student",
       }),
     });
     console.log(res);
