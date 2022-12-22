@@ -63,7 +63,13 @@ export function Accessibility(props) {
     navigate("/signup", { replace: true });
   };
   const dashboard = () => {
-    navigate("/dashboard", { replace: true });
+    if (user.role === "admin")
+      navigate("/admin", { replace: true });
+    else if (user.role === "instructor") {
+      navigate("/instructor-approve", { replace: true });
+    } else {
+      navigate("/dashboard", { replace: true });
+    }
   };
   const profile = () => {
     navigate("/profile", { replace: true });
@@ -73,11 +79,7 @@ export function Accessibility(props) {
       <LeftButton onClick={login}>Login</LeftButton>
       <RightButton onClick={signup}>Sign Up</RightButton>
     </AccessibilityContainer>
-  ) : user.role === "admin" ? 
-  <AccessibilityContainer>
-      <RightButton onClick={profile}>Profile</RightButton>
-    </AccessibilityContainer>
-  :(
+  ) : (
     <AccessibilityContainer>
      <LeftButton onClick={dashboard}>Dashboard</LeftButton>
       <RightButton onClick={profile}>Profile</RightButton>
