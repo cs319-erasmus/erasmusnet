@@ -1,4 +1,21 @@
-# erasmusnet.app
+# Deployed Website Based on Latest main
+
+https://www.erasmusnet.app
+
+Test Accounts:
+
+Student: student@test.com:securepassword
+
+Coordinator: coordinator@test.com:securepassword
+
+Instructor: instructor@test.com:securepassword
+
+Admin: admin@test.com:securepassword
+
+API (Backend) URL for testing: https://api.erasmusnet.app
+
+Monday 07:30 AM [Commit](https://github.com/cs319-erasmus/erasmusnet/tree/2ade0b4f9aed88c7f424af88f58ce98218ec3f9f)
+
 ## Group Members
 * Arda Baktır - 21802354
 
