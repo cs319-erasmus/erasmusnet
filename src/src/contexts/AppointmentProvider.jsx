@@ -27,11 +27,26 @@ function AppointmentProvider({children}) {
             headers: {
                 "Content-Type": "application/json",
                 "Authorization": "Bearer " + token,
+                "uid": user?.uid,
             },
         }).then(res => res.json());
 
         console.log("Appointments: " + JSON.stringify(res));
         setAppointments(() => res);
+    }
+
+    const sendAppointment = async (appointment) => {
+        const token = await getToken();
+        const res = await fetch(`${API}/api/appointment/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token,
+            },
+            body: JSON.stringify({
+                appointmentDTO: appointment,
+            }),
+        }).then(res => res.json());
     }
 
     useEffect(() => {
@@ -40,6 +55,7 @@ function AppointmentProvider({children}) {
 
     const value = {
         appointments,
+        sendAppointment,
     }
     
     return <AppointmentContext.Provider value={value}>{children}</AppointmentContext.Provider>

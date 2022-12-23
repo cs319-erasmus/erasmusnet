@@ -16,6 +16,11 @@ export class CourseApprovalController {
     return this.courseApprovalService.findAll(instructorId);
   }
 
+  @Get("/status")
+  status(@Headers('instructorId') instructorId: string, @Headers('approvalId') approvalId: string ) {
+    return this.courseApprovalService.status(instructorId, approvalId);
+  }
+
 
   @Delete()
   remove(@Headers('approvalId') courseApprovalId: string, @Headers('instructorId') instructorId: string) {

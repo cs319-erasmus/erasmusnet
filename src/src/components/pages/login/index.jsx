@@ -40,6 +40,8 @@ export default function Login() {
     if (user) {
       if (user.role === "admin") {
         navigate("/admin", { replace: true });
+      } else if (user.role === "instructor") {
+        navigate("/instructor", { replace: true });
       } else {
         navigate("/dashboard", { replace: true });
       }

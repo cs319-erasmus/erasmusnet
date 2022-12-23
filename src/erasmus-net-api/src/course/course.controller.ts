@@ -1,5 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Header, Headers, UseInterceptors, UploadedFile } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Header, Headers, UseInterceptors, UploadedFile, FileTypeValidator, ParseFilePipe } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express/multer';
+import { diskStorage } from 'multer';
 import admin from 'src/main';
 import { CourseService } from './course.service';
 import { CourseDTO } from './courseDto/course.dto';
@@ -19,11 +20,51 @@ export class CourseController {
   }
 
   @Post('syllabus')
-  @UseInterceptors(FileInterceptor('file'))
-  uploadFile( @UploadedFile() file: Express.Multer.File, @Headers('uid') uid: string,@Headers('approvalId') approvalId: string) {
-    admin.firestore().collection('courses').doc('uid')
-  }
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: diskStorage({
+        destination: './uploads',
+      }),
+    }),
+  )
+  async uploadExcel(
+    @UploadedFile(
+      new ParseFilePipe({
+        validators: [
+          new FileTypeValidator({
+            fileType: 'application/pdf',
+          }),
+        ],
+      }),
+    )
+    file: Express.Multer.File,
+    @Headers('uid') uid: string,
+    @Headers('approvalId') approvalId: string
+  ) {
 
+
+    const storage = admin.storage();
+
+    try {
+      const signedUrlResponse: string[] = await storage
+        .bucket("erasmus-net-e2c1c.appspot.com")
+        .file("./uploads/${file.filename}")
+        .getSignedUrl({
+          action: 'read',
+          expires: new Date(Date.now() + 10000 * 60000),
+        });
+
+      const assetUrl: string = signedUrlResponse[0];
+      var obj = {};
+
+      admin.firestore().collection('courses').doc(uid).update({
+        syllabus: assetUrl
+      }) 
+      return assetUrl;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   //gets a courseLink by its uid
   @Get()

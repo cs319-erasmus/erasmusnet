@@ -66,7 +66,7 @@ export function Accessibility(props) {
     if (user.role === "admin")
       navigate("/admin", { replace: true });
     else if (user.role === "instructor") {
-      navigate("/instructor-approve", { replace: true });
+      navigate("/instructor", { replace: true });
     } else {
       navigate("/dashboard", { replace: true });
     }

@@ -1,12 +1,17 @@
 import React from "react";
+import { useAppointment } from "../../../contexts/AppointmentProvider";
+import { useAuth } from "../../../contexts/AuthProvider";
 
-function index() {
+function StudentAppointment() {
   const coordinators = ["Can Alkan", "Aysegul Dundar"];
+  const { appointments, sendAppointment } = useAppointment();
+  const { user } = useAuth();
+
   const coordinatorOptions = coordinators.map((coordinator) => {
     return <option>{coordinator}</option>;
   });
-  const appointments = [{ Task: "Can Alkan", Date: "2021-05-01" }];
-  const appointmentItems = appointments.map((appointment) => {
+  const userAppointments = [{ Task: "Can Alkan", Date: "2021-05-01" }];
+  const appointmentItems = userAppointments.map((appointment) => {
     return (
       <tr>
         <td>{appointment.Task}</td>
@@ -14,6 +19,25 @@ function index() {
       </tr>
     );
   });
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const appointment = {
+      appointmentId: Math.floor(Math.random() * 100000),
+      hostName: "Can Alkan",
+      hostId: "123456789",
+      studentName: user.name,
+      studentUid: user.uid,
+      appointmentDescription: document.getElementById("Appointment-Text").value,
+      hostApproved: false,
+      studentApproved: false,
+    }
+
+    sendAppointment(appointment);
+  }
+
+
 
   return (
     <div
@@ -42,7 +66,7 @@ function index() {
             class="mt-1 p-4 w-full rounded-xl h-full align-top border-gray-200 border-2 shadow-sm sm:text-sm"
           />
           <div className="">
-            <button className="btn btn-primary mt-6">Submit Request</button>
+            <button className="btn btn-primary mt-6" onClick={e => handleSubmit(e)}>Submit Request</button>
           </div>
         </div>
       </div>
@@ -64,4 +88,4 @@ function index() {
   );
 }
 
-export default index;
+export default StudentAppointment;

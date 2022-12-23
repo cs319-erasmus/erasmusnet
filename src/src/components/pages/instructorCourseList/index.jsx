@@ -6,12 +6,15 @@ import { Input,Spacer} from "@nextui-org/react";
 import { Link} from "@nextui-org/react";
 import { useNavigate, Route } from "react-router-dom";
 import InstructorView from '../instructorViewCourse';
+import { useAuth } from "../../../contexts/AuthProvider";
+import { useCourse } from '../../../contexts/CourseProvider';
 
 import  { useState, useRef } from "react";
 
 
 export default function InstructorApprove() {
   const navigate = useNavigate();
+  const { instructorCourses } = useCourse();
 
   const instructorView = () => {
     navigate("/instructor-view-course");
@@ -24,6 +27,7 @@ export default function InstructorApprove() {
     { name: "Jane Doe" } ];
 
     const viewItems = students.map((item) => {
+      console.log("instructorCourses" + JSON.stringify(instructorCourses))
       return (
         <Grid.Container gap={4}>
       <Grid sm={12} md={12}>
@@ -42,7 +46,7 @@ export default function InstructorApprove() {
     });
   
   return (
-    <div>
+    <div className='max-w-screen-xl mx-auto'>
       <Grid.Container gap={4}><Text b size="$2xl"  color="indigo" css={ {paddingLeft: "$10"}}>Student Names</Text> </Grid.Container> 
       <hr color="indigo"></hr>
      {viewItems}

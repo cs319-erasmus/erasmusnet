@@ -97,6 +97,14 @@ const App = () => {
                       path="/student-view-request"
                       element={<StudentViewRequest />}
                     />
+                    <Route
+                  path="/instructor-view-course"
+                  element={<InstructorView />}
+                />
+                <Route
+                  path="/instructor"
+                  element={<InstructorApprove />}
+                />
                   </Route>
                   <Route element={<PlacementRoute />}>
                     <Route
@@ -106,14 +114,7 @@ const App = () => {
                   </Route>
                 </Route>
 
-                <Route
-                  path="/instructor-view-course"
-                  element={<InstructorView />}
-                />
-                <Route
-                  path="/instructor-approve"
-                  element={<InstructorApprove />}
-                />
+                
                 <Route path="/past" element={<PastApplications />} />
                 <Route
                   path="/uploadpreapproval"

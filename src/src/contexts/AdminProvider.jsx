@@ -52,11 +52,8 @@ function AdminProvider({children}) {
   const sendExcel = async (file) => {
     let formData = new FormData();
     formData.append("file", file);
-    const res = await fetch(API + "/api/foo", {
+    const res = await fetch(API + "/api/list/excel", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
         body: formData,
     });
     console.log(res);
