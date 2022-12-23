@@ -5,15 +5,30 @@ import { CourseLinkDTO } from './courseDto/courseLink.dto';
 
 @Injectable()
 export class CourseService {
-  createLink(courseLinkDTO:CourseLinkDTO, uid: string, approvalId: string) {
-    admin
-    .firestore()
-    .collection('courses')
-    .doc(uid)
-    .set({
-      [approvalId]: courseLinkDTO
-    }, {merge: true});
-    return true;
+  async createLink(courseLinkDTO: CourseLinkDTO, uid: string, approvalId: string) {
+    // Validate input arguments
+    if (!uid || !approvalId || !courseLinkDTO) {
+      throw new Error('Missing required input argument(s)');
+    }
+    if (typeof uid !== 'string' || typeof approvalId !== 'string') {
+      throw new Error('Input argument(s) must be strings');
+    }
+  
+    try {
+      // Get a reference to the courses collection and the specific document
+      const coursesRef = admin.firestore().collection('courses');
+      const docRef = coursesRef.doc(uid);
+  
+      // Update the document with the new course link
+      await docRef.set({
+        [approvalId]: courseLinkDTO
+      }, { merge: true });
+  
+      return true;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 
   create(courseDTO:CourseDTO, uid: string) {
