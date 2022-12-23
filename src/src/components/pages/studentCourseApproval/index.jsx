@@ -5,22 +5,22 @@ import { useNavigate } from "react-router-dom";
 import { useCourse } from "../../../contexts/CourseProvider";
 
 export default function StudentCourseApproval() {
-  const [courses, setCourses] = useState([]);
   const navigate = useNavigate();
-  const { getCourses } = useCourse();
+  const { courses } = useCourse();
+  const { statuses } = useCourse();
   const [courseItems, setCourseItems] = useState(null);
 
   useEffect(() => {
-    const res = getCourses();
-    setCourses(() => res);
-  }, [getCourses]);
+    console.log("statuses: ", statuses);
+  }, [statuses]);
 
   useEffect(() => {
-    if (courses == null) {
+    if (courses == null || statuses == null) {
       return;
     }
 
     const items = courses.map((curCourse, idx) => {
+      console.log("Current status: ", statuses[curCourse.approvalId])
       return (
         <div key={idx}>
           <div class="grid gap-12 mb-6 md:grid-cols-4">
@@ -29,21 +29,21 @@ export default function StudentCourseApproval() {
               class="bg-gray-50 border border-gray-300 text-gray-700 text-ml rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               disabled
             >
-              {curCourse.bilkentCourses[0].courseCode}
+              {curCourse.bilkentCourses.courseCode}
             </button>
             <button
               type="button"
               class="bg-gray-50 border border-gray-300 text-gray-700 text-ml rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               disabled
             >
-              {curCourse.erasmusCourses[0].courseCode}
+              {curCourse.erasmusCourses.courseCode}
             </button>
             <button
               type="button"
               class="bg-gray-50 border border-gray-300 text-gray-700 text-ml rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               disabled
             >
-              {"Approved"}
+              {statuses[curCourse.approvalId] == -1 ? "Pending" : statuses[curCourse.approvalId] == 0 ? "Rejected" : "Approved"}
             </button>
             <motion.button
               whileTap={{ scale: 0.9 }}
@@ -57,10 +57,10 @@ export default function StudentCourseApproval() {
       );
     });
     setCourseItems(items);
-  }, [courses]);
+  }, [courses, statuses]);
 
   return (
-    <div id="StudentCourseApproval" class="max-w-screen-2xl">
+    <div id="StudentCourseApproval" class="max-w-screen-xl mb-48 mt-24 mx-auto">
       <div className="text-2xl mb-7 font-bold text-indigo-900">
         <h1>Course Approval</h1>
         <hr class="my-4 h-0.5 bg-indigo-900 border-0"></hr>

@@ -35,12 +35,27 @@ function AppointmentProvider({children}) {
         setAppointments(() => res);
     }
 
+    const sendAppointment = async (appointment) => {
+        const token = await getToken();
+        const res = await fetch(`${API}/api/appointment/`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + token,
+            },
+            body: JSON.stringify({
+                appointmentDTO: appointment,
+            }),
+        }).then(res => res.json());
+    }
+
     useEffect(() => {
         fetchAppointments();
     }, [user]);
 
     const value = {
         appointments,
+        sendAppointment,
     }
     
     return <AppointmentContext.Provider value={value}>{children}</AppointmentContext.Provider>

@@ -3,6 +3,6 @@ export class CourseApprovalDTO{
     studentUid: string;
     approvalId: string;
     studentName: string;
-    isApproved: boolean;
+    isApproved: number;
     instructorId: string;
 }

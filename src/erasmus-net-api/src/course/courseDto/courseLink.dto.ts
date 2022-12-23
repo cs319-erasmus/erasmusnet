@@ -5,4 +5,5 @@ export class CourseLinkDTO{
     erasmusCourses: CourseDTO;
     approvalId: string;
     syllabus: Buffer;
+    instructorId: string;
 }
