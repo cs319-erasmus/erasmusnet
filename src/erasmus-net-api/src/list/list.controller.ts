@@ -76,44 +76,46 @@ export class ListController {
     file: Express.Multer.File,
   ) {
     const workBook = XLSX.readFile('./uploads/' + file.filename);
-    XLSX.writeFile(workBook, './uploads/excel.csv', { bookType: 'csv' });
+    // XLSX.writeFile(workBook, './uploads/excel.csv', { bookType: 'csv' });
     const jsonArray = await csvtojson()
       .fromFile('./uploads/excel.csv')
       .then((jsonObj) => {
+        // // Sort the array by total points in descending order
+        // jsonObj.sort((a: any, b: any) => {
+        //   return b['Total Points'] - a['Total Points'];
+        // });
+
         // Create a map of universities and their quotas
         const universityQuotas = new Map<string, number>();
 
         // Assign the preferred universities to each element in the array
         jsonObj.forEach((element: any) => {
-          let placedUniversity = element['Preferred University #1'];
-
+          let placedUniversity: string | undefined;
           for (let i = 1; i <= 5; i++) {
-            if (
-              placedUniversity &&
-              universityQuotas.has(placedUniversity) &&
-              universityQuotas.get(placedUniversity) >= 2
-            ) {
+            // Check if the university is in the map
+            if (!universityQuotas.has(element[`Preferred University #${i}`])) {
+              universityQuotas.set(element[`Preferred University #${i}`], 1);
               placedUniversity = element[`Preferred University #${i}`];
-            } else {
+              break;
+            }
+            // Check if the university has less than 2 students
+            if (universityQuotas.get(element[`Preferred University #${i}`]) < 2) {
+              placedUniversity = element[`Preferred University #${i}`];
+              universityQuotas.set(element[`Preferred University #${i}`], universityQuotas.get(element[`Preferred University #${i}`]) + 1);
               break;
             }
           }
 
           if (placedUniversity === undefined) {
             placedUniversity = 'None';
-          }
+            element.placedUniversity = placedUniversity;
+            admin.firestore().collection('list').doc('list').update({
+              waitinglist: admin.firestore.FieldValue.arrayUnion(element),
+            });
+          }else{
+            
 
           element.placedUniversity = placedUniversity;
-
-          // Update the quota for the placed university
-          if (universityQuotas.has(placedUniversity)) {
-            universityQuotas.set(
-              placedUniversity,
-              universityQuotas.get(placedUniversity) + 1,
-            );
-          } else {
-            universityQuotas.set(placedUniversity, 1);
-          }
           admin
           .firestore()
           .collection('list')
@@ -121,8 +123,9 @@ export class ListController {
           .update({
             applicationlist: admin.firestore.FieldValue.arrayUnion(element),
           });
+          }
+        });
       });
-    });   
   }
   @Get()
   findOne() {
