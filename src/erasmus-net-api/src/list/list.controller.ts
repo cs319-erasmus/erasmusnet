@@ -80,10 +80,6 @@ export class ListController {
     const jsonArray = await csvtojson()
       .fromFile('./uploads/excel.csv')
       .then((jsonObj) => {
-        // // Sort the array by total points in descending order
-        // jsonObj.sort((a: any, b: any) => {
-        //   return b['Total Points'] - a['Total Points'];
-        // });
 
         // Create a map of universities and their quotas
         const universityQuotas = new Map<string, number>();
@@ -112,17 +108,33 @@ export class ListController {
             admin.firestore().collection('list').doc('list').update({
               waitinglist: admin.firestore.FieldValue.arrayUnion(element),
             });
+            //update isplaced to false
+          admin
+          .firestore()
+          .collection('placements')
+          .doc(element['studentId'])
+          .update({
+            isPlaced: false,
+          });
           }else{
-            
-
           element.placedUniversity = placedUniversity;
           admin
           .firestore()
           .collection('list')
           .doc('list')
           .update({
-            applicationlist: admin.firestore.FieldValue.arrayUnion(element),
+            placedStudentslist: admin.firestore.FieldValue.arrayUnion(element),
           });
+          //update isplaced to true
+          admin
+          .firestore()
+          .collection('placements')
+          .doc(element['studentId'])
+          .update({
+            isPlaced: true,
+            placedSchoolName: placedUniversity
+          });
+
           }
         });
       });

@@ -57,8 +57,8 @@ export class CourseController {
 
       const assetUrl: string = signedUrlResponse[0];
       var obj = {};
-      obj['${uid}.${approvalId}.syllabus'] = assetUrl;
-      admin.firestore().collection('courses').doc(uid).update( obj); 
+      obj[`${approvalId}.syllabus`] = assetUrl;
+      admin.firestore().collection('courses').doc(uid).update(obj);
       return assetUrl;
     } catch (error) {
       console.log(error);
