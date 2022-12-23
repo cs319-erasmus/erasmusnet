@@ -219,16 +219,43 @@ function StudentCreateRequest() {
 
   const submit = (e) => {
     e.preventDefault();
-    if (bilkentCourses.length === 0 && erasmusCourses.length === 0) {
-      alert("Please add courses to your request");
+    if (!bilkentCode.current.value || !bilkentName.current.value || !bilkentCoordinator.current.value || !bilkentType.current.value || !bilkentCredits.current.value || !erasmusCode.current.value || !erasmusName.current.value || !erasmusSyllabus.current.value || !erasmusCredits.current.value || !erasmusSchool.current.value) {
+      alert("Please fill all fields!");
       return;
     }
+
+    const bilkentCourse = {
+      courseCode: bilkentCode.current.value,
+      courseName: bilkentName.current.value,
+      instructorName: bilkentCoordinator.current.value,
+      electiveName: bilkentType.current.value,
+      credit: bilkentCredits.current.value,
+      department: "Computer Engineering",
+      university: "Bilkent University",
+      isMustCourse: bilkentType.current.value === "Must",
+      courseApprovalRef: "",
+      syllabusRef: "",
+    };
+
+    const erasmusCourse = {
+      courseCode: erasmusCode.current.value,
+      courseName: erasmusName.current.value,
+      syllabusRef: erasmusSyllabus.current.value,
+      credit: erasmusCredits.current.value,
+      university: erasmusSchool.current.value,
+      isMustCourse: false,
+      courseApprovalRef: "",
+      syllabusRef: "",
+      electiveName: "",
+      instructorName: "",
+      department: "Computer Science",
+    };
     
-    sendStudentCourses(bilkentCourses, erasmusCourses);
+    sendStudentCourses(bilkentCourse, erasmusCourse, erasmusSyllabus.current.files[0]);
   };
 
   return (
-    <div id="StudentCourseApproval" class="ml-12 mr-12 mt-20 mb-32 flex flex-col">
+    <div id="StudentCourseApproval" class="ml-12 mr-12 mt-20 mb-32 xl:mx-auto max-w-screen-xl flex flex-col">
       <div className="text-2xl mb-7 font-bold text-indigo-900">
         <h1>Create Request</h1>
         <hr class="my-4 h-0.5 bg-indigo-900 border-0"></hr>
@@ -255,7 +282,7 @@ function StudentCreateRequest() {
               for="coordinator"
               class="block mb-2 text-ml font-bold text-indigo-900"
             >
-              Course Coordinator
+              Course Instructor
             </label>
           </div>
           <div class="grid gap-12 mb-6 grid-cols-3">
@@ -278,7 +305,7 @@ function StudentCreateRequest() {
               id="courseCoordinator"
               ref={bilkentCoordinator}
               class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-              placeholder={"School"}
+              placeholder={"Course Instructor"}
               required
             />
           </div>
@@ -307,7 +334,7 @@ function StudentCreateRequest() {
               required
             />
             <input
-              type="text"
+              type="number"
               id="courseCredits"
               ref={bilkentCredits}
               class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
@@ -316,14 +343,6 @@ function StudentCreateRequest() {
             />
           </div>
         </div>
-            <motion.button
-                whileTap={{ scale: 0.9 }}
-                onClick={(e) => addBilkentCourse(e)}
-                class="bg-transparent border-2 font-semibold border-indigo-900 text-indigo-900 p-2 px-12 rounded-lg hover:bg-indigo-900 hover:text-white"
-                >
-                Add a New Course
-                </motion.button>
-
         </div>
       </div>
       <div className="m-12">
@@ -396,14 +415,16 @@ function StudentCreateRequest() {
             <input
               type="file"
               id="file_input"
+              accept="application/pdf"
               ref={erasmusSyllabus}
               class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               placeholder={"Course Syllabus"}
               required
             />
             <input
-              type="text"
-              id="courseName"
+              type="number"
+              id="erasmusCredits"
+              min="0" max="20"
               ref={erasmusCredits}
               class="bg-gray-50 border border-gray-300 text-gray-700 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               placeholder={"ECTS Credits"}
@@ -411,14 +432,6 @@ function StudentCreateRequest() {
             />
           </div>
         </div>
-            <motion.button
-                whileTap={{ scale: 0.9 }}
-                onClick={(e) => addErasmusCourse(e)}
-                class="bg-transparent border-2 font-semibold border-indigo-900 text-indigo-900 p-2 px-12 rounded-lg hover:bg-indigo-900 hover:text-white"
-                >
-                Add a New Course
-                </motion.button>
-
         </div>
       </div>
     
