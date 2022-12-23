@@ -1,18 +1,19 @@
-# Deployed Website Based on Latest main
+# ErasmusNET
+## Deployed Website Based on Latest main
 
 https://www.erasmusnet.app
 
+API (Backend) URL for testing: https://api.erasmusnet.app
+
 Test Accounts:
 
-Student: student@test.com:securepassword
+* Student: student@test.com:securepassword
 
-Coordinator: coordinator@test.com:securepassword
+* Coordinator: coordinator@test.com:securepassword
 
-Instructor: instructor@test.com:securepassword
+* Instructor: instructor@test.com:securepassword
 
-Admin: admin@test.com:securepassword
-
-API (Backend) URL for testing: https://api.erasmusnet.app
+* Admin: admin@test.com:securepassword
 
 Monday 07:30 AM [Commit](https://github.com/cs319-erasmus/erasmusnet/tree/2ade0b4f9aed88c7f424af88f58ce98218ec3f9f)
 
