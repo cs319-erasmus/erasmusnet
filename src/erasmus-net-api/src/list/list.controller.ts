@@ -1,4 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseInterceptors, UploadedFile, Headers, ParseFilePipe, FileTypeValidator } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseInterceptors,
+  UploadedFile,
+  Headers,
+  ParseFilePipe,
+  FileTypeValidator,
+} from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express/multer';
 import { ListService } from './list.service';
 import { PlacedStudentsListDTO } from './listDto/placedStudentsList.dto';
@@ -9,17 +22,15 @@ import { diskStorage } from 'multer';
 import { Request, Response, NextFunction } from 'express';
 import * as csvtojson from 'csvtojson';
 
-
-
-
-
 @Controller('api/list')
 export class ListController {
   constructor(private readonly listService: ListService) {}
 
   @Post()
-  create(@Body('waitinglist') waitingListDTO: WaitingListDTO,
-  @Body('placedstudentslist') placedStudentsListDTO: PlacedStudentsListDTO) {
+  create(
+    @Body('waitinglist') waitingListDTO: WaitingListDTO,
+    @Body('placedstudentslist') placedStudentsListDTO: PlacedStudentsListDTO,
+  ) {
     return this.listService.create(waitingListDTO, placedStudentsListDTO);
   }
 
@@ -43,30 +54,75 @@ export class ListController {
   //   next(err);
   //   }
   //   }
-  @Post("excel")
-  @UseInterceptors(FileInterceptor('file',{
-    storage: diskStorage({
-      destination: './uploads'
-    })
-  }))
+  @Post('excel')
+  @UseInterceptors(
+    FileInterceptor('file', {
+      storage: diskStorage({
+        destination: './uploads',
+      }),
+    }),
+  )
   async uploadExcel(
     @UploadedFile(
       new ParseFilePipe({
         validators: [
-          new FileTypeValidator({ fileType: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' }),
+          new FileTypeValidator({
+            fileType:
+              'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+          }),
         ],
       }),
-    )file: Express.Multer.File) {
-      const workBook = XLSX.readFile("./uploads/"+file.filename);
-      XLSX.writeFile(workBook, "./uploads/excel.csv", { bookType: "csv" });
-      const jsonArray=await csvtojson().fromFile("./uploads/excel.csv").then((jsonObj)=>{
-        jsonObj.forEach((element:any) => {
-          admin.firestore().collection('list').doc('list').update({
-            applicationlist: admin.firestore.FieldValue.arrayUnion(element)
-          })
-        });
-      })
-      return JSON.stringify(jsonArray);
+    )
+    file: Express.Multer.File,
+  ) {
+    const workBook = XLSX.readFile('./uploads/' + file.filename);
+    XLSX.writeFile(workBook, './uploads/excel.csv', { bookType: 'csv' });
+    const jsonArray = await csvtojson()
+      .fromFile('./uploads/excel.csv')
+      .then((jsonObj) => {
+        // Create a map of universities and their quotas
+        const universityQuotas = new Map<string, number>();
+
+        // Assign the preferred universities to each element in the array
+        jsonObj.forEach((element: any) => {
+          let placedUniversity = element['Preferred University #1'];
+
+          for (let i = 1; i <= 5; i++) {
+            if (
+              placedUniversity &&
+              universityQuotas.has(placedUniversity) &&
+              universityQuotas.get(placedUniversity) >= 2
+            ) {
+              placedUniversity = element[`Preferred University #${i}`];
+            } else {
+              break;
+            }
+          }
+
+          if (placedUniversity === undefined) {
+            placedUniversity = 'None';
+          }
+
+          element.placedUniversity = placedUniversity;
+
+          // Update the quota for the placed university
+          if (universityQuotas.has(placedUniversity)) {
+            universityQuotas.set(
+              placedUniversity,
+              universityQuotas.get(placedUniversity) + 1,
+            );
+          } else {
+            universityQuotas.set(placedUniversity, 1);
+          }
+          admin
+          .firestore()
+          .collection('list')
+          .doc('list')
+          .update({
+            applicationlist: admin.firestore.FieldValue.arrayUnion(element),
+          });
+      });
+    });   
   }
   @Get()
   findOne() {
